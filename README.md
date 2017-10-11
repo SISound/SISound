@@ -1,2 +1,2 @@
 # SISound
-SISound final project
+SISound IT Talents final project
