@@ -18,12 +18,11 @@ public class Song {
 	private TreeSet<Comment> comments;
 	
 	//constructor for adding song
-	public Song(String title, User user, Genres genre , String url, LocalDateTime uploadDate) {
+	public Song(String title, User user, Genres genre , String url) {
 		this.title = title;
 		this.genre = genre;
 		this.user =  user;
 		this.url = url;
-		this.uploadDate = uploadDate;
 		this.timesListened = 0;
 		actions = new HashMap<>();
 		for (Actions action : Actions.values()) {
