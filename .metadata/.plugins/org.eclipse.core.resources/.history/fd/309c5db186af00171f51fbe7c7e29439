@@ -1,0 +1,12 @@
+package model;
+
+public class City {
+
+	private long cityID;
+	private String cityName;
+	private Country country;
+	
+	public City(){
+		
+	}
+}

@@ -20,7 +20,6 @@ public class User {
 	private TreeSet<Playlist> playlists;
 	private ArrayList<User> followers;
 	
-	//constructor for registering user
 	public User(String firstName, String lastName, String username, String password, String email, City city,
 			Country country) {
 		this.firstName = firstName;
@@ -36,18 +35,6 @@ public class User {
 		this.followers=new ArrayList<>();
 	}
 
-	//constructor for retrieving from db
-	public User(long userID, String firstName, String lastName, String username, String password, String email,
-			City city, Country country, String bio, String profilPicture, String coverPhoto, TreeSet<Song> songs,
-			TreeSet<Playlist> playlists, ArrayList<User> followers) {
-		this(firstName, lastName, username, password, email, city, country);
-		this.bio = bio;
-		this.profilPicture = profilPicture;
-		this.coverPhoto = coverPhoto;
-		this.songs = songs;
-		this.playlists = playlists;
-		this.followers = followers;
-	}
 	
 	public long getUserID() {
 		return userID;

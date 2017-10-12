@@ -103,6 +103,9 @@ public class Song implements Comparable<Song>{
 
 	@Override
 	public int compareTo(Song o) {
-		return this.uploadDate.compareTo(o.uploadDate);
+		if(this.actions.get(Actions.LIKE).size()==o.actions.get(Actions.LIKE).size()){
+			return this.uploadDate.compareTo(o.uploadDate);
+		}
+		return this.actions.get(Actions.LIKE).size()-o.actions.get(Actions.LIKE).size();
 	}
 }

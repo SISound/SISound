@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
 
-public class Song implements Comparable<Song>{
+public class Song {
 
 	private int songId;
 	private String title;
@@ -73,8 +73,8 @@ public class Song implements Comparable<Song>{
 		return genre;
 	}
 
-	public HashMap<Actions, ArrayList<User>> getActions() {
-		return actions;
+	public Map<Actions, ArrayList<User>> getActions() {
+		return Collections.unmodifiableMap(this.actions);
 	}
 
 	public TreeSet<Comment> getComments() {
@@ -99,10 +99,5 @@ public class Song implements Comparable<Song>{
 	
 	int getLikesCount(){
 		return this.actions.get(Actions.LIKE).size();
-	}
-
-	@Override
-	public int compareTo(Song o) {
-		return this.uploadDate.compareTo(o.uploadDate);
 	}
 }
