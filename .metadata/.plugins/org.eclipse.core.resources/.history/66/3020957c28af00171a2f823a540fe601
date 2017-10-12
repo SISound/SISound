@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class User {
 
-	private long userID;
+	private int userID;
 	private String firstName;
 	private String lastName;
 	private String username;
