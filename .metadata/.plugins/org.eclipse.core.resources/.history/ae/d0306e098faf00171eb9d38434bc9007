@@ -16,9 +16,10 @@ public class Country {
 	
 	
 	public Country(long countryID, String countryName) {
-		this(countryName);
+		super();
 		this.countryID = countryID;
 	}
+
 
 	public void setCountryID(long countryID) {
 		this.countryID = countryID;

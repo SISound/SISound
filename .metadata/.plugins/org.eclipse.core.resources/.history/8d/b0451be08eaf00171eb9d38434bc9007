@@ -14,7 +14,7 @@ public class City {
 	
 	
 	public City(long cityID, String cityName, Country country) {
-		this(cityName, country);
+		this(cityName, country)
 		this.cityID = cityID;
 	}
 

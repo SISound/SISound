@@ -12,13 +12,6 @@ public class City {
 		this.country = country;
 	}
 	
-	
-	public City(long cityID, String cityName, Country country) {
-		this(cityName, country);
-		this.cityID = cityID;
-	}
-
-
 	public void setCityID(long cityID) {
 		this.cityID = cityID;
 	}

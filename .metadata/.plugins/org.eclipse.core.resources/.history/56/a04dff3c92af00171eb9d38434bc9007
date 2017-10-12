@@ -57,10 +57,6 @@ public class User {
 		this.songs.add(song);
 	}
 	
-	public void addPlaylist(Playlist p){
-		this.playlists.add(p);
-	}
-	
 	public long getUserID() {
 		return userID;
 	}

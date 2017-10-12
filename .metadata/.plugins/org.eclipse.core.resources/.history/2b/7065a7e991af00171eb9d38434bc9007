@@ -49,18 +49,6 @@ public class User {
 		this.followers = followers;
 	}
 	
-	public void addFollower(User u){
-		this.followers.add(u);
-	}
-	
-	public void uploadSong(Song song){
-		this.songs.add(song);
-	}
-	
-	public void addPlaylist(Playlist p){
-		this.playlists.add(p);
-	}
-	
 	public long getUserID() {
 		return userID;
 	}
@@ -133,12 +121,25 @@ public class User {
 		return songs;
 	}
 
+	public void setSongs(TreeSet<Song> songs) {
+		this.songs = songs;
+	}
+
 	public TreeSet<Playlist> getPlaylists() {
 		return playlists;
+	}
+
+	public void setPlaylists(TreeSet<Playlist> playlists) {
+		this.playlists = playlists;
 	}
 
 	public ArrayList<User> getFollowers() {
 		return followers;
 	}
 
+	public void setFollowers(ArrayList<User> followers) {
+		this.followers = followers;
+	}
+	
+	
 }
