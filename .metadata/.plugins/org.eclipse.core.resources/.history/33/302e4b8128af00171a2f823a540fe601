@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Country {
 
-	private long countryID;
+	private int countryID;
 	private String countryName;
 	private ArrayList<City> cities;
 	

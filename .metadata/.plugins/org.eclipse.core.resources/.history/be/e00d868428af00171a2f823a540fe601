@@ -2,7 +2,7 @@ package model;
 
 public class City {
 
-	private long cityID;
+	private int cityID;
 	private String cityName;
 	private Country country;
 	

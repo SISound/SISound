@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="model.Like"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -10,3 +11,9 @@
 =======
 <qualifiedTypeNameHistroy/>
 >>>>>>> 878dc29c0c6016fd2913e5be3dca7591bed7174f
+=======
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.TreeSet"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+</qualifiedTypeNameHistroy>
+>>>>>>> 78c3c20fda77305fbd0ccb47272d7f01569394d8
