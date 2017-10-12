@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public abstract class Comment implements Comparable<Comment>{
 
-	private int commentId;
+	private long commentId;
 	private User user;
 	private String text;
 	private LocalDateTime date;
@@ -23,13 +23,13 @@ public abstract class Comment implements Comparable<Comment>{
 		}
 	}
 	
-	public Comment(int commentId, User user, String text, LocalDateTime date, Comment parentComment, TreeSet<Comment> subComments) {
+	public Comment(long commentId, User user, String text, LocalDateTime date, Comment parentComment, TreeSet<Comment> subComments) {
 		this(user, text, date, parentComment);
 		this.commentId = commentId;
 		this.subcoments = subComments;
 	}
 
-	public int getCommentId() {
+	public long getCommentId() {
 		return commentId;
 	}
 
