@@ -65,8 +65,5 @@ public abstract class Comment implements Comparable<Comment>{
 		this.text = text;
 	}
 	
-	@Override
-	public int compareTo(Comment o) {
-		return this.date.compareTo(o.getDate());
-	}
+	q
 }

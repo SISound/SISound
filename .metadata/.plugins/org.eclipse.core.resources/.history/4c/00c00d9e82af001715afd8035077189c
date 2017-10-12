@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 import java.util.TreeSet;
 
-public abstract class Comment implements Comparable<Comment>{
+public abstract class Comment {
 
 	private int commentId;
 	private User user;
@@ -63,10 +63,5 @@ public abstract class Comment implements Comparable<Comment>{
 	
 	public void setText(String text) {
 		this.text = text;
-	}
-	
-	@Override
-	public int compareTo(Comment o) {
-		return this.date.compareTo(o.getDate());
 	}
 }
