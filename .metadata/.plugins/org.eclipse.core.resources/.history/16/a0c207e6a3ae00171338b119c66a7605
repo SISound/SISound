@@ -1,0 +1,14 @@
+package model;
+
+public class LikeSong extends Like {
+
+	
+	private Song song;
+	
+	public LikeSong(User user, Song song) {
+		super(user);
+		this.song = song;
+	}
+	
+	
+}

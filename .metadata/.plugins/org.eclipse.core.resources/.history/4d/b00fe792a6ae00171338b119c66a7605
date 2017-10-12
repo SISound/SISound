@@ -1,0 +1,30 @@
+package model;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Song {
+
+	private int songId;
+	private String title;
+	private LocalDateTime uploadDate;
+	private int timesListened;
+	private User user;
+	private String url;
+	private Genres genre;
+	private HashMap<Actions, ArrayList<User>> actions;
+	
+
+	public Song(String title, User user, Genres genre , String url) {
+		this.title = title;
+		this.genre = genre;
+		this.user =  user;
+		this.url = url;
+		actions = new HashMap<>();
+		for (Actions action : Actions.values()) {
+			this.actions.put(action, new ArrayList<>());
+		}
+		
+	}
+}

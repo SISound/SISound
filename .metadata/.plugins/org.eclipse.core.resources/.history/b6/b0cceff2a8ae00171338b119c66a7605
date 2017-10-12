@@ -1,0 +1,13 @@
+package model;
+
+import java.time.LocalDateTime;
+
+public abstract class Comment {
+
+	private User user;
+	private String text;
+	private LocalDateTime date;
+	private Comment parentComment;
+	
+	
+}

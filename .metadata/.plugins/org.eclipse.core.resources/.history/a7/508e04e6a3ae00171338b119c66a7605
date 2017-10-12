@@ -1,0 +1,15 @@
+package model;
+
+public abstract class Like {
+
+	protected User user;
+	
+	protected Like(User user){
+		this.user = user;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+}

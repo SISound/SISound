@@ -1,0 +1,17 @@
+package model;
+
+import java.time.LocalDateTime;
+
+public class Song {
+
+	private int songId;
+	private String name;
+	private LocalDateTime uploadDate;
+	private int timesListened;
+	private User user;
+	private String url;
+	private Genres genre;
+
+	
+	
+}

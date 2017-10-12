@@ -1,0 +1,47 @@
+package model;
+
+import java.time.LocalDateTime;
+
+public abstract class Comment {
+
+	private User user;
+	private String text;
+	private LocalDateTime date;
+	private Comment parentComment;
+	
+	public Comment(User user, String text) {
+		this.user = user;
+		this.text = text;
+	}
+
+	//TODO validations
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	public Comment getParentComment() {
+		return parentComment;
+	}
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
+
+	public User getUser() {
+		return user;
+	}
+	
+	
+}

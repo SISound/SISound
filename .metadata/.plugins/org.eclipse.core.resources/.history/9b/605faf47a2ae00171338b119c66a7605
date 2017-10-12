@@ -1,0 +1,14 @@
+package model;
+
+public class LikeSong {
+
+	private User user;
+	private Song song;
+	
+	public LikeSong(User user, Song song) {
+		this.user = user;
+		this.song = song;
+	}
+	
+	
+}

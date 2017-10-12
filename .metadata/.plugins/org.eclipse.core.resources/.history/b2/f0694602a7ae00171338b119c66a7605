@@ -1,0 +1,96 @@
+package model;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Song {
+
+	private int songId;
+	private String title;
+	private LocalDateTime uploadDate;
+	private int timesListened;
+	private User user;
+	private String url;
+	private Genres genre;
+	private HashMap<Actions, ArrayList<User>> actions;
+	
+
+	public Song(String title, User user, Genres genre , String url) {
+		this.title = title;
+		this.genre = genre;
+		this.user =  user;
+		this.url = url;
+		actions = new HashMap<>();
+		for (Actions action : Actions.values()) {
+			this.actions.put(action, new ArrayList<>());
+		}
+	}
+
+
+	public int getSongId() {
+		return songId;
+	}
+
+
+	public void setSongId(int songId) {
+		this.songId = songId;
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	public int getTimesListened() {
+		return timesListened;
+	}
+
+
+	public void setTimesListened(int timesListened) {
+		this.timesListened = timesListened;
+	}
+
+
+	public Genres getGenre() {
+		return genre;
+	}
+
+
+	public void setGenre(Genres genre) {
+		this.genre = genre;
+	}
+
+
+	public LocalDateTime getUploadDate() {
+		return uploadDate;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public String getUrl() {
+		return url;
+	}
+	
+	public int getLikesNumber() {
+		return actions.get(Actions.LIKE).size();
+	}
+	
+	public int getDislikesNumber() {
+		return actions.get(Actions.DISLIKE).size();
+	}
+	
+	public int getSharesNumber() {
+		return actions.get(Actions.SHARE).size();
+	}
+}
