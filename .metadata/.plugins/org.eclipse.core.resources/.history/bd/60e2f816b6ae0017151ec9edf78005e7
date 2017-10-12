@@ -1,0 +1,24 @@
+package model;
+
+import java.util.ArrayList;
+
+public class User {
+
+	private int userId;
+	private String firstName;
+	private String lastName;
+	private String username;
+	private String password;
+	private String email;
+	private City city;
+	private Country country;
+	private String bio;
+	private String profilPicture;
+	private String coverPhoto;
+	private ArrayList<Song> songs;
+	private ArrayList<Playlist> playlists;
+	
+	public User(){
+		
+	}
+}
