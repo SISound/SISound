@@ -47,9 +47,6 @@ public class Song implements Comparable<Song> {
 		this.comments = comments;
 	}
 
-	public void addComment(Comment c){
-		this.comments.add(c);
-	}
 	public long getSongId() {
 		return songId;
 	}

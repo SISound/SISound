@@ -20,7 +20,6 @@ INDEX VERSION 1.130+D:\Programming\GIT\SISound\SISound\.metadata\.plugins\org.ec
 1017159511.index
 2933775851.index
 2185175350.index
-2729216755.index
 148409970.index
 3698447926.index
 286919383.index
