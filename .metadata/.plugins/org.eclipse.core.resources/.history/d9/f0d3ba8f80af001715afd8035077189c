@@ -35,7 +35,7 @@ public class Song {
 	//constructor for retrieving from db
 	public Song(int songId, String title, LocalDateTime uploadDate, int timesListened, User user, String url,
 			Genres genre, HashMap<Actions, ArrayList<User>> actions, TreeSet<Comment> comments) {
-		this(title, user, genre, url, uploadDate);
+		this(title,user,genre,url, uploadDate);
 		this.songId = songId;
 		this.timesListened = timesListened;
 		this.actions = actions;

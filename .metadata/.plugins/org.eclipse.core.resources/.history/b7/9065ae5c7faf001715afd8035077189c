@@ -1,0 +1,63 @@
+package model;
+
+import java.time.LocalDateTime;
+
+public abstract class Comment {
+
+	private int commentId;
+	private User user;
+	private String text;
+	private LocalDateTime date;
+	private Comment parentComment;
+	
+	public Comment(User user, String text) {
+		this.user = user;
+		this.text = text;
+	}
+	
+	public Comment(int commentId, User user, String text, LocalDateTime date, Comment parentComment) {
+		super();
+		this.commentId = commentId;
+		this.user = user;
+		this.text = text;
+		this.date = date;
+		this.parentComment = parentComment;
+	}
+
+	//TODO validations
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	public Comment getParentComment() {
+		return parentComment;
+	}
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
+
+	public User getUser() {
+		return user;
+	}
+	
+	public int getCommentId() {
+		return commentId;
+	}
+	
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+}

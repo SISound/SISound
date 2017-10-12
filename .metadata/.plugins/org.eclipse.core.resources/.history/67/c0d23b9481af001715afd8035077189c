@@ -26,42 +26,7 @@ public abstract class Comment {
 	public Comment(int commentId, User user, String text, LocalDateTime date, Comment parentComment, TreeSet<Comment> subComments) {
 		this(user, text, date, parentComment);
 		this.commentId = commentId;
-		this.subcoments = subComments;
 	}
 
-	public int getCommentId() {
-		return commentId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public LocalDateTime getDate() {
-		return date;
-	}
-
-	public TreeSet<Comment> getSubcoments() {
-		return subcoments;
-	}
-
-	public Comment getParentComment() {
-		return parentComment;
-	}
-
-	public void addSubcomment(Comment comment) {
-		this.subcoments.add(comment);
-	}
 	
-	public void setCommentId(int commentId) {
-		this.commentId = commentId;
-	}
-	
-	public void setText(String text) {
-		this.text = text;
-	}
 }
