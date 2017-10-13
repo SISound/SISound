@@ -1,0 +1,18 @@
+package model;
+
+public class City {
+
+	private long cityID;
+	private String cityName;
+	private Country country;
+	
+	public City(String cityName, Country country) {
+		super();
+		this.cityName = cityName;
+		this.country = country;
+	}
+	
+	public void setCityID(long cityID) {
+		this.cityID = cityID;
+	}
+}

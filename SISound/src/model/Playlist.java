@@ -1,17 +1,17 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.TreeSet;
 
-public class Playlist implements Comparable<Playlist> {
+public class Playlist implements Comparable<Playlist>, Actionable {
 
 	private long playlistID;
 	private String title;
 	private LocalDateTime creationDate;
 	private User user;
-	private HashMap<Actions, ArrayList<User>> actions;
+	private HashMap<Actions, HashSet<User>> actions;
 	private TreeSet<Comment> comments;
 	private boolean isPrivate;
 	private TreeSet<Song> songs;
@@ -25,14 +25,14 @@ public class Playlist implements Comparable<Playlist> {
 		this.comments = new TreeSet<>();
 		this.actions = new HashMap<>();
 		for (Actions action : Actions.values()) {
-			this.actions.put(action, new ArrayList<>());
+			this.actions.put(action, new HashSet());
 		}
 		this.songs = new TreeSet<>();
 	}
 
 
 	public Playlist(long playlistID, String title, LocalDateTime creationDate, User user, HashMap<Actions, 
-			ArrayList<User>> actions, TreeSet<Comment> comments, boolean isPrivate, TreeSet<Song> songs) {
+			HashSet<User>> actions, TreeSet<Comment> comments, boolean isPrivate, TreeSet<Song> songs) {
 		this(title, creationDate, user, isPrivate);
 		this.playlistID = playlistID;
 		this.actions = actions;
@@ -40,8 +40,8 @@ public class Playlist implements Comparable<Playlist> {
 		this.songs = songs;
 	}
 
-
-	public long getPlaylistID() {
+	@Override
+	public long getId() {
 		return playlistID;
 	}
 
@@ -61,7 +61,7 @@ public class Playlist implements Comparable<Playlist> {
 	}
 
 
-	public HashMap<Actions, ArrayList<User>> getActions() {
+	public HashMap<Actions, HashSet<User>> getActions() {
 		return actions;
 	}
 
@@ -80,7 +80,8 @@ public class Playlist implements Comparable<Playlist> {
 		return songs;
 	}
 	
-	public void setPlaylistID(long playlistID) {
+	@Override
+	public void setId(long playlistID) {
 		this.playlistID = playlistID;
 	}
 	
@@ -107,5 +108,10 @@ public class Playlist implements Comparable<Playlist> {
 	@Override
 	public int compareTo(Playlist o) {
 		return this.creationDate.compareTo(o.getCreationDate());
+	}
+	
+	@Override
+	public boolean isSong() {
+		return false;
 	}
 }

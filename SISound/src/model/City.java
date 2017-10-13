@@ -6,7 +6,20 @@ public class City {
 	private String cityName;
 	private Country country;
 	
-	public City(){
-		
+	public City(String cityName, Country country) {
+		super();
+		this.cityName = cityName;
+		this.country = country;
+	}
+	
+	
+	public City(long cityID, String cityName, Country country) {
+		this(cityName, country);
+		this.cityID = cityID;
+	}
+
+
+	public void setCityID(long cityID) {
+		this.cityID = cityID;
 	}
 }

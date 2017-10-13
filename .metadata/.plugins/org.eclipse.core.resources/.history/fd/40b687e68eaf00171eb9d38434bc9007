@@ -1,0 +1,21 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Country {
+
+	private long countryID;
+	private String countryName;
+	private HashSet<City> cities;
+	
+	public Country(String countryName) {
+		super();
+		this.countryName = countryName;
+		this.cities=new HashSet<>();
+	}
+	
+	public void setCountryID(long countryID) {
+		this.countryID = countryID;
+	}
+}

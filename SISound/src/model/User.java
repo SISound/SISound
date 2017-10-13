@@ -20,9 +20,9 @@ public class User {
 	private TreeSet<Playlist> playlists;
 	private ArrayList<User> followers;
 	
+	//constructor for registering user
 	public User(String firstName, String lastName, String username, String password, String email, City city,
 			Country country) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -31,12 +31,36 @@ public class User {
 		this.city = city;
 		this.country = country;
 		
-		//TODO add comparators to treesets
 		this.songs=new TreeSet();
 		this.playlists=new TreeSet();
 		this.followers=new ArrayList<>();
 	}
 
+	//constructor for retrieving from db
+	public User(long userID, String firstName, String lastName, String username, String password, String email,
+			City city, Country country, String bio, String profilPicture, String coverPhoto, TreeSet<Song> songs,
+			TreeSet<Playlist> playlists, ArrayList<User> followers) {
+		this(firstName, lastName, username, password, email, city, country);
+		this.bio = bio;
+		this.profilPicture = profilPicture;
+		this.coverPhoto = coverPhoto;
+		this.songs = songs;
+		this.playlists = playlists;
+		this.followers = followers;
+	}
+	
+	public void addFollower(User u){
+		this.followers.add(u);
+	}
+	
+	public void uploadSong(Song song){
+		this.songs.add(song);
+	}
+	
+	public void addPlaylist(Playlist p){
+		this.playlists.add(p);
+	}
+	
 	public long getUserID() {
 		return userID;
 	}
@@ -49,40 +73,20 @@ public class User {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
 	public String getLastName() {
 		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getEmail() {
 		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public City getCity() {
@@ -129,25 +133,12 @@ public class User {
 		return songs;
 	}
 
-	public void setSongs(TreeSet<Song> songs) {
-		this.songs = songs;
-	}
-
 	public TreeSet<Playlist> getPlaylists() {
 		return playlists;
-	}
-
-	public void setPlaylists(TreeSet<Playlist> playlists) {
-		this.playlists = playlists;
 	}
 
 	public ArrayList<User> getFollowers() {
 		return followers;
 	}
 
-	public void setFollowers(ArrayList<User> followers) {
-		this.followers = followers;
-	}
-	
-	
 }

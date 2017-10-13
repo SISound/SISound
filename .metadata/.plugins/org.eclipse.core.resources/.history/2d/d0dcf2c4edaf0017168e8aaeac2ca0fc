@@ -1,0 +1,30 @@
+package model.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import model.Song;
+
+public class SongDao {
+
+	private static SongDao instance;
+	
+	private SongDao(){}
+	
+	public static synchronized SongDao getInstance(){
+		if(instance==null){
+			instance=new SongDao();
+		}
+		
+		return instance;
+	}
+	
+	public void uploadSong(Song song) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("INSERT INTO songs (song_name, upload_date, listenings, user_id, genre_id, song_url) "
+				                                  + "VALUES (?, ?, ?, ?, ?, ?)");
+		stmt.setString(1, song.getTitle());
+		stmt.setDate(2, song.getUploadDate());
+	}
+}

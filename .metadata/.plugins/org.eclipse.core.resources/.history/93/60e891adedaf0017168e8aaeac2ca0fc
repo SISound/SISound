@@ -1,0 +1,8 @@
+package model.db;
+
+public class SongDao {
+
+	private static SongDao instance;
+	
+	private SongDao{}
+}
