@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ public class Playlist implements Comparable<Playlist> {
 
 	private long playlistID;
 	private String title;
-	private LocalDateTime creationDate;
+	private Date creationDate;
 	private User user;
 	private HashMap<Actions, ArrayList<User>> actions;
 	private TreeSet<Comment> comments;
@@ -17,7 +18,7 @@ public class Playlist implements Comparable<Playlist> {
 	private TreeSet<Song> songs;
 	
 	
-	public Playlist(String title, LocalDateTime creationDate, User user, boolean isPrivate) {
+	public Playlist(String title, Date creationDate, User user, boolean isPrivate) {
 		this.title = title;
 		this.creationDate = creationDate;
 		this.user = user;
@@ -31,7 +32,7 @@ public class Playlist implements Comparable<Playlist> {
 	}
 
 
-	public Playlist(long playlistID, String title, LocalDateTime creationDate, User user, HashMap<Actions, 
+	public Playlist(long playlistID, String title, Date creationDate, User user, HashMap<Actions, 
 			ArrayList<User>> actions, TreeSet<Comment> comments, boolean isPrivate, TreeSet<Song> songs) {
 		this(title, creationDate, user, isPrivate);
 		this.playlistID = playlistID;
@@ -51,7 +52,7 @@ public class Playlist implements Comparable<Playlist> {
 	}
 
 
-	public LocalDateTime getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 

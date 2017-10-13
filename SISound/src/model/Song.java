@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,16 +15,16 @@ public class Song implements Comparable<Song> {
 
 	private long songId;
 	private String title;
-	private LocalDateTime uploadDate;
-	private int timesListened;
+	private Date uploadDate;
+	private long timesListened;
 	private User user;
 	private String url;
-	private Genres genre;
+	private String genre;
 	private HashMap<Actions, HashSet<User>> actions;
 	private TreeSet<Comment> comments;
 	
 	//constructor for adding song
-	public Song(String title, User user, Genres genre , String url, LocalDateTime uploadDate) {
+	public Song(String title, User user, String genre , String url, Date uploadDate) {
 		this.title = title;
 		this.genre = genre;
 		this.user =  user;
@@ -38,15 +39,15 @@ public class Song implements Comparable<Song> {
 	}
 
 	//constructor for retrieving from db
-	public Song(long songId, String title, LocalDateTime uploadDate, int timesListened, User user, String url,
-			Genres genre, HashMap<Actions, HashSet<User>> actions, TreeSet<Comment> comments) {
+	public Song(long songId, String title, Date uploadDate, int timesListened, User user, String url,
+			String genre, HashMap<Actions, HashSet<User>> actions, TreeSet<Comment> comments) {
 		this(title, user, genre, url, uploadDate);
 		this.songId = songId;
 		this.timesListened = timesListened;
 		this.actions = actions;
 		this.comments = comments;
 	}
-
+	
 	public void addComment(Comment c){
 		this.comments.add(c);
 	}
@@ -58,11 +59,11 @@ public class Song implements Comparable<Song> {
 		return title;
 	}
 
-	public LocalDateTime getUploadDate() {
+	public Date getUploadDate() {
 		return uploadDate;
 	}
 
-	public int getTimesListened() {
+	public long getTimesListened() {
 		return timesListened;
 	}
 
@@ -74,7 +75,7 @@ public class Song implements Comparable<Song> {
 		return url;
 	}
 
-	public Genres getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
@@ -98,7 +99,7 @@ public class Song implements Comparable<Song> {
 		this.title = title;
 	}
 	
-	public void setGenre(Genres genre) {
+	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 	
