@@ -85,6 +85,7 @@ public class ActionsDao {
 		Connection con = DBManager.getInstance().getConnection();
 
 		//getting likes
+<<<<<<< HEAD
 		PreparedStatement stmt = con.prepareStatement("SELECT ?.username FROM ? JOIN ? "
 				                                    + "ON ?=?"
 				                                    + "WHERE ? = ?");
@@ -99,6 +100,16 @@ public class ActionsDao {
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
 			actions.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getString(1))); //TODO in UserDao get by index
+=======
+		PreparedStatement stmt = con.prepareStatement("SELECT (user_id) FROM ? WHERE ? = ?");
+		stmt.setString(1, isSong ? "songs_likes" : "playlists_likes");
+		stmt.setString(2, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(3, id);
+		
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			actions.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getLong(1))); //TODO in UserDao get by index
+>>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 		}
 		
 		//getting dislikes
@@ -109,7 +120,11 @@ public class ActionsDao {
 		
 		rs = stmt.executeQuery();
 		while (rs.next()) {
+<<<<<<< HEAD
 			actions.get(Actions.DISLIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
+=======
+			actions.get(Actions.DISLIKE).add(UserDao.getInstance().getUser(rs.getLong(1)));
+>>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 		}
 		
 		//getting shares
@@ -120,7 +135,11 @@ public class ActionsDao {
 		stmt.setLong(3, id);
 		rs = stmt.executeQuery();
 		while (rs.next()) {
+<<<<<<< HEAD
 			actions.get(Actions.SHARE).add(UserDao.getInstance().getUser(rs.getString(1))); 
+=======
+			actions.get(Actions.SHARE).add(UserDao.getInstance().getUser(rs.getLong(1))); 
+>>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 		}
 		
 		return actions;

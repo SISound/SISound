@@ -49,6 +49,7 @@ public class CommentDao {
 	//TODO getComments from song/playlist
 	public synchronized TreeSet<Comment> comments(long id, boolean isSong) throws SQLException {
 		Connection con = DBManager.getInstance().getConnection();
+<<<<<<< HEAD
 		PreparedStatement stmt = con.prepareStatement("SELECT (?.comment_id, u.user_name, ?.comment_text, ?.upload_date, ?.parent_id FROM ? JOIN ?"
 				                                    + "ON ?.user_id=u.user_id "
 				                                    + "WHERE ? = ? AND parent_id = null");//TODO check query
@@ -65,6 +66,17 @@ public class CommentDao {
 		HashMap<Long, Comment> mainComments = new HashMap<>();
 		while (rs.next()) {
 			mainComments.put(rs.getLong(1), new Comment(rs.getLong(1), UserDao.getInstance().getUser(rs.getString(2)), rs.getString(3), rs.getTimestamp(4).toLocalDateTime(), null, new TreeSet())); //TODO get user by id
+=======
+		PreparedStatement stmt = con.prepareStatement("SELECT (comment_id, user_id, comment_text, upload_date, parent_id FROM ? WHERE ? = ? AND parent_id = null");//TODO check query
+		stmt.setString(1, isSong ? "songs_comments" : "playlists_comments");
+		stmt.setString(2, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(3, id);
+		
+		HashMap<Long, Comment> mainComments = new HashMap<>();
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			mainComments.put(rs.getLong(1), new Comment(rs.getLong(1), UserDao.getInstance().getUser(rs.getLong(2)), rs.getString(3), rs.getTimestamp(4).toLocalDateTime(), null, new TreeSet()); //TODO get user by id
+>>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 		}
 		
 		//TODO add subcomments

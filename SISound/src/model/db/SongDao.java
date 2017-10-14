@@ -69,7 +69,10 @@ public class SongDao {
 		}
 	}
 	
+<<<<<<< HEAD
 	public synchronized void deleteSong(){
 		
 	}
+=======
+>>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 }
