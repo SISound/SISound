@@ -22,12 +22,12 @@ public class Song implements Comparable<Song>, Actionable {
 	private long timesListened;
 	private User user;
 	private String url;
-	private Genre genre;
+	private String genre;
 	private HashMap<Actions, HashSet<User>> actions;
 	private TreeSet<Comment> comments;
 	
 	//constructor for adding song
-	public Song(String title, User user, Genre genre , String url, LocalDateTime uploadDate) {
+	public Song(String title, User user, String genre , String url, LocalDateTime uploadDate) {
 		this.title = title;
 		this.genre = genre;
 		this.user =  user;
@@ -42,8 +42,8 @@ public class Song implements Comparable<Song>, Actionable {
 	}
 
 	//constructor for retrieving from db
-	public Song(long songId, String title, LocalDateTime uploadDate, int timesListened, User user, String url,
-			Genre genre, HashMap<Actions, HashSet<User>> actions, TreeSet<Comment> comments) {
+	public Song(long songId, String title, LocalDateTime uploadDate, long timesListened, User user, String url,
+			String genre, HashMap<Actions, HashSet<User>> actions, TreeSet<Comment> comments) {
 		this(title, user, genre, url, uploadDate);
 		this.songId = songId;
 		this.timesListened = timesListened;
@@ -80,7 +80,7 @@ public class Song implements Comparable<Song>, Actionable {
 		return url;
 	}
 
-	public Genre getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
@@ -105,7 +105,7 @@ public class Song implements Comparable<Song>, Actionable {
 		this.title = title;
 	}
 	
-	public void setGenre(Genre genre) {
+	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 	
@@ -125,6 +125,11 @@ public class Song implements Comparable<Song>, Actionable {
 	@Override
 	public boolean isSong() {
 		return true;
+	}
+
+	@Override
+	public boolean isComment() {
+		return false;
 	}
 
 

@@ -6,6 +6,7 @@
 <fullyQualifiedTypeName name="model.Actionable"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="model.Actions"/>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="model.db.UserDao"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="model.db.ActionsDao"/>
@@ -13,4 +14,25 @@
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="model.Comment"/>
+=======
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="model.Country"/>
+<fullyQualifiedTypeName name="model.db.UserDao"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.sun.corba.se.spi.orbutil.fsm.Guard.Result"/>
+<fullyQualifiedTypeName name="java.util.TreeSet"/>
+<fullyQualifiedTypeName name="model.Song"/>
+<fullyQualifiedTypeName name="model.Comment"/>
+<fullyQualifiedTypeName name="model.Playlist"/>
+<fullyQualifiedTypeName name="model.db.DBManager"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="model.db.CommentDao"/>
+<fullyQualifiedTypeName name="model.User"/>
+<fullyQualifiedTypeName name="model.db.SongDao"/>
+<fullyQualifiedTypeName name="model.db.PlaylistDao"/>
+>>>>>>> ce3b33655a5a22a4c95f2c6d405090fa27ce24bb
 </qualifiedTypeNameHistroy>

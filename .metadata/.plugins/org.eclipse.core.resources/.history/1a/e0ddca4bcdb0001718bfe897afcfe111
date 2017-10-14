@@ -1,0 +1,36 @@
+package model.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import model.Playlist;
+
+public class PlaylistDao {
+
+	private static PlaylistDao instance;
+	
+	private PlaylistDao(){}
+	
+	public synchronized PlaylistDao getInstance(){
+		if(instance==null){
+			instance=new PlaylistDao();
+		}
+		
+		return instance;
+	}
+	
+	public synchronized void createPlaylist(Playlist playlist) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("INSERT INTO playlists (playlist_name, user_id, upload_date, isPrivate) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+		stmt.setString(1, playlist.getTitle());
+		stmt.setLong(2, playlist.getUser().getUserID());
+		stmt.setString(3, playlist.getCreationDate().toString());
+		stmt.setBoolean(4, playlist.isPrivate());
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
+		playlist.setId(rs.getLong(1));
+	}
+}

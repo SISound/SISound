@@ -39,7 +39,7 @@ public class CommentDao {
 		stmt.setString(3, comment.getText());
 		stmt.setTimestamp(4, Timestamp.valueOf(comment.getDate()));
 		stmt.setLong(5, commented.getId());
-		stmt.setLong(6, comment.getParentComment().getCommentId());
+		stmt.setLong(6, comment.getParentComment().getId());
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
 		commented.setId(rs.getInt(1));
@@ -47,20 +47,54 @@ public class CommentDao {
 	
 	
 	//TODO getComments from song/playlist
-	public synchronized TreeSet<Comment> comments(long id, boolean isSong) throws SQLException {
+	public synchronized TreeSet<Comment> getComments(long id, boolean isSong) throws SQLException {
 		Connection con = DBManager.getInstance().getConnection();
-		PreparedStatement stmt = con.prepareStatement("SELECT (comment_id, user_id, comment_text, upload_date, parent_id FROM ? WHERE ? = ? AND parent_id = null");//TODO check query
-		stmt.setString(1, isSong ? "songs_comments" : "playlists_comments");
-		stmt.setString(2, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(3, id);
-		
-		HashMap<Long, Comment> mainComments = new HashMap<>();
+		PreparedStatement stmt = con.prepareStatement("SELECT (?.comment_id, u.user_name, ?.comment_text, ?.upload_date, ?.parent_id FROM ? JOIN ?"
+				                                    + "ON ?.user_id=u.user_id "
+				                                    + "WHERE ? = ? AND parent_id IS NULL");//TODO check query
+		stmt.setString(1, isSong ? "sc" : "pc");
+		stmt.setString(2, isSong ? "sc" : "pc");
+		stmt.setString(3, isSong ? "sc" : "pc");
+		stmt.setString(4, isSong ? "sc" : "pc");
+		stmt.setString(5, isSong ? "songs_comments as sc" : "playlists_comments as pc");
+		stmt.setString(6, "users as u");
+		stmt.setString(7, isSong ? "sc" : "pc");
+		stmt.setString(8, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(9, id);
 		ResultSet rs = stmt.executeQuery();
+		HashMap<Long, Comment> mainComments = new HashMap<>();
+		
 		while (rs.next()) {
-			mainComments.put(rs.getLong(1), new Comment(rs.getLong(1), UserDao.getInstance().getUser(rs.getLong(2)), rs.getString(3), rs.getTimestamp(4).toLocalDateTime(), null, new TreeSet()); //TODO get user by id
+			mainComments.put(rs.getLong(1), new Comment(rs.getLong(1), UserDao.getInstance().getUser(rs.getString(2)), 
+					rs.getString(3), rs.getTimestamp(4).toLocalDateTime(), null, new TreeSet())); 
 		}
 		
-		//TODO add subcomments
+		stmt = con.prepareStatement("SELECT (?.comment_id, u.user_name, ?.comment_text, ?.upload_date, ?.parent_id FROM ? JOIN ?"
+													+ "ON ?.user_id=u.user_id "
+													+ "WHERE ? = ? AND parent_id IS NOT NULL");
+		stmt.setString(1, isSong ? "sc" : "pc");
+		stmt.setString(2, isSong ? "sc" : "pc");
+		stmt.setString(3, isSong ? "sc" : "pc");
+		stmt.setString(4, isSong ? "sc" : "pc");
+		stmt.setString(5, isSong ? "songs_comments as sc" : "playlists_comments as pc");
+		stmt.setString(6, "users as u");
+		stmt.setString(7, isSong ? "sc" : "pc");
+		stmt.setString(8, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(9, id);
+		rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			mainComments.get(rs.getLong(5)).addSubcomment(new Comment(rs.getLong(1), UserDao.getInstance().getUser(rs.getString(2)), 
+					rs.getString(3), rs.getTimestamp(4).toLocalDateTime(), mainComments.get(rs.getLong(5)), new TreeSet()));
+		}
+
+		
+		TreeSet<Comment> set = new TreeSet<Comment>();
+		for (Long key : mainComments.keySet()) {
+		     set.add(mainComments.get(key));
+		}
+		
+		return set;
 	}
 	
 }

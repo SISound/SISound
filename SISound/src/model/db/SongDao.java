@@ -55,18 +55,29 @@ public class SongDao {
 	
 	public synchronized TreeSet<Song> getSongsForUser(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, g.genre_title, s.song_url"
+		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, g.genre_title, s.song_url, s.genre_id"
 				                                  + "FROM songs as s JOIN music_genres as g "
 				                                  + "ON s.genre_id=g.genre_id"
 				                                  + "WHERE user_id=?");
 		stmt.setLong(1, u.getUserID());
 		ResultSet rs=stmt.executeQuery();
 		TreeSet<Song> songs=new TreeSet<>();
-		
 		//TODO add comments
 		while(rs.next()){
-			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getDate(3), rs.getLong(4), u, rs.getString(6), rs.getString(5), ActionsDao.getInstance().getActions(true, rs.getLong(1)), comments));
+			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getLong(4), u, rs.getString(6), rs.getString(5), 
+					ActionsDao.getInstance().getActions(true, rs.getLong(1)), CommentDao.getInstance().getComments(rs.getLong(1), true)));
 		}
+		
+		return songs;
 	}
 	
+	//TODO searching song by name
+	public synchronized void searchSongByName(String songName){
+		
+	}
+	
+	//TODO deleting song method
+	public synchronized void deleteSong(String songName){
+		
+	}
 }
