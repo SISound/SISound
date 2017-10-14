@@ -8,23 +8,26 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
+
+import com.sun.xml.internal.ws.api.ImpliesWebServiceFeature;
+
 import java.util.HashSet;
 import java.util.TreeSet;
 
-public class Song implements Comparable<Song> {
+public class Song implements Comparable<Song>, Actionable {
 
 	private long songId;
 	private String title;
-	private Date uploadDate;
+	private LocalDateTime uploadDate;
 	private long timesListened;
 	private User user;
 	private String url;
-	private String genre;
+	private Genre genre;
 	private HashMap<Actions, HashSet<User>> actions;
 	private TreeSet<Comment> comments;
 	
 	//constructor for adding song
-	public Song(String title, User user, String genre , String url, Date uploadDate) {
+	public Song(String title, User user, Genre genre , String url, LocalDateTime uploadDate) {
 		this.title = title;
 		this.genre = genre;
 		this.user =  user;
@@ -39,8 +42,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	//constructor for retrieving from db
-	public Song(long songId, String title, Date uploadDate, int timesListened, User user, String url,
-			String genre, HashMap<Actions, HashSet<User>> actions, TreeSet<Comment> comments) {
+	public Song(long songId, String title, LocalDateTime uploadDate, int timesListened, User user, String url,
+			Genre genre, HashMap<Actions, HashSet<User>> actions, TreeSet<Comment> comments) {
 		this(title, user, genre, url, uploadDate);
 		this.songId = songId;
 		this.timesListened = timesListened;
@@ -51,7 +54,9 @@ public class Song implements Comparable<Song> {
 	public void addComment(Comment c){
 		this.comments.add(c);
 	}
-	public long getSongId() {
+	
+	@Override
+	public long getId() {
 		return songId;
 	}
 
@@ -59,7 +64,7 @@ public class Song implements Comparable<Song> {
 		return title;
 	}
 
-	public Date getUploadDate() {
+	public LocalDateTime getUploadDate() {
 		return uploadDate;
 	}
 
@@ -75,7 +80,7 @@ public class Song implements Comparable<Song> {
 		return url;
 	}
 
-	public String getGenre() {
+	public Genre getGenre() {
 		return genre;
 	}
 
@@ -87,7 +92,8 @@ public class Song implements Comparable<Song> {
 		return comments;
 	}
 
-	public void setSongId(int songId) {
+	@Override
+	public void setId(long songId) {
 		this.songId = songId;
 	}
 	
@@ -99,7 +105,7 @@ public class Song implements Comparable<Song> {
 		this.title = title;
 	}
 	
-	public void setGenre(String genre) {
+	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
 	
@@ -115,4 +121,11 @@ public class Song implements Comparable<Song> {
 	public void addAction(Actions action, User user) {
 		this.actions.get(action).add(user);
 	}
+	
+	@Override
+	public boolean isSong() {
+		return true;
+	}
+
+
 }

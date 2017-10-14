@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 import java.util.TreeSet;
 
-public abstract class Comment implements Comparable<Comment>{
+public class Comment implements Comparable<Comment>{
 
 	private long commentId;
 	private User user;

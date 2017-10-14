@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeSet;
+import java.sql.Timestamp;
 
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
@@ -26,34 +27,33 @@ public class SongDao {
 		return instance;
 	}
 	
-	public void uploadSong(Song song) throws SQLException{
+	public synchronized void uploadSong(Song song) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("INSERT INTO songs (song_name, upload_date, listenings, user_id, genre_id, song_url) "
 				                                  + "VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 		stmt.setString(1, song.getTitle());
-		stmt.setDate(2, song.getUploadDate());
+		stmt.setTimestamp(2, Timestamp.valueOf(song.getUploadDate()));
 		stmt.setLong(3, song.getTimesListened());
 		stmt.setLong(4, song.getUser().getUserID());
-		
-		//TODO set genre
-		stmt.setLong(5, song.getGenre());
+		stmt.setLong(5, song.getGenre().getGenreId());
 		stmt.setString(6, song.getUrl());
 		ResultSet rs=stmt.executeQuery();
 		rs.next();
-		song.setSongId(rs.getInt(1));
+		song.setId(rs.getInt(1));
 	}
 	
-	public boolean existSong(Song s) throws SQLException{
+	//?
+	public synchronized boolean existSong(Song s) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) FROM songs WHERE song_id=?");
-		stmt.setLong(1, s.getSongId());
+		stmt.setLong(1, s.getId());
 		ResultSet rs=stmt.executeQuery();
 		rs.next();
 		int count=rs.getInt(1);
 		return count>0;
 	}
 	
-	public TreeSet<Song> getSongsForUser(User u) throws SQLException{
+	public synchronized TreeSet<Song> getSongsForUser(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, g.genre_title, s.song_url"
 				                                  + "FROM songs as s JOIN music_genres as g "
@@ -63,9 +63,13 @@ public class SongDao {
 		ResultSet rs=stmt.executeQuery();
 		TreeSet<Song> songs=new TreeSet<>();
 		
-		//TODO add actions and comments
+		//TODO add comments
 		while(rs.next()){
-			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getDate(3), rs.getLong(4), u, rs.getString(6), rs.getString(5), actions, comments))
+			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getDate(3), rs.getLong(4), u, rs.getString(6), rs.getString(5), ActionsDao.getInstance().getActions(true, rs.getLong(1)), comments));
 		}
+	}
+	
+	public synchronized void deleteSong(){
+		
 	}
 }

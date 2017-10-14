@@ -1,0 +1,40 @@
+package model.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+
+import model.Comment;
+import model.Song;
+
+public class CommentDao {
+
+	private static CommentDao instance;
+	
+	private CommentDao(){}
+	
+	public static synchronized CommentDao getInstance(){
+		if(instance==null){
+			instance=new CommentDao();
+		}
+		
+		return instance;
+	}
+	
+	public void insertSongComment(Comment comment, Song song) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("INSERT INTO songs_comments (user_id, comment_text, song_id, parent_id) "
+				                                  + "VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+		stmt.setLong(1, comment.getUser().getUserID());
+		stmt.setString(2, comment.getText());
+		stmt.setLong(3, song.getSongId());
+		stmt.setLong(4, comment.getParentComment().getCommentId());
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
+		song.setSongId(rs.getInt(1));
+	}
+	
+}

@@ -1,0 +1,6 @@
+package model.db;
+
+public class ActionsDao {
+
+	
+}

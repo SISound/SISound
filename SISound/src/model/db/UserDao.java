@@ -24,7 +24,7 @@ public class UserDao {
 		return instance;
 	}
 	
-	public void insertUser(User u) throws SQLException{
+	public synchronized void insertUser(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("INSERT INTO users (user_name, user_password, email) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 		stmt.setString(1, u.getUsername());
@@ -35,7 +35,7 @@ public class UserDao {
 		u.setUserID(rs.getLong(1));
 	}
 	
-	public boolean existUser(String username, String password) throws SQLException{
+	public synchronized boolean existUser(String username, String password) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) as count FROM users where user_name=? AND user_password=?");
 		stmt.setString(1, username);
@@ -45,7 +45,7 @@ public class UserDao {
 		return rs.getInt("count")>0;
 	}
 	
-	public User getUser(String username) throws SQLException{
+	public synchronized User getUser(String username) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, u.user_name, u.email, u.first_name, u.last_name, u.city_name, u.country_name, "
 				                                  + "u.bio, u.profile_picture, u.cover_photo FROM users as u JOIN cities as cty "
@@ -58,4 +58,9 @@ public class UserDao {
 		TreeSet<Song> songs=new TreeSet<>();
 		//TODO add songs, playlists and followers
 	}
+	
+		//TODO get user by index
+	
+		
+	
 }

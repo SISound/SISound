@@ -1,0 +1,17 @@
+package model.db;
+
+public class ActionsDao {
+
+	private static ActionsDao instance;
+	
+	private ActionsDao(){}
+	
+	public static synchronized ActionsDao getInstance(){
+		if(instance==null){
+			instance=new ActionsDao();
+		}
+		
+		return instance;
+	}
+	
+}

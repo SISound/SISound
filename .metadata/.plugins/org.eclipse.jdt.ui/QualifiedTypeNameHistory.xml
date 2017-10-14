@@ -7,4 +7,17 @@
 <fullyQualifiedTypeName name="model.Actions"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="model.Country"/>
+<fullyQualifiedTypeName name="model.db.UserDao"/>
+<fullyQualifiedTypeName name="model.db.SongDao"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="com.sun.corba.se.spi.orbutil.fsm.Guard.Result"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="model.db.DBManager"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.util.TreeSet"/>
+<fullyQualifiedTypeName name="model.Song"/>
+<fullyQualifiedTypeName name="model.User"/>
 </qualifiedTypeNameHistroy>

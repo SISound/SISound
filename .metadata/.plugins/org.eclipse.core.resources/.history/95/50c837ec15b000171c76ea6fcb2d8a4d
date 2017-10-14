@@ -1,0 +1,90 @@
+package model.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+
+import model.Actionable;
+import model.Actions;
+import model.User;
+
+public class ActionsDao {
+
+	private static ActionsDao instance;
+	
+	private ActionsDao(){}
+	
+	public static synchronized ActionsDao getInstance(){
+		if(instance == null){
+			instance = new ActionsDao();
+		}
+		
+		return instance;
+	}
+	
+	public synchronized void addAction(Actionable a, Actions action, User user) throws SQLException {
+		
+		Connection con = DBManager.getInstance().getConnection();
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO ? (?, user_id) " + "VALUES (?, ?)");
+		switch (action) {
+		case LIKE:
+			if(a.isSong()) {
+				stmt.setString(1, "songs_likes");
+				stmt.setString(2, "song_id");
+				
+			} else {
+				stmt.setString(1, "playlists_likes");
+				stmt.setString(2, "playlist_id");
+			}
+						
+			break;
+		case DISLIKE:
+			if(a.isSong()) {
+				stmt.setString(1, "songs_dislikes");
+				stmt.setString(2, "song_id");
+				
+			} else {
+				stmt.setString(1, "playlists_dislikes");
+				stmt.setString(2, "playlist_id");
+			}
+			
+			break;
+		case SHARE:
+			if(a.isSong()) {
+				stmt.setString(1, "songs_shares");
+				stmt.setString(2, "song_id");
+				
+			} else {
+				stmt.setString(1, "playlists_shares");
+				stmt.setString(2, "playlist_id");
+			}
+			
+			break;
+		}
+		
+		stmt.setLong(3, a.getId());
+		stmt.setLong(4, user.getUserID());
+		
+		stmt.execute();
+	}
+	
+	public synchronized HashMap<Actions, HashSet<User>> getActions(Actionable a) throws SQLException {
+		Connection con = DBManager.getInstance().getConnection();
+		PreparedStatement stmt = con.prepareStatement("SELECT (user_id) FROM ? WHERE ? = ?");
+		stmt.setString(1, a.isSong() ? "songs_likes" : "playlists_likes");
+		stmt.setString(2, a.isSong() ? "song_id" : "playlist_id");
+		stmt.setLong(3, a.getId());
+		
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			
+			usersLiked.put(rs.getString("u.username"),rs.getString("u.profilephoto_path"));
+	}
+	}
+	
+}
