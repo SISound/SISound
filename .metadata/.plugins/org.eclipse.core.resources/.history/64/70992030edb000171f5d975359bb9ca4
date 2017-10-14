@@ -68,13 +68,7 @@ public class SongDao {
 		}
 	}
 	
-	//TODO searching song by name
-	public synchronized void searchSongByName(String songName){
-		
-	}
-	
-	//TODO deleting song method
-	public synchronized void deleteSong(String songName){
+	public synchronized void deleteSong(){
 		
 	}
 }

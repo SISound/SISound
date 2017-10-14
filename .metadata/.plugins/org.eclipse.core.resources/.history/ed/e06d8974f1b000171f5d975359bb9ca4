@@ -97,8 +97,4 @@ public class Comment implements Comparable<Comment>, Actionable{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public void setLikes(HashMap<Actions, HashSet<User>> likes) {
-		this.likes = likes;
-	}
 }

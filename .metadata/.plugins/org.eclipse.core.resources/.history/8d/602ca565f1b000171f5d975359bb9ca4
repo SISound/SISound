@@ -157,7 +157,5 @@ public class ActionsDao {
 		while(rs.next()){
 			commentLikes.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
 		}
-		
-		return commentLikes;
 	}
 }

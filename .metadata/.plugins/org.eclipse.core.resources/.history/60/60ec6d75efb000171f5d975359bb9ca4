@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Desktop.Action;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,7 +14,7 @@ public class Comment implements Comparable<Comment>, Actionable{
 	private LocalDateTime date;
 	private TreeSet<Comment> subcoments;
 	private Comment parentComment;
-	private HashMap<Actions, HashSet<User>> likes;
+	private HashMap<Action, HashSet<User>> likes;
 	
 	public Comment(User user, String text, LocalDateTime date, Comment parentComment) {
 		this.user = user;
@@ -24,8 +25,6 @@ public class Comment implements Comparable<Comment>, Actionable{
 		if(parentComment != null) {
 			parentComment.subcoments.add(this);
 		}
-		this.likes=new HashMap<>();
-		this.likes.put(Actions.LIKE, new HashSet<>());
 	}
 	
 	public Comment(long commentId, User user, String text, LocalDateTime date, Comment parentComment, TreeSet<Comment> subComments) {
@@ -96,9 +95,5 @@ public class Comment implements Comparable<Comment>, Actionable{
 	public void setId(long id) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public void setLikes(HashMap<Actions, HashSet<User>> likes) {
-		this.likes = likes;
 	}
 }

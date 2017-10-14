@@ -68,9 +68,4 @@ public class PlaylistDao {
 	public synchronized void searchPlaylistByName(String playlistName){
 		
 	}
-	
-	//TODO deleting playlist
-	public synchronized void deletePlaylist(String playlistName){
-		
-	}
 }

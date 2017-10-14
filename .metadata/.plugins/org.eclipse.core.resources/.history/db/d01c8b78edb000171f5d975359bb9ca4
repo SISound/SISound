@@ -70,7 +70,7 @@ public class PlaylistDao {
 	}
 	
 	//TODO deleting playlist
-	public synchronized void deletePlaylist(String playlistName){
+	public synchronized void deletePlaylist(){
 		
 	}
 }

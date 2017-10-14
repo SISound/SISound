@@ -63,14 +63,4 @@ public class PlaylistDao {
 			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getDate(3), rs.getLong(4), u, rs.getString(6), rs.getString(5), ActionsDao.getInstance().getActions(true, rs.getLong(1)), comments));
 		}
 	}
-	
-	//TODO search playlist by name
-	public synchronized void searchPlaylistByName(String playlistName){
-		
-	}
-	
-	//TODO deleting playlist
-	public synchronized void deletePlaylist(String playlistName){
-		
-	}
 }

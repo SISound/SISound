@@ -37,12 +37,7 @@ public class ActionsDao {
 				stmt.setString(1, "songs_likes");
 				stmt.setString(2, "song_id");
 				
-			}
-			if(a.isComment()){
-				stmt.setString(1, "comments_likes");
-				stmt.setString(2, "comment_id");
-			}
-			else {
+			} else {
 				stmt.setString(1, "playlists_likes");
 				stmt.setString(2, "playlist_id");
 			}
@@ -143,21 +138,4 @@ public class ActionsDao {
 		return actions;
 	}
 	
-	public synchronized HashMap<Actions, HashSet<User>> getCommentsLikes(long commentID) throws SQLException{
-		HashMap<Actions, HashSet<User>> commentLikes=new HashMap<>();
-		commentLikes.put(Actions.LIKE, new HashSet<>());
-		
-		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT username FROM comments_likes as cl JOIN users as u"
-				                                  + "ON u.user_id=cl.user_id "
-				                                  + "WHERE cl.comment_id=?");
-		stmt.setLong(1, commentID);
-		ResultSet rs=stmt.executeQuery();
-		
-		while(rs.next()){
-			commentLikes.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
-		}
-		
-		return commentLikes;
-	}
 }

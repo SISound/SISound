@@ -127,10 +127,5 @@ public class Song implements Comparable<Song>, Actionable {
 		return true;
 	}
 
-	@Override
-	public boolean isComment() {
-		return false;
-	}
-
 
 }

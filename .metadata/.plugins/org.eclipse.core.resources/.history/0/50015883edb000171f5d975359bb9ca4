@@ -74,7 +74,7 @@ public class SongDao {
 	}
 	
 	//TODO deleting song method
-	public synchronized void deleteSong(String songName){
+	public synchronized void deleteSong(){
 		
 	}
 }
