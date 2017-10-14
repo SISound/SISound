@@ -1,30 +1,29 @@
-<<<<<<< HEAD
 INDEX VERSION 1.130+D:\Programming\GIT\SISound\SISound\.metadata\.plugins\org.eclipse.jdt.core
 2034935569.index
 559129880.index
 3564172600.index
-3861370543.index
-1509899902.index
-194259052.index
 1477788888.index
+1509899902.index
+3861370543.index
+194259052.index
 2709225165.index
 886986949.index
-2807769364.index
-3438612212.index
 2023097419.index
-1919576511.index
+3438612212.index
+2807769364.index
 2470519452.index
-2272273464.index
-1017159511.index
+1919576511.index
 2185175350.index
+1017159511.index
+2272273464.index
 717766120.index
 3666609613.index
 2933775851.index
 628019425.index
 2729216755.index
 148409970.index
-286919383.index
 3698447926.index
+286919383.index
 3534737865.index
 1646528879.index
 3278004053.index
@@ -44,25 +43,3 @@ INDEX VERSION 1.130+D:\Programming\GIT\SISound\SISound\.metadata\.plugins\org.ec
 3141958188.index
 2880077800.index
 3132284073.index
-=======
-INDEX VERSION 1.130+D:\doma6ni\IT tallents\Project\SISound\.metadata\.plugins\org.eclipse.jdt.core
-2341309489.index
-2725782233.index
-3439039382.index
-2396838687.index
-955459938.index
-3163996356.index
-940800111.index
-956752177.index
-948919066.index
-1817446190.index
-1173945041.index
-3876057666.index
-2729216755.index
-2273491807.index
-1012197361.index
-39414472.index
-3129114939.index
-1417411144.index
-2663008219.index
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a

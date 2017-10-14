@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
 public class User {
@@ -11,20 +12,17 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
-	private City city;
-	private Country country;
+	private String city;
+	private String country;
 	private String bio;
 	private String profilPicture;
 	private String coverPhoto;
 	private TreeSet<Song> songs;
 	private TreeSet<Playlist> playlists;
-	private ArrayList<User> followers;
+	private LinkedHashSet<User> followers;
 	
 	//constructor for registering user
-	public User(String firstName, String lastName, String username, String password, String email, City city,
-			Country country) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public User(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -33,22 +31,25 @@ public class User {
 		
 		this.songs=new TreeSet();
 		this.playlists=new TreeSet();
-		this.followers=new ArrayList<>();
+		this.followers=new LinkedHashSet();
 	}
-
-	//constructor for retrieving from db
+	
 	public User(long userID, String firstName, String lastName, String username, String password, String email,
-			City city, Country country, String bio, String profilPicture, String coverPhoto, TreeSet<Song> songs,
-			TreeSet<Playlist> playlists, ArrayList<User> followers) {
-		this(firstName, lastName, username, password, email, city, country);
+			String city, String country, String bio, String profilPicture, String coverPhoto) {
+		super();
+		this.userID = userID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.city = city;
+		this.country = country;
 		this.bio = bio;
 		this.profilPicture = profilPicture;
 		this.coverPhoto = coverPhoto;
-		this.songs = songs;
-		this.playlists = playlists;
-		this.followers = followers;
 	}
-	
+
 	public void addFollower(User u){
 		this.followers.add(u);
 	}
@@ -89,19 +90,19 @@ public class User {
 		return email;
 	}
 
-	public City getCity() {
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public Country getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
@@ -133,12 +134,51 @@ public class User {
 		return songs;
 	}
 
+	public void setSongs(TreeSet<Song> songs) {
+		this.songs = songs;
+	}
+	
 	public TreeSet<Playlist> getPlaylists() {
 		return playlists;
 	}
 
-	public ArrayList<User> getFollowers() {
+	public void setPlaylists(TreeSet<Playlist> playlists) {
+		this.playlists = playlists;
+	}
+	
+	public LinkedHashSet<User> getFollowers() {
 		return followers;
 	}
 
+	public void setFollowers(LinkedHashSet<User> followers) {
+		this.followers = followers;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (userID ^ (userID >>> 32));
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (userID != other.userID)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
 }

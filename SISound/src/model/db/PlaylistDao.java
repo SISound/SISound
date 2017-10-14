@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.TreeSet;
 
 import model.Playlist;
+import model.Song;
+import model.User;
 
 public class PlaylistDao {
 
@@ -14,7 +17,7 @@ public class PlaylistDao {
 	
 	private PlaylistDao(){}
 	
-	public synchronized PlaylistDao getInstance(){
+	public static synchronized PlaylistDao getInstance(){
 		if(instance==null){
 			instance=new PlaylistDao();
 		}
@@ -44,5 +47,20 @@ public class PlaylistDao {
 		rs.next();
 		int count=rs.getInt(1);
 		return count>0;
+	}
+	
+	public synchronized TreeSet<Playlist> getPlaylistForUser(User u) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, g.genre_title, s.song_url"
+				                                  + "FROM songs as s JOIN music_genres as g "
+				                                  + "ON s.genre_id=g.genre_id"
+				                                  + "WHERE user_id=?");
+		stmt.setLong(1, u.getUserID());
+		ResultSet rs=stmt.executeQuery();
+		TreeSet<Song> songs=new TreeSet<>();
+		//TODO add comments
+		while(rs.next()){
+			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getDate(3), rs.getLong(4), u, rs.getString(6), rs.getString(5), ActionsDao.getInstance().getActions(true, rs.getLong(1)), comments));
+		}
 	}
 }

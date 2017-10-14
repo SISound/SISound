@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item value="false" key="updateQualifiedNames"/>
 		<item value="*" key="patterns"/>
@@ -11,49 +7,19 @@
 		<item value="1" key="updateSimilarElementsMatchStrategy"/>
 		<item value="false" key="updateTextualMatches"/>
 	</section>
-<<<<<<< HEAD
-=======
-=======
->>>>>>> d626f3d361d1aeba22bc7b9bc16858292b88fd42
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 	<section name="GenerateConstructorUsingFieldsSelectionDialog">
 		<item value="false" key="OmitCallToSuper"/>
 	</section>
 	<section name="DialogBounds_GenerateConstructorUsingFieldsSelectionDialog">
-<<<<<<< HEAD
-		<item value="519" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="678" key="DIALOG_HEIGHT"/>
-		<item value="709" key="DIALOG_X_ORIGIN"/>
-		<item value="76" key="DIALOG_Y_ORIGIN"/>
-	</section>
-	<section name="NewClassWizardPage">
-		<item value="false" key="create_constructor"/>
-		<item value="true" key="create_unimplemented"/>
-	</section>
-	<section name="OptionalMessageDialog.hide.">
-		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
-	</section>
-	<section name="SourceActionDialog.constructors">
-=======
 		<item value="520" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="677" key="DIALOG_HEIGHT"/>
 		<item value="431" key="DIALOG_X_ORIGIN"/>
 		<item value="8" key="DIALOG_Y_ORIGIN"/>
 	</section>
-<<<<<<< HEAD
 	<section name="NewClassWizardPage">
 		<item value="false" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
-=======
-	<section name="SourceActionDialog.methods">
->>>>>>> d626f3d361d1aeba22bc7b9bc16858292b88fd42
-		<item value="false" key="SynchronizedModifier"/>
-		<item value="false" key="Comments"/>
-		<item value="1" key="VisibilityModifier"/>
-		<item value="false" key="FinalModifier"/>
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 	</section>
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
@@ -64,27 +30,6 @@
 		<item value="1" key="VisibilityModifier"/>
 		<item value="false" key="FinalModifier"/>
 	</section>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-	<section name="ClasspathContainerSelectionPage">
-		<item value="3" key="index"/>
-	</section>
-	<section name="quick_assist_proposal_size">
-	</section>
-	<section name="BuildPathsPropertyPage">
-		<item value="2" key="pageIndex"/>
-	</section>
-	<section name="NewPackageWizardPage">
-		<item value="false" key="create_package_info_java"/>
-	</section>
-=======
->>>>>>> d626f3d361d1aeba22bc7b9bc16858292b88fd42
-	<section name="completion_proposal_size">
-		<item value="221" key="contextSelector.size.y"/>
-		<item value="331" key="contextSelector.size.x"/>
-	</section>
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
 		<item value="529" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>

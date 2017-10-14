@@ -85,10 +85,9 @@ public class ActionsDao {
 		Connection con = DBManager.getInstance().getConnection();
 
 		//getting likes
-<<<<<<< HEAD
 		PreparedStatement stmt = con.prepareStatement("SELECT ?.username FROM ? JOIN ? "
 				                                    + "ON ?=?"
-				                                    + "WHERE ? = ?");
+				                                    + "WHERE ?=?");
 		stmt.setString(1, "u");
 		stmt.setString(2, isSong ? "songs_likes as sl" : "playlists_likes as pl");
 		stmt.setString(3, "users as u");
@@ -99,47 +98,41 @@ public class ActionsDao {
 		
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
-			actions.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getString(1))); //TODO in UserDao get by index
-=======
-		PreparedStatement stmt = con.prepareStatement("SELECT (user_id) FROM ? WHERE ? = ?");
-		stmt.setString(1, isSong ? "songs_likes" : "playlists_likes");
-		stmt.setString(2, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(3, id);
-		
-		ResultSet rs = stmt.executeQuery();
-		while (rs.next()) {
-			actions.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getLong(1))); //TODO in UserDao get by index
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
+			actions.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
 		}
 		
 		//getting dislikes
-		stmt = con.prepareStatement("SELECT (user_id) FROM ? WHERE ? = ?");
-		stmt.setString(1, isSong ? "songs_dislikes" : "playlists_dislikes");
-		stmt.setString(2, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(3, id);
-		
+		stmt = con.prepareStatement("SELECT ?.username FROM ? JOIN ? "
+				                  + "ON ?=? "
+				                  + "WHERE ?=?");
+		stmt.setString(1, "u");
+		stmt.setString(2, isSong ? "songs_dislikes as sd" : "playlists_dislikes as pd");
+		stmt.setString(3, " users as u");
+		stmt.setString(4, isSong ? "sd.user_id" : "pd.user_id");
+		stmt.setString(5, "u.user_id");
+		stmt.setString(6, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(7, id);
 		rs = stmt.executeQuery();
+		
 		while (rs.next()) {
-<<<<<<< HEAD
 			actions.get(Actions.DISLIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
-=======
-			actions.get(Actions.DISLIKE).add(UserDao.getInstance().getUser(rs.getLong(1)));
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 		}
 		
 		//getting shares
-		stmt = con.prepareStatement("SELECT (user_id) FROM ? WHERE ? = ?");
-				
-		stmt.setString(1, isSong ? "songs_shares" : "playlists_shares");
-		stmt.setString(2, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(3, id);
+		stmt = con.prepareStatement("SELECT ?.username FROM ? JOIN ? "
+                                  + "ON ?=? "
+                                  + "WHERE ?=?");		
+		stmt.setString(1, "u");
+		stmt.setString(2, isSong ? "songs_shares as ss" : "playlists_shares as ps");
+		stmt.setString(3, " users as u");
+		stmt.setString(4, isSong ? "sd.user_id" : "pd.user_id");
+		stmt.setString(5, "u.user_id");
+		stmt.setString(6, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(7, id);
 		rs = stmt.executeQuery();
+		
 		while (rs.next()) {
-<<<<<<< HEAD
 			actions.get(Actions.SHARE).add(UserDao.getInstance().getUser(rs.getString(1))); 
-=======
-			actions.get(Actions.SHARE).add(UserDao.getInstance().getUser(rs.getLong(1))); 
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 		}
 		
 		return actions;

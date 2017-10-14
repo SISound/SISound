@@ -62,17 +62,13 @@ public class SongDao {
 		stmt.setLong(1, u.getUserID());
 		ResultSet rs=stmt.executeQuery();
 		TreeSet<Song> songs=new TreeSet<>();
-		
 		//TODO add comments
 		while(rs.next()){
-			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getDate(3), rs.getLong(4), u, rs.getString(6), rs.getString(5), ActionsDao.getInstance().getActions(true, rs.getLong(1)), comments));
+			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getDate(3), rs.getLong(4), u, rs.getString(6), rs.getString(5), ActionsDao.getInstance().getActions(true, rs.getLong(1)), CommentDao.getInstance().comments(rs.getLong(), true)));
 		}
 	}
 	
-<<<<<<< HEAD
 	public synchronized void deleteSong(){
 		
 	}
-=======
->>>>>>> ba72b4fa110ec80957318fa73b3241e31e3b8c2a
 }
