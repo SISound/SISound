@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeSet;
 
+import model.Comment;
 import model.Playlist;
-import model.Song;
 import model.User;
 
 public class PlaylistDao {
@@ -49,28 +49,65 @@ public class PlaylistDao {
 		return count>0;
 	}
 	
-	public synchronized TreeSet<Playlist> getPlaylistForUser(User u) throws SQLException{
+	public synchronized TreeSet<Playlist> getPlaylistsForUser(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, g.genre_title, s.song_url"
-				                                  + "FROM songs as s JOIN music_genres as g "
-				                                  + "ON s.genre_id=g.genre_id"
-				                                  + "WHERE user_id=?");
+		PreparedStatement stmt=con.prepareStatement("SELECT playlist_id, playlist_name, upload_date, isPrivate FROM playlists WHERE user_id=?");
 		stmt.setLong(1, u.getUserID());
 		ResultSet rs=stmt.executeQuery();
-		TreeSet<Song> songs=new TreeSet<>();
-		//TODO add comments
+		TreeSet<Playlist> playlists=new TreeSet<>();
+		
 		while(rs.next()){
-			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getDate(3), rs.getLong(4), u, rs.getString(6), rs.getString(5), ActionsDao.getInstance().getActions(true, rs.getLong(1)), comments));
+			playlists.add(new Playlist(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), u, ActionsDao.getInstance().getActions(false, rs.getLong(1)),
+					CommentDao.getInstance().getComments(rs.getLong(1), false), rs.getBoolean(4), SongDao.getInstance().getSongsForPlaylist(rs.getLong(1))));
 		}
+		
+		return playlists;
 	}
 	
-	//TODO search playlist by name
-	public synchronized void searchPlaylistByName(String playlistName){
+	public synchronized Playlist searchPlaylistByName(String playlistName) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT playlist_id, playlist_name, user_name, upload_date, isPrivate FROM playlists as p JOIN users as u "
+				                                  + "ON p.user_id=u.user_id "
+				                                  + "WHERE playlist_name=?");
+		stmt.setString(1, playlistName);
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
+		Playlist p=new Playlist(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), UserDao.getInstance().getUser(rs.getString(3)),
+				                ActionsDao.getInstance().getActions(false, rs.getLong(1)), CommentDao.getInstance().getComments(rs.getLong(1), false), 
+				                rs.getBoolean(5), SongDao.getInstance().getSongsForPlaylist(rs.getLong(1)));
 		
+		return p;
 	}
 	
 	//TODO deleting playlist
-	public synchronized void deletePlaylist(String playlistName){
+	public synchronized void deletePlaylist(Playlist playlist) throws SQLException {
+		Connection con=DBManager.getInstance().getConnection();
 		
+		try {
+			//delete comment-likes
+			for (Comment comment : playlist.getComments()) {
+				ActionsDao.getInstance().deleteCommentLikes(comment.getId());
+			}
+			
+			//delete comments
+			CommentDao.getInstance().deleteComments(playlist.getId(), false);
+			
+			//delete likes, dislikes, shares
+			ActionsDao.getInstance().deleteAllActions(false, playlist.getId());
+			
+			//delete from playlist_songs
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM playlists_songs WHERE playlist_id = ?");
+			stmt.setLong(1, playlist.getId());
+			stmt.execute();
+			
+			//delete playlist
+			stmt=con.prepareStatement("DELETE FROM playlists WHERE playlist_id = ?");
+			stmt.setLong(1, playlist.getId());
+			stmt.execute();
+				
+		} catch (SQLException e) {
+			//reverse
+			throw new SQLException();
+		}
 	}
 }

@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -16,6 +14,7 @@ import model.User;
 public class ActionsDao {
 
 	private static ActionsDao instance;
+	private String deleteQuery = "DELETE FROM ? WHERE ? = ?";
 	
 	private ActionsDao(){}
 	
@@ -159,5 +158,46 @@ public class ActionsDao {
 		}
 		
 		return commentLikes;
+	}
+	
+	public synchronized void deleteAllActions(boolean isSong, long id) throws SQLException {
+		
+		Connection con = DBManager.getInstance().getConnection();
+		
+		//deleting likes
+		PreparedStatement stmt = con.prepareStatement(this.deleteQuery);
+		stmt.setString(1, isSong ? "songs_likes" : "playlists_likes");
+		stmt.setString(2, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(3, id);
+		
+		stmt.execute();
+		
+		//deleting dislikes
+		stmt = con.prepareStatement(this.deleteQuery);
+		stmt.setString(1, isSong ? "songs_dislikes" : "playlists_dislikes");
+		stmt.setString(2, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(3, id);
+				
+		stmt.execute();
+		
+		//deleting dislikes
+		stmt = con.prepareStatement(this.deleteQuery);
+		stmt.setString(1, isSong ? "songs_shares" : "playlists_shares");
+		stmt.setString(2, isSong ? "song_id" : "playlist_id");
+		stmt.setLong(3, id);
+						
+		stmt.execute();
+	}
+	
+	public synchronized void deleteCommentLikes(long id) throws SQLException {
+		Connection con = DBManager.getInstance().getConnection();
+		
+		//deleting likes
+		PreparedStatement stmt = con.prepareStatement(this.deleteQuery);
+		stmt.setString(1, "comments_likes");
+		stmt.setString(2, "comment_id");
+		stmt.setLong(3, id);
+		
+		stmt.execute();
 	}
 }

@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class GenresDao {
 
 	private static GenresDao instance;
-	private HashMap<Long, String> genres = null;
+	private HashMap<String, Long> genres = null;
 	
 	public static synchronized GenresDao getInstance() throws SQLException{
 		if(instance == null){
@@ -26,11 +26,16 @@ public class GenresDao {
 		stmt = con.prepareStatement("SELECT (genre_id, genre_title) FROM music_genres");
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
-			this.genres.put(rs.getLong(1), rs.getString(2));
+			this.genres.put(rs.getString(2), rs.getLong(1));
 		}
 	}
 	
-	public HashMap<Long, String> getGenres(){
+	public HashMap<String, Long> getGenres(){
 		return this.genres;
 	}
+	
+	public long getGenreId(String name) {
+		return genres.get(name);
+	}
+	
 }

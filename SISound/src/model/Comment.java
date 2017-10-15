@@ -34,10 +34,6 @@ public class Comment implements Comparable<Comment>, Actionable{
 		this.subcoments = subComments;
 	}
 
-	public long getCommentId() {
-		return commentId;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -61,11 +57,7 @@ public class Comment implements Comparable<Comment>, Actionable{
 	public void addSubcomment(Comment comment) {
 		this.subcoments.add(comment);
 	}
-	
-	public void setCommentId(int commentId) {
-		this.commentId = commentId;
-	}
-	
+
 	public void setText(String text) {
 		this.text = text;
 	}
@@ -83,19 +75,17 @@ public class Comment implements Comparable<Comment>, Actionable{
 
 	@Override
 	public boolean isComment() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public long getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return commentId;
 	}
 
 	@Override
 	public void setId(long id) {
-		// TODO Auto-generated method stub
-		
+		this.commentId = id;
 	}
 	
 	public void setLikes(HashMap<Actions, HashSet<User>> likes) {

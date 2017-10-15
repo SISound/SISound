@@ -8,8 +8,7 @@ import java.sql.Statement;
 import java.util.TreeSet;
 import java.sql.Timestamp;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
+import model.Comment;
 import model.Song;
 import model.User;
 
@@ -35,14 +34,13 @@ public class SongDao {
 		stmt.setTimestamp(2, Timestamp.valueOf(song.getUploadDate()));
 		stmt.setLong(3, song.getTimesListened());
 		stmt.setLong(4, song.getUser().getUserID());
-		stmt.setLong(5, song.getGenre().getGenreId());
+		stmt.setLong(5, GenresDao.getInstance().getGenreId(song.getGenre()));
 		stmt.setString(6, song.getUrl());
 		ResultSet rs=stmt.executeQuery();
 		rs.next();
 		song.setId(rs.getInt(1));
 	}
 	
-	//?
 	public synchronized boolean existSong(Song s) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) FROM songs WHERE song_id=?");
@@ -62,7 +60,7 @@ public class SongDao {
 		stmt.setLong(1, u.getUserID());
 		ResultSet rs=stmt.executeQuery();
 		TreeSet<Song> songs=new TreeSet<>();
-		//TODO add comments
+
 		while(rs.next()){
 			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getLong(4), u, rs.getString(6), rs.getString(5), 
 					ActionsDao.getInstance().getActions(true, rs.getLong(1)), CommentDao.getInstance().getComments(rs.getLong(1), true)));
@@ -71,13 +69,67 @@ public class SongDao {
 		return songs;
 	}
 	
-	//TODO searching song by name
-	public synchronized void searchSongByName(String songName){
+	public synchronized TreeSet<Song> getSongsForPlaylist(long playlistId) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, u.user_name, g.genre_title, s.song_url "
+			                                      + "FROM playlists_songs as ps JOIN songs as s ON ps.song_id=s.song_id "
+			                                      + "JOIN users as u ON u.user_id=s.user_id "
+			                                      + "JOIN music_genres as mg ON s.genre_id=mg.genre_id "
+			                                      + "WHERE ps.playlist_id=?");
+		stmt.setLong(1, playlistId);
+		ResultSet rs=stmt.executeQuery();
+		TreeSet<Song> songs=new TreeSet<>();
+		while(rs.next()){
+			//TODO check genresDao
+			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getInt(4), UserDao.getInstance().getUser(rs.getString(5)),
+					  rs.getString(7), rs.getString(6), ActionsDao.getInstance().getActions(true, rs.getLong(1)), CommentDao.getInstance().getComments(rs.getLong(1), true)));
+		}
 		
+		return songs;
 	}
 	
-	//TODO deleting song method
-	public synchronized void deleteSong(String songName){
+	//TODO searching song by name
+	public synchronized Song searchSongByName(String songName) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, u.user_name, g.genre_title, s.song_url "
+				                                  + "FROM songs as s JOIN users as u "
+				                                  + "ON s.user_id=u.user_id "
+				                                  + "JOIN music_genres as mg ON s.genre_id=mg.genre_id "
+				                                  + "WHERE s.song_name=?");
+		stmt.setString(1, songName);
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
 		
+		return new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getInt(4), UserDao.getInstance().getUser(rs.getString(5)),
+				        rs.getString(7), rs.getString(6), ActionsDao.getInstance().getActions(true, rs.getLong(1)), CommentDao.getInstance().getComments(rs.getLong(1), true));		
 	}
+	
+	//deleting song method
+	//TODO make it atomic
+	public synchronized void deleteSong(long songId) throws SQLException {
+		Connection con=DBManager.getInstance().getConnection();
+		
+		//delete comment-likes
+		TreeSet<Comment> comments = CommentDao.getInstance().getComments(songId, true);
+		for (Comment comment : comments) {
+			ActionsDao.getInstance().deleteCommentLikes(comment.getId());
+		}
+		
+		//delete comments
+		CommentDao.getInstance().deleteComments(songId, true);
+		
+		//delete likes, dislikes, shares
+		ActionsDao.getInstance().deleteAllActions(true, songId);
+		
+		//delete from playlist_songs
+		PreparedStatement stmt=con.prepareStatement("DELETE FROM playlists_songs WHERE song_id = ?");
+		stmt.setLong(1, songId);
+		stmt.execute();
+		
+		//delete song
+		stmt=con.prepareStatement("DELETE FROM songs WHERE song_id = ?");
+		stmt.setLong(1, songId);
+		stmt.execute();
+	}
+
 }

@@ -2628,15 +2628,22 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.jface.text 2 0 2017-10-14 17:44:16.143
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+<<<<<<< HEAD
 >>>>>>> ce3b33655a5a22a4c95f2c6d405090fa27ce24bb
 !SESSION 2017-10-15 00:46:54.347 -----------------------------------------------
 eclipse.buildId=4.7.1.M20170906-1700
 java.version=1.8.0_144
+=======
+!SESSION 2017-10-14 21:47:08.604 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_131
+>>>>>>> dde239421180690c3d9e6370b6f6df2f58c38d3b
 java.vendor=Oracle Corporation
 BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
 Framework arguments:  -product org.eclipse.epp.package.jee.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.e4.ui.workbench 4 0 2017-10-15 00:47:04.973
 !MESSAGE Unable to load resource file:/D:/doma6ni/IT%20tallents/Project/SISound/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
 !STACK 0
@@ -2720,10 +2727,16 @@ java.lang.Exception
 !ENTRY org.eclipse.egit.ui 2 0 2017-10-15 00:47:21.162
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\iDoktorov'. If this is
+=======
+!ENTRY org.eclipse.egit.ui 2 0 2017-10-14 21:47:38.477
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Workstation'. If this is
+>>>>>>> dde239421180690c3d9e6370b6f6df2f58c38d3b
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jst.j2ee 4 0 2017-10-15 00:47:40.201
 !MESSAGE Plugin org.eclipse.jst.jee, extension org.eclipse.jst.j2ee.J2EEModelProvider
 Version 8.0 of project facet jst.ear does not exist.
@@ -3025,3 +3038,10 @@ org.xml.sax.SAXParseException; lineNumber: 9; columnNumber: 2; The content of el
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1472)
+=======
+!ENTRY org.eclipse.jface.text 2 0 2017-10-14 21:49:42.024
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-14 21:49:42.027
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+>>>>>>> dde239421180690c3d9e6370b6f6df2f58c38d3b

@@ -59,7 +59,7 @@ public class UserDao {
 		
 		User u=new User(rs.getLong(1), rs.getString(5), rs.getString(6), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
 		u.setSongs(SongDao.getInstance().getSongsForUser(u));
-		u.setPlaylists(PlaylistDao.getInstance().getPlaylistForUser(u));
+		u.setPlaylists(PlaylistDao.getInstance().getPlaylistsForUser(u));
 		u.setFollowers(this.getFollowers(u));
 		
 		return u;
@@ -79,5 +79,22 @@ public class UserDao {
 		}
 		
 		return followers;
+	}
+	
+	public synchronized User searchUserByUsername(String username) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT user_id, first_name, last_name, user_name, password, email, city_name, country_name, bio, profile_pic, cover_photo "
+				                                  + "FROM users WHERE user_name=?");
+		stmt.setString(1, username);
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
+		User u=new User(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), 
+				        rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
+		
+		u.setSongs(SongDao.getInstance().getSongsForUser(u));
+		u.setPlaylists(PlaylistDao.getInstance().getPlaylistsForUser(u));
+		u.setFollowers(this.getFollowers(u));
+		
+		return u;
 	}
 }
