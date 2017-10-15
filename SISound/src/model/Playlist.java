@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Playlist implements Comparable<Playlist>, Actionable {
@@ -14,7 +15,7 @@ public class Playlist implements Comparable<Playlist>, Actionable {
 	private HashMap<Actions, HashSet<User>> actions;
 	private TreeSet<Comment> comments;
 	private boolean isPrivate;
-	private TreeSet<Song> songs;
+	private TreeMap<LocalDateTime, Song> songs;
 	
 	
 	public Playlist(String title, LocalDateTime creationDate, User user, boolean isPrivate) {
@@ -27,12 +28,12 @@ public class Playlist implements Comparable<Playlist>, Actionable {
 		for (Actions action : Actions.values()) {
 			this.actions.put(action, new HashSet());
 		}
-		this.songs = new TreeSet<>();
+		this.songs = new TreeMap<>();
 	}
 
 
 	public Playlist(long playlistID, String title, LocalDateTime creationDate, User user, HashMap<Actions, 
-			HashSet<User>> actions, TreeSet<Comment> comments, boolean isPrivate, TreeSet<Song> songs) {
+			HashSet<User>> actions, TreeSet<Comment> comments, boolean isPrivate, TreeMap<LocalDateTime, Song> songs) {
 		this(title, creationDate, user, isPrivate);
 		this.playlistID = playlistID;
 		this.actions = actions;
@@ -76,7 +77,7 @@ public class Playlist implements Comparable<Playlist>, Actionable {
 	}
 
 
-	public TreeSet<Song> getSongs() {
+	public TreeMap<LocalDateTime, Song> getSongs() {
 		return songs;
 	}
 	
@@ -97,8 +98,8 @@ public class Playlist implements Comparable<Playlist>, Actionable {
 		this.comments.add(comment);
 	}
 	
-	public void addSong(Song song) {
-		this.songs.add(song);
+	public void addSong(Song song, LocalDateTime time) {
+		this.songs.put(time, song);
 	}
 	
 	public void addAction(Actions action, User user) {

@@ -6,14 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 import java.util.HashMap;
 import java.util.TreeSet;
 
 import model.Actionable;
-import model.Actions;
 import model.Comment;
-import model.User;
+
 
 
 public class CommentDao {
@@ -98,13 +97,13 @@ public class CommentDao {
 	}
 	
 	//TODO delete comments
-	public synchronized void deleteComments(long id, boolean isSong) throws SQLException {
+	public synchronized boolean deleteComments(long id, boolean isSong) throws SQLException {
 		Connection con = DBManager.getInstance().getConnection();
 		PreparedStatement stmt = con.prepareStatement("DELETE FROM ? WHERE ? = ?");
 		stmt.setString(1, isSong ? "songs_comments" : "playlists_comments");
 		stmt.setString(2, isSong ? "song_id" : "playlist_id");
 		stmt.setLong(3, id);
 		
-		stmt.execute();
+		return stmt.execute();
 	}
 }
