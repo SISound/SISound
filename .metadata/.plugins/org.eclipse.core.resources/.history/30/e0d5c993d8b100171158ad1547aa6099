@@ -143,8 +143,6 @@ public class SongDao {
 		TreeSet<Comment> comments = CommentDao.getInstance().getComments(song.getId(), true);
 		ArrayList<HashMap<Actions, HashSet<User>>> commentLikes = new ArrayList<>();
 		HashMap<Actions, HashSet<User>> actions = ActionsDao.getInstance().getActions(true, song.getId());
-		HashMap<LocalDateTime, Long> playlists = SongDao.getInstance().getPlaylistsWithSong(song.getId());
-		
 		boolean commentsDeleted = false;
 		boolean playlistSongsDeleted = false;
 		boolean songDeleted = false;
@@ -172,6 +170,7 @@ public class SongDao {
 			sharesDeleted = ActionsDao.getInstance().deleteShares(true, song.getId());
 			
 			//delete from playlist_songs
+			//TODO get from playlist_songs
 			PreparedStatement stmt=con.prepareStatement("DELETE FROM playlists_songs WHERE song_id = ?");
 			stmt.setLong(1, song.getId());
 			playlistSongsDeleted = stmt.execute();
@@ -219,11 +218,9 @@ public class SongDao {
 				}
 			}
 			
-			//add deleted playlist_songs
+			//TODO add deleted playlist_songs
 			if(!playlistSongsDeleted) {
-				for(Map.Entry<LocalDateTime, Long> entry : playlists.entrySet()) {
-					  SongDao.getInstance().addSongToPlaylist(song.getId(), entry.getValue(), entry.getKey());
-				}
+				
 			}
 			
 			//add deleted song

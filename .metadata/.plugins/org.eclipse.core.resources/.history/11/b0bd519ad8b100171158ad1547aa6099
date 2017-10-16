@@ -6,13 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
->>>>>>> a8020d0bef43ff531513542f51858899e25dcd9d
 import java.util.TreeSet;
 
 import model.Actions;
@@ -89,14 +86,13 @@ public class PlaylistDao {
 		return p;
 	}
 	
-	//deleting playlist
+	//TODO deleting playlist
 	public synchronized void deletePlaylist(Playlist playlist) throws SQLException {
 		Connection con=DBManager.getInstance().getConnection();
 		
 		ArrayList<HashMap<Actions, HashSet<User>>> likes = new ArrayList<>();
 		TreeSet<Comment> comments = CommentDao.getInstance().getComments(playlist.getId(), false);
 		HashMap<Actions, HashSet<User>> actions = ActionsDao.getInstance().getActions(false, playlist.getId());
-		
 		boolean commentsDeleted = false;
 		boolean playlistSongsDeleted = false;
 		boolean playlistDeleted = false;
@@ -186,50 +182,5 @@ public class PlaylistDao {
 			
 			throw new SQLException();
 		}
-	}
-	
-	public synchronized void addSongToPlaylist(long userId, String playlistName, Song s) throws SQLException{
-		SongDao.getInstance().uploadSong(s);
-		
-		//getting the ID of the playlist to which we want to add song 
-		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT playlist_id FROM playlists WHERE user_id=? AND playlist_name=?");
-		stmt.setLong(1, userId);
-		stmt.setString(2, playlistName);
-		ResultSet rs=stmt.executeQuery();
-		rs.next();
-		long playlistId=rs.getLong(1);
-		
-		//adding the song to the playlist 
-		stmt=con.prepareStatement("INSERT INTO playlists_songs (playlist_id, song_id, upload_date) VALUES (?, ?, ?)");
-		stmt.setLong(1, playlistId);
-		stmt.setLong(2, s.getId());
-		stmt.setString(3, LocalDateTime.now().toString());
-	}
-	
-	public synchronized void deleteSongFromPlaylist(long userId, String playlistName, String songName) throws SQLException{
-		Connection con=DBManager.getInstance().getConnection();
-		
-		//getting the ID of the playlist from which we want to delete song 
-		PreparedStatement stmt=con.prepareStatement("SELECT playlist_id FROM playlists WHERE playlist_name=? AND user_id=?");
-		stmt.setLong(1, userId);
-		stmt.setString(2, playlistName);
-		ResultSet rs=stmt.executeQuery();
-		rs.next();
-		long playlistId=rs.getLong(1);
-				
-		//getting the ID of the song we want to delete
-		stmt=con.prepareStatement("SELECT song_id FROM songs WHERE song_name=? AND user_id=?");
-		stmt.setString(1, songName);
-		stmt.setLong(2, userId);
-		rs=stmt.executeQuery();
-		rs.next();
-		long songId=rs.getLong(1);
-		
-		//deleting the song from the playlist
-		stmt=con.prepareStatement("DELETE FROM playlists_songs WHERE playlist_id=? AND song_id=?");
-		stmt.setLong(1, playlistId);
-		stmt.setLong(2, songId);
-		stmt.executeQuery();
 	}
 }

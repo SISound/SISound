@@ -219,11 +219,9 @@ public class SongDao {
 				}
 			}
 			
-			//add deleted playlist_songs
+			//TODO add deleted playlist_songs
 			if(!playlistSongsDeleted) {
-				for(Map.Entry<LocalDateTime, Long> entry : playlists.entrySet()) {
-					  SongDao.getInstance().addSongToPlaylist(song.getId(), entry.getValue(), entry.getKey());
-				}
+				
 			}
 			
 			//add deleted song
