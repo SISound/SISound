@@ -2,11 +2,19 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="model.db.GenresDao"/>
 <fullyQualifiedTypeName name="model.Playlist"/>
-<fullyQualifiedTypeName name="model.db.SongDao"/>
-<fullyQualifiedTypeName name="java.util.TreeSet"/>
 <fullyQualifiedTypeName name="model.Comment"/>
-<fullyQualifiedTypeName name="model.db.ActionsDao"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.TreeSet"/>
 <fullyQualifiedTypeName name="model.db.CommentDao"/>
 <fullyQualifiedTypeName name="model.db.PlaylistDao"/>
+<fullyQualifiedTypeName name="java.sql.Timestamp"/>
+<fullyQualifiedTypeName name="java.util.TreeMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="model.db.ActionsDao"/>
+<fullyQualifiedTypeName name="model.Actions"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="model.db.SongDao"/>
+<fullyQualifiedTypeName name="java.time.LocalDateTime"/>
 </qualifiedTypeNameHistroy>
