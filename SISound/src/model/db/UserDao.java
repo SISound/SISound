@@ -97,4 +97,20 @@ public class UserDao {
 		
 		return u;
 	}
+	
+	public synchronized void followUser(long followerId, long followedId) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("INSERT INTO follows (follower_id, followed_id) VALUES (?, ?)");
+		stmt.setLong(1, followerId);
+		stmt.setLong(2, followedId);
+		stmt.executeQuery();
+	}
+	
+	public synchronized void unfollowUser(long followerId, long followedId) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("DELETE FROM follows WHERE follower_id=? AND followed_id=?");
+		stmt.setLong(1, followerId);
+		stmt.setLong(2, followedId);
+		stmt.executeQuery();
+	}
 }

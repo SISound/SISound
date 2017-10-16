@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.TreeSet;
 
 import model.Comment;
 import model.Playlist;
+import model.Song;
 import model.User;
 
 public class PlaylistDao {
@@ -109,5 +111,50 @@ public class PlaylistDao {
 			//reverse
 			throw new SQLException();
 		}
+	}
+	
+	public synchronized void addSongToPlaylist(long userId, String playlistName, Song s) throws SQLException{
+		SongDao.getInstance().uploadSong(s);
+		
+		//getting the ID of the playlist to which we want to add song 
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT playlist_id FROM playlists WHERE user_id=? AND playlist_name=?");
+		stmt.setLong(1, userId);
+		stmt.setString(2, playlistName);
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
+		long playlistId=rs.getLong(1);
+		
+		//adding the song to the playlist 
+		stmt=con.prepareStatement("INSERT INTO playlists_songs (playlist_id, song_id, upload_date) VALUES (?, ?, ?)");
+		stmt.setLong(1, playlistId);
+		stmt.setLong(2, s.getId());
+		stmt.setString(3, LocalDateTime.now().toString());
+	}
+	
+	public synchronized void deleteSongFromPlaylist(long userId, String playlistName, String songName) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		
+		//getting the ID of the playlist from which we want to delete song 
+		PreparedStatement stmt=con.prepareStatement("SELECT playlist_id FROM playlists WHERE playlist_name=? AND user_id=?");
+		stmt.setLong(1, userId);
+		stmt.setString(2, playlistName);
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
+		long playlistId=rs.getLong(1);
+				
+		//getting the ID of the song we want to delete
+		stmt=con.prepareStatement("SELECT song_id FROM songs WHERE song_name=? AND user_id=?");
+		stmt.setString(1, songName);
+		stmt.setLong(2, userId);
+		rs=stmt.executeQuery();
+		rs.next();
+		long songId=rs.getLong(1);
+		
+		//deleting the song from the playlist
+		stmt=con.prepareStatement("DELETE FROM playlists_songs WHERE playlist_id=? AND song_id=?");
+		stmt.setLong(1, playlistId);
+		stmt.setLong(2, songId);
+		stmt.executeQuery();
 	}
 }
