@@ -33,7 +33,7 @@ public class CountryDao {
 		return countries;
 	}
 	
-	public long getCountryId(String name) {
+	public long getGenreId(String name) {
 		return countries.get(name);
 	}
 	

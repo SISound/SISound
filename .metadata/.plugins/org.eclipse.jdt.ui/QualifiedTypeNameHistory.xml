@@ -5,7 +5,6 @@
 <fullyQualifiedTypeName name="model.Comment"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.TreeSet"/>
-<fullyQualifiedTypeName name="model.db.CommentDao"/>
 <fullyQualifiedTypeName name="model.db.PlaylistDao"/>
 <fullyQualifiedTypeName name="java.sql.Timestamp"/>
 <fullyQualifiedTypeName name="java.util.TreeMap"/>
@@ -17,4 +16,8 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="model.db.SongDao"/>
 <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+<fullyQualifiedTypeName name="com.google.common.hash.Hashing"/>
+<fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
+<fullyQualifiedTypeName name="model.db.CommentDao"/>
+<fullyQualifiedTypeName name="model.db.CountryDao"/>
 </qualifiedTypeNameHistroy>

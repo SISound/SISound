@@ -133,9 +133,9 @@ public class UserDao {
 		return rs.getInt("count")>0;	
 	}
 	
-	public synchronized boolean oldPasswordCheck (String password, String username) throws SQLException {
+	public synchronized boolean oldPasswordCheck (String password, String username) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT count(*) as count FROM users WHERE user_name = ? AND user_password = ?");
+		PreparedStatement stmt=con.prepareStatement("SELECT count(*) as count FROM users WHERE user_id = ? AND user_password = ?");
 		stmt.setString(1, username);
 		stmt.setString(1, Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString());
 		ResultSet rs=stmt.executeQuery();
@@ -143,7 +143,7 @@ public class UserDao {
 		return rs.getInt("count")>0;	
 	}
 	
-	public synchronized void passwordChange (String newPassword, String username) throws SQLException {
+	public synchronized void passwordChange (String newPassword, String username) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("UPDATE users SET user_password = ? WHERE user_name = ?");
 		stmt.setString(2, username);
@@ -151,26 +151,17 @@ public class UserDao {
 		stmt.execute();
 	}
 	
-	public synchronized void emailChange (String newEmail, String username) throws SQLException {
+	public synchronized void emailChange (String newEmail, long userId) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("UPDATE users SET email = ? WHERE user_name = ?");
-		stmt.setString(2, username);
+		PreparedStatement stmt=con.prepareStatement("UPDATE users SET email = ? WHERE user_id = ?");
+		stmt.setLong(2, userId);
 		stmt.setString(1, newEmail);
 		stmt.execute();
 	}
 	
-	public synchronized void editProfile(User user) throws SQLException {
-		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("UPDATE users SET city = ?, bio = ?, profile_pic = ?, first_name = ?, last_name = ?, cover_photo = ?, country_id = ?  WHERE user_name = ?");
-		stmt.setString(1, user.getCity());
-		stmt.setString(2, user.getBio());
-		stmt.setString(3, user.getProfilPicture());
-		stmt.setString(4, user.getFirstName());
-		stmt.setString(5, user.getLastName());
-		stmt.setString(6, user.getCoverPhoto());
-		stmt.setLong(7, CountryDao.getInstance().getCountryId(user.getCountry()));
+	public synchronized void editProfile(User user) {
 		
-		stmt.execute();
 	}
+	//TODO edit profile
 	
 }
