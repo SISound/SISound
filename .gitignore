@@ -1,3 +1,15 @@
+.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log
+/.metadata/*
+.metadata
+/.recommenders
+*/.metadata
+/*/.settings
+/*/bin
+/*/.settings
+/*/.classpath
+/*/.project
+/*/*/.project
+
 # Compiled class file
 *.class
 
