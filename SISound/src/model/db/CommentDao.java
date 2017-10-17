@@ -50,7 +50,7 @@ public class CommentDao {
 		Connection con = DBManager.getInstance().getConnection();
 		PreparedStatement stmt = con.prepareStatement("SELECT (?.comment_id, u.user_name, ?.comment_text, ?.upload_date, ?.parent_id FROM ? JOIN ?"
 				                                    + "ON ?.user_id=u.user_id "
-				                                    + "WHERE ? = ? AND parent_id IS NULL");//TODO check query
+				                                    + "WHERE ? = ? AND parent_id IS NULL");
 		stmt.setString(1, isSong ? "sc" : "pc");
 		stmt.setString(2, isSong ? "sc" : "pc");
 		stmt.setString(3, isSong ? "sc" : "pc");

@@ -37,7 +37,7 @@ public class UserDao {
 		u.setUserID(rs.getLong(1));
 	}
 	
-	public synchronized boolean loginConfirmationUser(String username, String password) throws SQLException{
+	public synchronized boolean loginConfirmation(String username, String password) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) as count FROM users where user_name=? AND user_password=?");
 		stmt.setString(1, username);
@@ -49,12 +49,11 @@ public class UserDao {
 	
 	public synchronized User getUser(String username) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, u.user_name, u.user_password, u.email, u.first_name, u.last_name, u.city_name, u.country_name, "
-				                                  + "u.bio, u.profile_picture, u.cover_photo FROM users as u JOIN cities as cty "
-				                                  + "ON u.city_id=cty.city_id "
-				                                  + "JOIN countries as cnt "
-				                                  + "ON cty.country_id=cnt.country_id "
-				                                  + "WHERE u.user_name=?");
+		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, u.user_name, u.user_password, u.email, u.first_name, u.last_name, u.city_name, c.country_name, "
+				                                  + "u.bio, u.profile_picture, u.cover_photo FROM users as u" 
+				                                  + "JOIN countries as c "
+				                                  + "ON u.country_id = c.country_id "
+				                                  + "WHERE u.user_name = ?");
 		stmt.setString(1, username);
 		ResultSet rs=stmt.executeQuery();
 		
@@ -66,7 +65,24 @@ public class UserDao {
 		return u;
 	}
 	
-	private synchronized LinkedHashSet<User> getFollowers(User u) throws SQLException{
+	/*public synchronized User searchUserByUsername(String username) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT user_id, first_name, last_name, user_name, password, email, city_name, country_name, bio, profile_pic, cover_photo "
+				+ "FROM users WHERE user_name=?");
+		stmt.setString(1, username);
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
+		User u=new User(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), 
+				rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
+		
+		u.setSongs(SongDao.getInstance().getSongsForUser(u));
+		u.setPlaylists(PlaylistDao.getInstance().getPlaylistsForUser(u));
+		u.setFollowers(this.getFollowers(u));
+		
+		return u;
+	}*/
+	
+	public synchronized LinkedHashSet<User> getFollowers(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT f.user_id, f.user_name, f.user_password, f.email, f.first_name, f.last_name, f.city_name, f.country_name, "
 				                                  + "f.bio, f.profile_picture, f.cover_photo FROM follows as f JOIN users as u"
@@ -80,23 +96,6 @@ public class UserDao {
 		}
 		
 		return followers;
-	}
-	
-	public synchronized User searchUserByUsername(String username) throws SQLException{
-		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT user_id, first_name, last_name, user_name, password, email, city_name, country_name, bio, profile_pic, cover_photo "
-				                                  + "FROM users WHERE user_name=?");
-		stmt.setString(1, username);
-		ResultSet rs=stmt.executeQuery();
-		rs.next();
-		User u=new User(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), 
-				        rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
-		
-		u.setSongs(SongDao.getInstance().getSongsForUser(u));
-		u.setPlaylists(PlaylistDao.getInstance().getPlaylistsForUser(u));
-		u.setFollowers(this.getFollowers(u));
-		
-		return u;
 	}
 	
 	public synchronized void followUser(long followerId, long followedId) throws SQLException{
@@ -133,7 +132,7 @@ public class UserDao {
 		return rs.getInt("count")>0;	
 	}
 	
-	public synchronized boolean oldPasswordCheck (String password, String username) throws SQLException {
+	public synchronized boolean passwordCheck (String password, String username) throws SQLException {
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) as count FROM users WHERE user_name = ? AND user_password = ?");
 		stmt.setString(1, username);
