@@ -160,35 +160,7 @@ public class ActionsDao {
 		return commentLikes;
 	}
 	
-	public synchronized void deleteAllActions(boolean isSong, long id) throws SQLException {
-		
-		Connection con = DBManager.getInstance().getConnection();
-		
-		//deleting likes
-		PreparedStatement stmt = con.prepareStatement(this.deleteQuery);
-		stmt.setString(1, isSong ? "songs_likes" : "playlists_likes");
-		stmt.setString(2, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(3, id);
-		
-		stmt.execute();
-		
-		//deleting dislikes
-		stmt = con.prepareStatement(this.deleteQuery);
-		stmt.setString(1, isSong ? "songs_dislikes" : "playlists_dislikes");
-		stmt.setString(2, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(3, id);
-				
-		stmt.execute();
-		
-		//deleting dislikes
-		stmt = con.prepareStatement(this.deleteQuery);
-		stmt.setString(1, isSong ? "songs_shares" : "playlists_shares");
-		stmt.setString(2, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(3, id);
-						
-		stmt.execute();
-	}
-	public synchronized boolean deleteLikes(boolean isSong, long id) throws SQLException {
+	public synchronized void deleteLikes(boolean isSong, long id) throws SQLException {
 		Connection con = DBManager.getInstance().getConnection();
 		
 		PreparedStatement stmt = con.prepareStatement(this.deleteQuery);
@@ -196,11 +168,10 @@ public class ActionsDao {
 		stmt.setString(2, isSong ? "song_id" : "playlist_id");
 		stmt.setLong(3, id);
 		
-		return stmt.execute();
-		
+		stmt.execute();
 	}
 	
-	public synchronized boolean deleteDislikes(boolean isSong, long id) throws SQLException {
+	public synchronized void deleteDislikes(boolean isSong, long id) throws SQLException {
 		Connection con = DBManager.getInstance().getConnection();
 		
 		PreparedStatement stmt = con.prepareStatement(this.deleteQuery);
@@ -208,11 +179,10 @@ public class ActionsDao {
 		stmt.setString(2, isSong ? "song_id" : "playlist_id");
 		stmt.setLong(3, id);
 		
-		return stmt.execute();
-		
+		stmt.execute();
 	}
 	
-	public synchronized boolean deleteShares(boolean isSong, long id) throws SQLException {
+	public synchronized void deleteShares(boolean isSong, long id) throws SQLException {
 		Connection con = DBManager.getInstance().getConnection();
 		
 		PreparedStatement stmt = con.prepareStatement(this.deleteQuery);
@@ -220,8 +190,7 @@ public class ActionsDao {
 		stmt.setString(2, isSong ? "song_id" : "playlist_id");
 		stmt.setLong(3, id);
 		
-		return stmt.execute();
-		
+		stmt.execute();
 	}
 	public synchronized void deleteCommentLikes(long id) throws SQLException {
 		Connection con = DBManager.getInstance().getConnection();

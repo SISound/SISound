@@ -96,14 +96,13 @@ public class CommentDao {
 		return set;
 	}
 	
-	//TODO delete comments
-	public synchronized boolean deleteComments(long id, boolean isSong) throws SQLException {
+	public synchronized void deleteComments(long id, boolean isSong) throws SQLException {
 		Connection con = DBManager.getInstance().getConnection();
 		PreparedStatement stmt = con.prepareStatement("DELETE FROM ? WHERE ? = ?");
 		stmt.setString(1, isSong ? "songs_comments" : "playlists_comments");
 		stmt.setString(2, isSong ? "song_id" : "playlist_id");
 		stmt.setLong(3, id);
 		
-		return stmt.execute();
+		stmt.execute();
 	}
 }

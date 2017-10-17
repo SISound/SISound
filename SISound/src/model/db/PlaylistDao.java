@@ -7,13 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.TreeSet;
 
-import model.Actions;
 import model.Comment;
 import model.Playlist;
 import model.Song;
@@ -90,99 +85,44 @@ public class PlaylistDao {
 	//deleting playlist
 	public synchronized void deletePlaylist(Playlist playlist) throws SQLException {
 		Connection con=DBManager.getInstance().getConnection();
-		
-		ArrayList<HashMap<Actions, HashSet<User>>> likes = new ArrayList<>();
-		TreeSet<Comment> comments = CommentDao.getInstance().getComments(playlist.getId(), false);
-		HashMap<Actions, HashSet<User>> actions = ActionsDao.getInstance().getActions(false, playlist.getId());
-		
-		boolean commentsDeleted = false;
-		boolean playlistSongsDeleted = false;
-		boolean playlistDeleted = false;
-		boolean likesDeleted = false;
-		boolean dislikesDeleted = false;
-		boolean sharesDeleted = false;
-		
+		con.setAutoCommit(false);
+			
 		try {
 			//delete comment-likes
 
-			for (Comment comment : comments) {
-				likes.add(ActionsDao.getInstance().getCommentsLikes(comment.getId()));
+			for (Comment comment : CommentDao.getInstance().getComments(playlist.getId(), false)) {
 				ActionsDao.getInstance().deleteCommentLikes(comment.getId());
 			}
 			
 			//delete comments
-			commentsDeleted = CommentDao.getInstance().deleteComments(playlist.getId(), false);
+			CommentDao.getInstance().deleteComments(playlist.getId(), false);
 			
 			//delete likes
-			likesDeleted = ActionsDao.getInstance().deleteLikes(false, playlist.getId());
+			ActionsDao.getInstance().deleteLikes(false, playlist.getId());
 			//delete dislikes
-			dislikesDeleted = ActionsDao.getInstance().deleteDislikes(false, playlist.getId());
+			ActionsDao.getInstance().deleteDislikes(false, playlist.getId());
 			//delete shares
-			sharesDeleted = ActionsDao.getInstance().deleteShares(false, playlist.getId());
+			ActionsDao.getInstance().deleteShares(false, playlist.getId());
 			
 			
 			//delete from playlist_songs
 			PreparedStatement stmt = con.prepareStatement("DELETE FROM playlists_songs WHERE playlist_id = ?");
 			stmt.setLong(1, playlist.getId());
-			playlistSongsDeleted = stmt.execute();
+			stmt.execute();
 			
 			//delete playlist
 			stmt=con.prepareStatement("DELETE FROM playlists WHERE playlist_id = ?");
 			stmt.setLong(1, playlist.getId());
-			playlistDeleted = stmt.execute();
+			stmt.execute();
 				
+			con.commit();
 		} catch (SQLException e) {
 			//reverse
-			//add deleted comment likes
-			for (HashMap<Actions, HashSet<User>> map : likes) {
-				for (Actions action : map.keySet()) {
-					for (User user : map.get(action)) {
-						ActionsDao.getInstance().addAction(playlist, action, user);						
-					}
-				}
-			}
-			
-			//add deleted comments
-			if(!commentsDeleted) {
-				for (Comment comment : comments) {
-					CommentDao.getInstance().insertComment(comment, playlist);
-				}
-			}
-			
-			//add deleted likes
-			if(!likesDeleted) {
-				for (User user : actions.get(Actions.LIKE)) {
-					ActionsDao.getInstance().addAction(playlist, Actions.LIKE, user);
-				}
-			}
-			
-			//add deleted dislikes
-			if(!dislikesDeleted) {
-				for (User user : actions.get(Actions.DISLIKE)) {
-					ActionsDao.getInstance().addAction(playlist, Actions.DISLIKE, user);
-				}
-			}
-			
-			//add deleted shares
-			if(!sharesDeleted) {
-				for (User user : actions.get(Actions.SHARE)) {
-					ActionsDao.getInstance().addAction(playlist, Actions.SHARE, user);
-				}
-			}
-			
-			//add deleted playlist_songs
-			if(!playlistSongsDeleted) {
-				for(Map.Entry<LocalDateTime,Song> entry : playlist.getSongs().entrySet()) {
-					  SongDao.getInstance().addSongToPlaylist(entry.getValue().getId(), playlist.getId(), entry.getKey());
-				}
-			}
-			
-			//add deleted playlist
-			if(!playlistDeleted) {				
-				PlaylistDao.getInstance().createPlaylist(playlist);
-			}
-			
+			con.rollback();
 			throw new SQLException();
+	
+		} finally {
+			con.setAutoCommit(true);
 		}
 	}
 	

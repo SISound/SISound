@@ -5,16 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import model.Actions;
 import model.Comment;
 import model.Song;
 import model.User;
@@ -139,100 +135,44 @@ public class SongDao {
 	//deleting song method
 	public synchronized void deleteSong(Song song) throws SQLException {
 		Connection con=DBManager.getInstance().getConnection();
-		
-		TreeSet<Comment> comments = CommentDao.getInstance().getComments(song.getId(), true);
-		ArrayList<HashMap<Actions, HashSet<User>>> commentLikes = new ArrayList<>();
-		HashMap<Actions, HashSet<User>> actions = ActionsDao.getInstance().getActions(true, song.getId());
-		HashMap<LocalDateTime, Long> playlists = SongDao.getInstance().getPlaylistsWithSong(song.getId());
-		
-		boolean commentsDeleted = false;
-		boolean playlistSongsDeleted = false;
-		boolean songDeleted = false;
-		boolean likesDeleted = false;
-		boolean dislikesDeleted = false;
-		boolean sharesDeleted = false;
+		con.setAutoCommit(false);
 		
 		try {
 			//delete comment-likes
-			for (Comment comment : comments) {
-				commentLikes.add(ActionsDao.getInstance().getCommentsLikes(comment.getId()));
+			for (Comment comment : CommentDao.getInstance().getComments(song.getId(), true)) {
 				ActionsDao.getInstance().deleteCommentLikes(comment.getId());
 			}
 			
 			//delete comments
-			commentsDeleted = CommentDao.getInstance().deleteComments(song.getId(), true);
+			CommentDao.getInstance().deleteComments(song.getId(), true);
 		
 			//delete likes
-			likesDeleted = ActionsDao.getInstance().deleteLikes(true, song.getId());
+			ActionsDao.getInstance().deleteLikes(true, song.getId());
 		
 			//delete dislikes
-			dislikesDeleted = ActionsDao.getInstance().deleteDislikes(true, song.getId());
+			ActionsDao.getInstance().deleteDislikes(true, song.getId());
 			
 			//delete shares
-			sharesDeleted = ActionsDao.getInstance().deleteShares(true, song.getId());
+			ActionsDao.getInstance().deleteShares(true, song.getId());
 			
 			//delete from playlist_songs
 			PreparedStatement stmt=con.prepareStatement("DELETE FROM playlists_songs WHERE song_id = ?");
 			stmt.setLong(1, song.getId());
-			playlistSongsDeleted = stmt.execute();
+			stmt.execute();
 			
 			//delete song
 			stmt=con.prepareStatement("DELETE FROM songs WHERE song_id = ?");
 			stmt.setLong(1, song.getId());
-			songDeleted = stmt.execute();
+			stmt.execute();
+			
+			con.commit();
 		} catch (SQLException e) {
 			//reverse
-			//add deleted comment likes
-			for (HashMap<Actions, HashSet<User>> map : commentLikes) {
-				for (Actions action : map.keySet()) {
-					for (User user : map.get(action)) {
-						ActionsDao.getInstance().addAction(song, action, user);						
-					}
-				}
-			}
-			
-			//add deleted comments
-			if(!commentsDeleted) {
-				for (Comment comment : comments) {
-					CommentDao.getInstance().insertComment(comment, song);
-				}
-			}
-			
-			//add deleted likes
-			if(!likesDeleted) {
-				for (User user : actions.get(Actions.LIKE)) {
-					ActionsDao.getInstance().addAction(song, Actions.LIKE, user);
-				}
-			}
-			
-			//add deleted dislikes
-			if(!dislikesDeleted) {
-				for (User user : actions.get(Actions.DISLIKE)) {
-					ActionsDao.getInstance().addAction(song, Actions.DISLIKE, user);
-				}
-			}
-			
-			//add deleted shares
-			if(!sharesDeleted) {
-				for (User user : actions.get(Actions.SHARE)) {
-					ActionsDao.getInstance().addAction(song, Actions.SHARE, user);
-				}
-			}
-			
-			//add deleted playlist_songs
-			if(!playlistSongsDeleted) {
-				for(Map.Entry<LocalDateTime, Long> entry : playlists.entrySet()) {
-					  SongDao.getInstance().addSongToPlaylist(song.getId(), entry.getValue(), entry.getKey());
-				}
-			}
-			
-			//add deleted song
-			if(!songDeleted) {
-				SongDao.getInstance().uploadSong(song);
-			}
-			
+			con.rollback();
 			throw new SQLException();
 	
+		} finally {
+			con.setAutoCommit(true);
 		}
 	}
 

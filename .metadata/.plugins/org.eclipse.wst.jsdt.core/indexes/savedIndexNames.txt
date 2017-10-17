@@ -1,17 +1,7 @@
-<<<<<<< HEAD
-INDEX VERSION 1.3+D:\Programming\GIT\SISound\SISound\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3679251112.index
-2729216755.index
-3467606126.index
-1945797120.index
-2415811298.index
-2240460519.index
-=======
 INDEX VERSION 1.4+D:\doma6ni\IT tallents\Project\SISound\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
 1814590529.index
 814890756.index
 182718309.index
-2729216755.index
 788073650.index
+2729216755.index
 2676153072.index
->>>>>>> a8020d0bef43ff531513542f51858899e25dcd9d
