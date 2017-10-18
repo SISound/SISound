@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="model.db.GenresDao"/>
 <fullyQualifiedTypeName name="model.Playlist"/>
 <fullyQualifiedTypeName name="model.Comment"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -9,11 +8,8 @@
 <fullyQualifiedTypeName name="java.sql.Timestamp"/>
 <fullyQualifiedTypeName name="java.util.TreeMap"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="model.db.ActionsDao"/>
 <fullyQualifiedTypeName name="model.Actions"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="model.db.SongDao"/>
-<fullyQualifiedTypeName name="java.time.LocalDateTime"/>
 <fullyQualifiedTypeName name="com.google.common.hash.Hashing"/>
 <fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
 <fullyQualifiedTypeName name="model.db.CommentDao"/>
@@ -21,9 +17,20 @@
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="java.nio.file.attribute.UserPrincipalLookupService"/>
 <fullyQualifiedTypeName name="java.sql.Statement"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
 <fullyQualifiedTypeName name="java.util.LinkedHashSet"/>
-<fullyQualifiedTypeName name="model.db.UserDao"/>
+<fullyQualifiedTypeName name="model.db.SongDao"/>
+<fullyQualifiedTypeName name="model.Song"/>
+<fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+<fullyQualifiedTypeName name="model.db.ActionsDao"/>
+<fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthSpinnerUI"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="model.db.DBManager"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="model.db.GenresDao"/>
+<fullyQualifiedTypeName name="model.Genres"/>
+<fullyQualifiedTypeName name="com.sun.xml.internal.ws.addressing.EndpointReferenceUtil"/>
 <fullyQualifiedTypeName name="model.User"/>
+<fullyQualifiedTypeName name="model.db.UserDao"/>
 </qualifiedTypeNameHistroy>

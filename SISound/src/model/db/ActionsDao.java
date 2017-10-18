@@ -77,6 +77,7 @@ public class ActionsDao {
 		stmt.execute();
 	}
 	
+	//OK
 	public synchronized HashMap<Actions, HashSet<User>> getActions(boolean isSong, long id) throws SQLException {
 		
 		//creating the result map
@@ -88,55 +89,63 @@ public class ActionsDao {
 		
 		Connection con = DBManager.getInstance().getConnection();
 
-		//getting likes
-		PreparedStatement stmt = con.prepareStatement("SELECT ?.username FROM ? JOIN ? "
-				                                    + "ON ?=?"
-				                                    + "WHERE ?=?");
-		stmt.setString(1, "u");
-		stmt.setString(2, isSong ? "songs_likes as sl" : "playlists_likes as pl");
-		stmt.setString(3, "users as u");
-		stmt.setString(4, isSong ? "sl.user_id" : "pl.user_id");
-		stmt.setString(5, "u.user_id");
-		stmt.setString(6, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(7, id);
-		
-		ResultSet rs = stmt.executeQuery();
-		while (rs.next()) {
-			actions.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
+		PreparedStatement stmt = null;
+		ResultSet rs=null;
+		if(isSong){
+			//getting song likes
+			stmt=con.prepareStatement("SELECT u.user_name FROM songs_likes as sl JOIN users as u ON sl.user_id=u.user_id WHERE sl.song_id=?");
+			stmt.setLong(1, id);
+			
+		    rs = stmt.executeQuery();
+			while (rs.next()) {
+				actions.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
+			}
+			
+			//getting song dislikes
+			stmt = con.prepareStatement("SELECT u.user_name FROM songs_dislikes as sd JOIN users as u ON sd.user_id=u.user_id WHERE sd.song_id=?");
+			stmt.setLong(1, id);
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				actions.get(Actions.DISLIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
+			}
+			
+			//getting song shares
+			stmt = con.prepareStatement("SELECT u.user_name FROM songs_shares as ss JOIN users as u ON ss.user_id=u.user_id WHERE ss.song_id=?");
+			stmt.setLong(1, id);
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				actions.get(Actions.SHARE).add(UserDao.getInstance().getUser(rs.getString(1))); 
+			}
 		}
+		else{
+			//getting playlist likes
+			stmt=con.prepareStatement("SELECT u.user_name FROM playlists_likes as pl JOIN users as u ON pl.user_id=u.user_id WHERE pl.playlist_id=?");
+			stmt.setLong(1, id);
+			
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				actions.get(Actions.LIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
+			}
+			
+			//getting playlist dislikes
+			stmt = con.prepareStatement("SELECT u.user_name FROM playlists_dislikes as pd JOIN users as u ON pd.user_id=u.user_id WHERE pd.playlist_id=?");
+			stmt.setLong(1, id);
+            rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				actions.get(Actions.DISLIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
+			}
+			
+			//getting playlist shares
+			stmt = con.prepareStatement("SELECT u.user_name FROM playlists_shares as ps JOIN users as u ON ps.user_id=u.user_id WHERE ps.playlist_id=?");
+			stmt.setLong(1, id);
+		    rs = stmt.executeQuery();
 		
-		//getting dislikes
-		stmt = con.prepareStatement("SELECT ?.username FROM ? JOIN ? "
-				                  + "ON ?=? "
-				                  + "WHERE ?=?");
-		stmt.setString(1, "u");
-		stmt.setString(2, isSong ? "songs_dislikes as sd" : "playlists_dislikes as pd");
-		stmt.setString(3, " users as u");
-		stmt.setString(4, isSong ? "sd.user_id" : "pd.user_id");
-		stmt.setString(5, "u.user_id");
-		stmt.setString(6, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(7, id);
-		rs = stmt.executeQuery();
-		
-		while (rs.next()) {
-			actions.get(Actions.DISLIKE).add(UserDao.getInstance().getUser(rs.getString(1)));
-		}
-		
-		//getting shares
-		stmt = con.prepareStatement("SELECT ?.username FROM ? JOIN ? "
-                                  + "ON ?=? "
-                                  + "WHERE ?=?");		
-		stmt.setString(1, "u");
-		stmt.setString(2, isSong ? "songs_shares as ss" : "playlists_shares as ps");
-		stmt.setString(3, " users as u");
-		stmt.setString(4, isSong ? "sd.user_id" : "pd.user_id");
-		stmt.setString(5, "u.user_id");
-		stmt.setString(6, isSong ? "song_id" : "playlist_id");
-		stmt.setLong(7, id);
-		rs = stmt.executeQuery();
-		
-		while (rs.next()) {
-			actions.get(Actions.SHARE).add(UserDao.getInstance().getUser(rs.getString(1))); 
+		    while (rs.next()) {
+			    actions.get(Actions.SHARE).add(UserDao.getInstance().getUser(rs.getString(1))); 
+		    }
 		}
 		
 		return actions;

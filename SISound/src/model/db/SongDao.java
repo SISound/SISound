@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.sql.Timestamp;
@@ -88,7 +89,7 @@ public class SongDao {
 	
 	public synchronized TreeMap<LocalDateTime, Song> getSongsForPlaylist(long playlistId) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, u.user_name, g.genre_title, s.song_url, ps.upload_date "
+		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, u.user_name, mg.genre_title, s.song_url, ps.upload_date "
 			                                      + "FROM playlists_songs as ps JOIN songs as s ON ps.song_id = s.song_id "
 			                                      + "JOIN users as u ON u.user_id = s.user_id "
 			                                      + "JOIN music_genres as mg ON s.genre_id = mg.genre_id "
@@ -135,6 +136,25 @@ public class SongDao {
 		return res;
 	}
 	
+	public synchronized HashSet<Song> getAllSongs() throws SQLException{
+		HashSet<Song> songs=new HashSet<>();
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, u.user_name, "
+				                                  + "g.genre_title, s.song_url "
+				                                  + "FROM songs as s "
+				                                  + "JOIN users as u ON s.user_id=u.user_id "
+				                                  + "JOIN music_genres as m ON s.genre_id=m.genre_id");
+		ResultSet rs=stmt.executeQuery();
+		while(rs.next()){
+			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getLong(4), 
+					  UserDao.getInstance().getUser(rs.getString(5)), rs.getString(6), rs.getString(7), 
+					  ActionsDao.getInstance().getActions(true, rs.getLong(1)), 
+					  CommentDao.getInstance().getComments(rs.getLong(1), true)));
+		}
+		
+		return songs;
+	}
+	
 	//deleting song method
 	public synchronized void deleteSong(Song song) throws SQLException {
 		Connection con=DBManager.getInstance().getConnection();
@@ -178,5 +198,4 @@ public class SongDao {
 			con.setAutoCommit(true);
 		}
 	}
-
 }
