@@ -4651,6 +4651,7 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 	at org.eclipse.recommenders.internal.calls.rcp.RcpCallModelProvider.acquireModel(RcpCallModelProvider.java:1)
 	at org.eclipse.recommenders.internal.models.rcp.PrefetchModelArchiveJob.run(PrefetchModelArchiveJob.java:43)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+<<<<<<< HEAD
 
 !ENTRY org.eclipse.jdt.core 4 4 2017-10-18 17:12:57.488
 !MESSAGE Background Indexer Crash Recovery
@@ -4901,3 +4902,5 @@ java.io.FileNotFoundException: /icons/full/eview16/junit.png
 
 !ENTRY org.eclipse.wst.server.discovery 1 0 2017-10-18 21:11:10.624
 !MESSAGE already installed: org.eclipse.jst.server.generic.jonas4
+=======
+>>>>>>> 908c3014b0fd1b3d43b871db9971fdb530682ccb
