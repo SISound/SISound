@@ -21,5 +21,6 @@
 <fullyQualifiedTypeName name="model.db.CountryDao"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="java.nio.file.attribute.UserPrincipalLookupService"/>
+<fullyQualifiedTypeName name="model.User"/>
 <fullyQualifiedTypeName name="model.db.UserDao"/>
 </qualifiedTypeNameHistroy>
