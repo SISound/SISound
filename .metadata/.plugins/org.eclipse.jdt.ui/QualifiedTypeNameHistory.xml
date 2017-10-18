@@ -11,7 +11,6 @@
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="model.db.ActionsDao"/>
 <fullyQualifiedTypeName name="model.Actions"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="model.db.SongDao"/>
 <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
@@ -21,5 +20,10 @@
 <fullyQualifiedTypeName name="model.db.CountryDao"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="java.nio.file.attribute.UserPrincipalLookupService"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
+<fullyQualifiedTypeName name="java.util.LinkedHashSet"/>
 <fullyQualifiedTypeName name="model.db.UserDao"/>
+<fullyQualifiedTypeName name="model.User"/>
 </qualifiedTypeNameHistroy>

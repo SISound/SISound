@@ -1,2 +1,0 @@
-127.0.0.1 - - [11/Oct/2017:19:36:16 +0300] "GET / HTTP/1.1" 404 1070
-0:0:0:0:0:0:0:1 - - [11/Oct/2017:19:36:17 +0300] "GET /SISound/WEB-INF/classes/model/LikeSong.java HTTP/1.1" 404 1047
