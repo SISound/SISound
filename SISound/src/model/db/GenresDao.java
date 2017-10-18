@@ -5,12 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map.Entry;
+
+import com.sun.xml.internal.ws.addressing.EndpointReferenceUtil;
 
 
 public class GenresDao {
 
 	private static GenresDao instance;
 	private HashMap<String, Long> genres = null;
+	
+	private GenresDao() throws SQLException {}
 	
 	public static synchronized GenresDao getInstance() throws SQLException{
 		if(instance == null){
@@ -19,23 +24,13 @@ public class GenresDao {
 		return instance;
 	}
 	
-	private GenresDao() throws SQLException {
-		Connection con = DBManager.getInstance().getConnection();
-		PreparedStatement stmt;
-	
-		stmt = con.prepareStatement("SELECT (genre_id, genre_title) FROM music_genres");
-		ResultSet rs = stmt.executeQuery();
-		while (rs.next()) {
-			this.genres.put(rs.getString(2), rs.getLong(1));
-		}
+	public long getGenreId(String genre) throws SQLException{
+		Connection con=DBManager.getInstance().getConnection();
+		PreparedStatement stmt=con.prepareStatement("SELECT genre_id FROM music_genres WHERE genre_title=?");
+		stmt.setString(1, genre);
+		ResultSet rs=stmt.executeQuery();
+		rs.next();
+		long l=rs.getLong(1);
+		return l;
 	}
-	
-	public HashMap<String, Long> getGenres(){
-		return this.genres;
-	}
-	
-	public long getGenreId(String name) {
-		return genres.get(name);
-	}
-	
 }

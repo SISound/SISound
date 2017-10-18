@@ -26,7 +26,6 @@ public class UserDao {
 		return instance;
 	}
 	
-	//insertUser query is fixed
 	public synchronized void insertUser(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("INSERT INTO users (user_name, user_password, email) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -39,7 +38,6 @@ public class UserDao {
 		u.setUserID(rs.getLong(1));
 	}
 	
-	//OK
 	public synchronized boolean loginConfirmation(String username, String password) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) as count FROM users where user_name=? AND user_password=?");
@@ -50,17 +48,16 @@ public class UserDao {
 		return rs.getInt("count")>0;
 	}
 	
-	//getUser query is fixed: LEFT JOIN instead JOIN
 	public synchronized User getUser(String username) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, u.user_name, u.user_password, u.email, "
-				                                  + "if(u.first_name is not null, u.first_name, null) as first_name, " 
-				                                  + "if(u.last_name is not null, u.last_name, null) as last_name, "
-				                                  + "if(u.city_name is not null, u.city_name, null) as city, "
+				                                  + "u.first_name, " 
+				                                  + "u.last_name, "
+				                                  + "u.city_name, "
 				                                  + "c.country_name as country, "
-				                                  + "if(u.bio is not null, u.bio, null) as bio, "
-				                                  + "if(u.profile_pic is not null, u.profile_pic, null) as profile_pic, "
-				                                  + "if(u.cover_photo is not null, u.cover_photo, null) as cover_photo "
+				                                  + "u.bio, "
+				                                  + "u.profile_pic, "
+				                                  + "u.cover_photo "
 				                                  + "FROM users as u LEFT join countries as c on u.country_id=c.country_id "
 				                                  + "WHERE user_name=?");
 		stmt.setString(1, username);
@@ -89,7 +86,6 @@ public class UserDao {
 		return u;
 	}*/
 	
-	//getFollowers query is fixed
 	public synchronized LinkedHashSet<User> getFollowers(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, "
@@ -119,15 +115,13 @@ public class UserDao {
 		
 		return followers;
 	}
-	
-	//TODO check and fix |
-	//                   V
+	           
 	public synchronized void followUser(long followerId, long followedId) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("INSERT INTO follows (follower_id, followed_id) VALUES (?, ?)");
 		stmt.setLong(1, followerId);
 		stmt.setLong(2, followedId);
-		stmt.executeQuery();
+		stmt.executeUpdate();
 	}
 	
 	public synchronized void unfollowUser(long followerId, long followedId) throws SQLException{
@@ -135,7 +129,7 @@ public class UserDao {
 		PreparedStatement stmt=con.prepareStatement("DELETE FROM follows WHERE follower_id=? AND followed_id=?");
 		stmt.setLong(1, followerId);
 		stmt.setLong(2, followedId);
-		stmt.executeQuery();
+		stmt.executeUpdate();
 	}
 
 	public synchronized boolean usernameExists(String username) throws SQLException{
@@ -184,7 +178,8 @@ public class UserDao {
 	
 	public synchronized void editProfile(User user) throws SQLException {
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("UPDATE users SET city = ?, bio = ?, profile_pic = ?, first_name = ?, last_name = ?, cover_photo = ?, country_id = ?  WHERE user_name = ?");
+		PreparedStatement stmt=con.prepareStatement("UPDATE users SET city_name = ?, bio = ?, profile_pic = ?, first_name = ?, "
+				                                  + "last_name = ?, cover_photo = ?, country_id = ?  WHERE user_name = ?");
 		stmt.setString(1, user.getCity());
 		stmt.setString(2, user.getBio());
 		stmt.setString(3, user.getProfilPicture());
@@ -192,6 +187,7 @@ public class UserDao {
 		stmt.setString(5, user.getLastName());
 		stmt.setString(6, user.getCoverPhoto());
 		stmt.setLong(7, CountryDao.getInstance().getCountryId(user.getCountry()));
+		stmt.setString(8, user.getUsername());
 		
 		stmt.execute();
 	}

@@ -29,8 +29,10 @@ public class SongDao {
 		return instance;
 	}
 	
+	//OK
 	public synchronized void uploadSong(Song song) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
+		
 		PreparedStatement stmt=con.prepareStatement("INSERT INTO songs (song_name, upload_date, listenings, user_id, genre_id, song_url) "
 				                                  + "VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 		stmt.setString(1, song.getTitle());
@@ -39,7 +41,8 @@ public class SongDao {
 		stmt.setLong(4, song.getUser().getUserID());
 		stmt.setLong(5, GenresDao.getInstance().getGenreId(song.getGenre()));
 		stmt.setString(6, song.getUrl());
-		ResultSet rs=stmt.executeQuery();
+		stmt.executeUpdate();
+		ResultSet rs=stmt.getGeneratedKeys();
 		rs.next();
 		song.setId(rs.getInt(1));
 	}
