@@ -21,7 +21,7 @@ public class DBManager {
 		final String DB_PORT = "3306";
 		final String DB_DBNAME = "soundcloud";
 		final String DB_USER = "root";
-		final String DB_PASS = "788080";
+		final String DB_PASS = "Bubonci12#";
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://" + DB_IP + ":" + DB_PORT + "/" + DB_DBNAME, DB_USER, DB_PASS);
 		} catch (SQLException e) {

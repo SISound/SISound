@@ -32,7 +32,8 @@ public class UserDao {
 		stmt.setString(1, u.getUsername());
 		stmt.setString(2, Hashing.sha512().hashString(u.getPassword(), StandardCharsets.UTF_8).toString());
 		stmt.setString(3, u.getEmail());
-		ResultSet rs=stmt.executeQuery();
+		stmt.executeUpdate();//here
+		ResultSet rs=stmt.getGeneratedKeys();//and here
 		rs.next();
 		u.setUserID(rs.getLong(1));
 	}
@@ -49,18 +50,21 @@ public class UserDao {
 	
 	public synchronized User getUser(String username) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, u.user_name, u.user_password, u.email, u.first_name, u.last_name, u.city_name, c.country_name, "
-				                                  + "u.bio, u.profile_picture, u.cover_photo FROM users as u" 
-				                                  + "JOIN countries as c "
-				                                  + "ON u.country_id = c.country_id "
-				                                  + "WHERE u.user_name = ?");
+		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, u.user_name, u.user_password, u.email, "
+				                                  + "u.first_name, " 
+				                                  + "u.last_name, "
+				                                  + "u.city_name, "
+				                                  + "c.country_name as country, "
+				                                  + "u.bio, "
+				                                  + "u.profile_pic, "
+				                                  + "u.cover_photo "
+				                                  + "FROM users as u LEFT join countries as c on u.country_id=c.country_id "
+				                                  + "WHERE user_name=?");
 		stmt.setString(1, username);
 		ResultSet rs=stmt.executeQuery();
-		
-		User u=new User(rs.getLong(1), rs.getString(5), rs.getString(6), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
-		u.setSongs(SongDao.getInstance().getSongsForUser(u));
-		u.setPlaylists(PlaylistDao.getInstance().getPlaylistsForUser(u));
-		u.setFollowers(this.getFollowers(u));
+		rs.next();
+		User u=new User(rs.getLong(1), rs.getString(5), rs.getString(6), rs.getString(2), rs.getString(3), rs.getString(4),
+				rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
 		
 		return u;
 	}
@@ -84,26 +88,40 @@ public class UserDao {
 	
 	public synchronized LinkedHashSet<User> getFollowers(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT f.user_id, f.user_name, f.user_password, f.email, f.first_name, f.last_name, f.city_name, f.country_name, "
-				                                  + "f.bio, f.profile_picture, f.cover_photo FROM follows as f JOIN users as u"
+		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, "
+									              + "u.first_name, " 
+									              + "u.last_name, "
+									              + "u.user_name, "
+									              + "u.user_password, "
+									              + "u.email, "
+									              + "u.city_name, "
+									              + "c.country_name, "
+									              + "u.bio, "
+				                                  + "u.profile_pic, "
+				                                  + "u.cover_photo "
+				                                  + "FROM follows as f "
+				                                  + "JOIN users as u "
 				                                  + "ON f.follower_id=u.user_id "
+				                                  + "LEFT JOIN countries as c "
+				                                  + "ON u.country_id=c.country_id "
 				                                  + "WHERE f.followed_id=?");
 		stmt.setLong(1, u.getUserID());
 		ResultSet rs=stmt.executeQuery();
 		LinkedHashSet<User> followers=new LinkedHashSet<>();
 		while(rs.next()){
-			followers.add(new User(rs.getLong(1), rs.getString(5), rs.getString(6), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)));
+			followers.add(new User(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), 
+					               rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)));
 		}
 		
 		return followers;
 	}
-	
+	           
 	public synchronized void followUser(long followerId, long followedId) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("INSERT INTO follows (follower_id, followed_id) VALUES (?, ?)");
 		stmt.setLong(1, followerId);
 		stmt.setLong(2, followedId);
-		stmt.executeQuery();
+		stmt.executeUpdate();
 	}
 	
 	public synchronized void unfollowUser(long followerId, long followedId) throws SQLException{
@@ -111,7 +129,7 @@ public class UserDao {
 		PreparedStatement stmt=con.prepareStatement("DELETE FROM follows WHERE follower_id=? AND followed_id=?");
 		stmt.setLong(1, followerId);
 		stmt.setLong(2, followedId);
-		stmt.executeQuery();
+		stmt.executeUpdate();
 	}
 
 	public synchronized boolean usernameExists(String username) throws SQLException{
@@ -160,7 +178,8 @@ public class UserDao {
 	
 	public synchronized void editProfile(User user) throws SQLException {
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("UPDATE users SET city = ?, bio = ?, profile_pic = ?, first_name = ?, last_name = ?, cover_photo = ?, country_id = ?  WHERE user_name = ?");
+		PreparedStatement stmt=con.prepareStatement("UPDATE users SET city_name = ?, bio = ?, profile_pic = ?, first_name = ?, "
+				                                  + "last_name = ?, cover_photo = ?, country_id = ?  WHERE user_name = ?");
 		stmt.setString(1, user.getCity());
 		stmt.setString(2, user.getBio());
 		stmt.setString(3, user.getProfilPicture());
@@ -168,6 +187,7 @@ public class UserDao {
 		stmt.setString(5, user.getLastName());
 		stmt.setString(6, user.getCoverPhoto());
 		stmt.setLong(7, CountryDao.getInstance().getCountryId(user.getCountry()));
+		stmt.setString(8, user.getUsername());
 		
 		stmt.execute();
 	}
