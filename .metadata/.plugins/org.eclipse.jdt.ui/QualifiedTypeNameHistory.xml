@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.sql.SQLException"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="com.sun.javafx.collections.MappingChange.Map"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="model.db.SongDao"/>
+<fullyQualifiedTypeName name="model.Song"/>
+<fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+<fullyQualifiedTypeName name="sun.security.jca.GetInstance"/>
+<fullyQualifiedTypeName name="model.db.GenresDao"/>
+<fullyQualifiedTypeName name="model.db.UserDao"/>
 </qualifiedTypeNameHistroy>

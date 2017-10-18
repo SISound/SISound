@@ -28,6 +28,7 @@ public class PlaylistDao {
 		return instance;
 	}
 	
+	//OK
 	public synchronized void createPlaylist(Playlist playlist) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("INSERT INTO playlists (playlist_name, user_id, upload_date, isPrivate) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -35,23 +36,24 @@ public class PlaylistDao {
 		stmt.setLong(2, playlist.getUser().getUserID());
 		stmt.setString(3, playlist.getCreationDate().toString());
 		stmt.setBoolean(4, playlist.isPrivate());
-		ResultSet rs=stmt.executeQuery();
+		stmt.executeUpdate();
+		ResultSet rs=stmt.getGeneratedKeys();
 		rs.next();
 		playlist.setId(rs.getLong(1));
 	}
 	
+	//OK
 	public synchronized boolean existPlaylist(Playlist playlist) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT count(*) FROM ? WHERE ?=?");
-		stmt.setString(1, "playlists");
-		stmt.setString(2, "playlist_id");
-		stmt.setLong(3, playlist.getId());
+		PreparedStatement stmt=con.prepareStatement("SELECT count(*) FROM playlists WHERE playlist_id=?");
+		stmt.setLong(1, playlist.getId());
 		ResultSet rs=stmt.executeQuery();
 		rs.next();
 		int count=rs.getInt(1);
 		return count>0;
 	}
 	
+	//OK
 	public synchronized TreeSet<Playlist> getPlaylistsForUser(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT playlist_id, playlist_name, upload_date, isPrivate FROM playlists WHERE user_id=?");
