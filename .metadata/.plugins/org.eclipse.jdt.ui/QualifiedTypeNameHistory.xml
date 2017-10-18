@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="model.db.GenresDao"/>
-<fullyQualifiedTypeName name="model.Playlist"/>
-<fullyQualifiedTypeName name="model.Comment"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.util.TreeSet"/>
-<fullyQualifiedTypeName name="model.db.PlaylistDao"/>
-<fullyQualifiedTypeName name="java.sql.Timestamp"/>
-<fullyQualifiedTypeName name="java.util.TreeMap"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="model.db.ActionsDao"/>
-<fullyQualifiedTypeName name="model.Actions"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="model.db.SongDao"/>
-<fullyQualifiedTypeName name="java.time.LocalDateTime"/>
-<fullyQualifiedTypeName name="com.google.common.hash.Hashing"/>
-<fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
-<fullyQualifiedTypeName name="model.db.CommentDao"/>
-<fullyQualifiedTypeName name="model.db.CountryDao"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
-<fullyQualifiedTypeName name="java.nio.file.attribute.UserPrincipalLookupService"/>
-<<<<<<< HEAD
-<fullyQualifiedTypeName name="model.User"/>
-=======
-<fullyQualifiedTypeName name="java.sql.Statement"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
-<fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
-<fullyQualifiedTypeName name="java.util.LinkedHashSet"/>
->>>>>>> 716fb07c9a40057305f9ccc3749e87a277bc9cca
-<fullyQualifiedTypeName name="model.db.UserDao"/>
-<fullyQualifiedTypeName name="model.User"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.sun.javafx.collections.MappingChange.Map"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
 </qualifiedTypeNameHistroy>

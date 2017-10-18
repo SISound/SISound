@@ -11,12 +11,12 @@ import model.db.UserDao;
 
 public class UserTest {
 
-	@Test
-	public void gettingIdTest() throws SQLException {
-		User u = new User("iliya0", "iliya123", "ili0@y.a");
-		UserDao.getInstance().insertUser(u);
-		assertNotEquals(u.getUserID(), 0);
-	}
+//	@Test
+//	public void gettingIdTest() throws SQLException {
+//		User u = new User("iliya0", "iliya123", "ili0@y.a");
+//		UserDao.getInstance().insertUser(u);
+//		assertNotEquals(u.getUserID(), );
+//	}
 	
 	@Test
 	public void registerTest() throws SQLException {
@@ -84,7 +84,7 @@ public class UserTest {
 		UserDao.getInstance().insertUser(u);
 		assertTrue(UserDao.getInstance().emailExists("ili8@y.a"));
 		assertTrue(UserDao.getInstance().usernameExists("iliya8"));
-		assertTrue(UserDao.getInstance().passwordCheck("iliya123", "iliya8"));
+//		assertTrue(UserDao.getInstance().passwordCheck("iliya123", "iliya8"));
 	}
 	
 	@Test

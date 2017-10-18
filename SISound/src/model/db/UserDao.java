@@ -27,8 +27,8 @@ public class UserDao {
 	}
 	
 	public synchronized void insertUser(User u) throws SQLException{
-		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("INSERT INTO users (user_name, user_password, email) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+		Connection con = DBManager.getInstance().getConnection();
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO users (user_name, user_password, email) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 		stmt.setString(1, u.getUsername());
 		stmt.setString(2, Hashing.sha512().hashString(u.getPassword(), StandardCharsets.UTF_8).toString());
 		stmt.setString(3, u.getEmail());
