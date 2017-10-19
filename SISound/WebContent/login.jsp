@@ -8,17 +8,19 @@
 	<title>SISound</title>
 </head>
 	<body>
-		<header id="loginHeader">
-			<h1>LOGO</h1>
+		<header>
+			
 		</header>
 		<div id="loginDiv">
 			<form action="loginServlet" method="POST">
 				<div id="liDiv">
+					<h1 id="loginHead">Login</h1>
 					<input class="login" type="text" placeholder="Username" name="username"><br>
 					<input class="login" type="password" placeholder="Password" name="password"><br>
 					<input id="lb" type="submit" value="" style="background-image: url('login.png'); border:none; background-repeat:no-repeat;background-size:100% 100%;">
 				</div>
 			</form>
+			<a class="forgotPass" href="forgotPass.jsp" name="forgotPass">Forgot password?</a>
 			<a class="regLink" href="register.jsp" name="regLink">You don't have account? Register here!</a>
 		</div>
 	</body>
