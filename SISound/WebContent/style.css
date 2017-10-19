@@ -1,5 +1,16 @@
-body{
-	background-color: #0000f4;
+html{
+	padding: 0;
+	margin: 0;
+}
+
+body,html{
+	background-color: #FA6F59;
+	margin: 0;
+	padding: 0;
+}
+
+body,html{
+	background-color: #FA6F59;
 	margin: 0;
 	padding: 0;
 }
@@ -60,10 +71,35 @@ body{
 	margin-left: 500px;
 }
 
+#loginDiv{
+	border-radius: 15px;
+	background-color: #524A49;
+	height: 380px;
+	width: 350px;
+	opacity: 0.9;
+	margin-top: 100px;
+	margin-left: 500px;
+}
+
 #regDiv{
 	position: absolute;
 	margin-left: 45px;
 	margin-top: 75px;
+}
+
+#liDiv{
+	position: absolute;
+	margin-left: 45px;
+	margin-top: 85px;
+}
+
+#lb{
+	height: 35px;
+	width: 150px;
+	background: none;
+	border-radius: 7px;
+	margin-top: 10%;
+	margin-left: 20%;
 }
 
 #rb{
@@ -79,6 +115,17 @@ body{
 	background-color: #524A49;
 	height: 50px;
 	opacity: 0.9;
+}
+
+.regLink{
+	position: absolute;
+	font-size: 16px;
+	text-decoration: none;
+	margin-top: 280px;
+	margin-left: 35px;
+	font: 16px "Trebuchet MS", Helvetica, sans-serif;
+	color: #C2C2C2;
+	opacity: 0.4;
 }
 
 .logLink{
