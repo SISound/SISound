@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="model.db.SongDao"/>
-<fullyQualifiedTypeName name="model.Song"/>
-<fullyQualifiedTypeName name="java.time.LocalDateTime"/>
-<fullyQualifiedTypeName name="sun.security.jca.GetInstance"/>
-<fullyQualifiedTypeName name="model.db.GenresDao"/>
+<fullyQualifiedTypeName name="model.User"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="javax.servlet.annotation.MultipartConfig"/>
 <fullyQualifiedTypeName name="model.db.UserDao"/>
 </qualifiedTypeNameHistroy>

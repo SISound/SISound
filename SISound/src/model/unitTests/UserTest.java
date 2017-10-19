@@ -22,9 +22,9 @@ public class UserTest {
 	public void registerTest() throws SQLException {
 		User u = new User("iliya", "iliya123", "ili@y.a");
 		UserDao.getInstance().insertUser(u);
-		assertTrue(UserDao.getInstance().loginConfirmation("iliya", "iliya123"));
-		assertFalse(UserDao.getInstance().loginConfirmation("iliya", "iliya1234"));
-		assertFalse(UserDao.getInstance().loginConfirmation("iliya1", "iliya123"));
+		assertTrue(UserDao.getInstance().existsUser("iliya", "iliya123"));
+		assertFalse(UserDao.getInstance().existsUser("iliya", "iliya1234"));
+		assertFalse(UserDao.getInstance().existsUser("iliya1", "iliya123"));
 	}
 	
 	@Test

@@ -38,7 +38,7 @@ public class UserDao {
 		u.setUserID(rs.getLong(1));
 	}
 	
-	public synchronized boolean loginConfirmation(String username, String password) throws SQLException{
+	public synchronized boolean existsUser(String username, String password) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) as count FROM users where user_name=? AND user_password=?");
 		stmt.setString(1, username);
@@ -69,24 +69,7 @@ public class UserDao {
 		
 		return u;
 	}
-	
-	/*public synchronized User searchUserByUsername(String username) throws SQLException{
-		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT user_id, first_name, last_name, user_name, password, email, city_name, country_name, bio, profile_pic, cover_photo "
-				+ "FROM users WHERE user_name=?");
-		stmt.setString(1, username);
-		ResultSet rs=stmt.executeQuery();
-		rs.next();
-		User u=new User(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), 
-				rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
 		
-		u.setSongs(SongDao.getInstance().getSongsForUser(u));
-		u.setPlaylists(PlaylistDao.getInstance().getPlaylistsForUser(u));
-		u.setFollowers(this.getFollowers(u));
-		
-		return u;
-	}*/
-	
 	public synchronized LinkedHashSet<User> getFollowers(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, "
@@ -139,7 +122,7 @@ public class UserDao {
 		stmt.setString(1, username);
 		ResultSet rs=stmt.executeQuery();
 		rs.next();
-		return rs.getInt("count")>0;	
+		return rs.getInt("count")>0;
 	}
 
 	public synchronized boolean emailExists(String email) throws SQLException{
