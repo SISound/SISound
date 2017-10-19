@@ -6,5 +6,12 @@
 1508431491541	Delete element
 1508431629434	Delete element
 1508432028772	Delete element
+<<<<<<< HEAD
+1508435673613	Rename type 'homeServlet'
+1508435688477	Rename type 'loginServlet'
+1508435712315	Rename type 'registerServlet'
+1508438087308	Delete element
+=======
 1508436817796	Rename type 'loginServlet'
 1508436833312	Rename type 'homeServlet'
+>>>>>>> 035d12229da04faa5d202f7dd8a029deb71c5a36

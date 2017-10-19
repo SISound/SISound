@@ -16,7 +16,7 @@
 				<input id="loginButton" type="submit" value="" style="background-image: url('login.png'); border:none; background-repeat:no-repeat;background-size:100% 100%;">
 			</form>
 			
-			<form action="signup.jsp" method="GET">
+			<form action="register.jsp" method="GET">
 				<input id="signupButton" type="submit" value="" style="background-image: url('signup.png'); border:none; background-repeat:no-repeat;background-size:100% 100%;">
 			</form>
 			

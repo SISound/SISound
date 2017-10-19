@@ -5,11 +5,21 @@ body,html{
 	padding: 0;
 }
 
+<<<<<<< HEAD
 header{
 	position:initial;
 	width: 100%;
 	top: 0;
 	left: 0;
+=======
+body,html{
+	background-color: #FA6F59;
+	margin: 0;
+	padding: 0;
+}
+
+#indexHeader{
+>>>>>>> caa11bac3c901c8b258cbcb976385c06f0823b1c
 	background-color: #524A49;
 	height: 50px;
 	opacity: 0.9;
@@ -56,6 +66,16 @@ header{
 	left: 17%;
 }
 
+#registerDiv{
+	border-radius: 15px;
+	background-color: #524A49;
+	height: 420px;
+	width: 350px;
+	opacity: 0.9;
+	margin-top: 100px;
+	margin-left: 500px;
+}
+
 #loginDiv{
 	border-radius: 15px;
 	background-color: #524A49;
@@ -66,6 +86,7 @@ header{
 	margin-left: 500px;
 }
 
+<<<<<<< HEAD
 #loginHead{
 	padding: 0;
 	margin: 0;
@@ -73,6 +94,12 @@ header{
 	margin-top: 5%;
 	font: 40px Impact, Charcoal, sans-serif;
 	color: #ffffff;
+=======
+#regDiv{
+	position: absolute;
+	margin-left: 45px;
+	margin-top: 75px;
+>>>>>>> caa11bac3c901c8b258cbcb976385c06f0823b1c
 }
 
 #liDiv{
@@ -90,6 +117,7 @@ header{
 	margin-left: 45%;
 }
 
+<<<<<<< HEAD
 .forgotPass{
 	position: absolute;
 	font-size: 16px;
@@ -99,6 +127,21 @@ header{
 	font: 12px "Trebuchet MS", Helvetica, sans-serif;
 	color: #C2C2C2;
 	opacity: 0.4;
+=======
+#rb{
+	height: 35px;
+	width: 150px;
+	background: none;
+	border-radius: 7px;
+	margin-top: 20%;
+	margin-left: 20%;
+}
+
+#loginHeader{
+	background-color: #524A49;
+	height: 50px;
+	opacity: 0.9;
+>>>>>>> caa11bac3c901c8b258cbcb976385c06f0823b1c
 }
 
 .regLink{
@@ -112,10 +155,32 @@ header{
 	opacity: 0.4;
 }
 
+.logLink{
+	position: absolute;
+	font-size: 16px;
+	text-decoration: none;
+	margin-top: 325px;
+	margin-left: 22px;
+	font: 16px "Trebuchet MS", Helvetica, sans-serif;
+	color: #C2C2C2;
+	opacity: 0.4;
+}
+
 .login{
 	border-radius: 7px;
 	height: 30px;
 	width: 250px;
 	margin-top: 20px;
 	font: 16px "Lucida Console", Monaco, monospace;
+}
+
+.regMessage{
+	position: absolute;
+	font-size: 20px;
+	text-decoration: none;
+	margin-top: -40px;
+	margin-left: 22px;
+	font: 16px "Trebuchet MS", Helvetica, sans-serif;
+	color: #C2C2C2;
+	opacity: 0.4;
 }

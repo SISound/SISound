@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
+<<<<<<< HEAD
+=======
+<fullyQualifiedTypeName name="model.User"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="javax.servlet.annotation.MultipartConfig"/>
+>>>>>>> caa11bac3c901c8b258cbcb976385c06f0823b1c
 <fullyQualifiedTypeName name="model.db.UserDao"/>
 <fullyQualifiedTypeName name="model.User"/>
 </qualifiedTypeNameHistroy>
