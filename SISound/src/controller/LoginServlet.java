@@ -9,19 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
 import model.User;
 import model.db.UserDao;
 
 /**
  * Servlet implementation class loginServlet
  */
-@WebServlet("/loginServlet")
-=======
 
 @WebServlet("/login")
-
->>>>>>> caa11bac3c901c8b258cbcb976385c06f0823b1c
 public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
