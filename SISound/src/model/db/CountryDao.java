@@ -28,7 +28,7 @@ public class CountryDao {
 	}
 
 	private void getAllCountries() throws SQLException {
-		if (COUNTRIES != null) {
+		if (!COUNTRIES.isEmpty()) {
 			return;
 		}
 		

@@ -14,6 +14,7 @@ public class GenresDao {
 	private final static Map<String, Long> GENRES = new HashMap<>();
 	
 	private GenresDao() throws SQLException {
+		System.out.println("asdf");
 		getAllGenres();
 	}
 	
@@ -29,16 +30,18 @@ public class GenresDao {
 	}
 
 	private void getAllGenres() throws SQLException {
-		if (GENRES != null) {
+		if (!GENRES.isEmpty()) {
 			return;
 		}
-		
+		System.out.println("123");
 		Connection con = DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT (genre_id, genre_title) FROM music_genres");
+		PreparedStatement stmt=con.prepareStatement("SELECT genre_id, genre_title FROM music_genres");
 		ResultSet rs = stmt.executeQuery();
 		
 		while(rs.next()) {
 			GENRES.put(rs.getString("genre_title"), rs.getLong("genre_id"));
+			System.out.println(rs.getString("genre_title"));
+			System.out.println(GENRES.get(rs.getString("genre_title")));
 		}	
 	}
 }

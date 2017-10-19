@@ -27,13 +27,13 @@ public class UserDao {
 	}
 	
 	public synchronized void insertUser(User u) throws SQLException{
-		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("INSERT INTO users (user_name, user_password, email) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+		Connection con = DBManager.getInstance().getConnection();
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO users (user_name, user_password, email) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 		stmt.setString(1, u.getUsername());
 		stmt.setString(2, Hashing.sha512().hashString(u.getPassword(), StandardCharsets.UTF_8).toString());
 		stmt.setString(3, u.getEmail());
 		stmt.executeUpdate();//here
-		ResultSet rs=stmt.getGeneratedKeys();//and here
+		ResultSet rs = stmt.getGeneratedKeys();//and here
 		rs.next();
 		u.setUserID(rs.getLong(1));
 	}
@@ -43,14 +43,14 @@ public class UserDao {
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) as count FROM users where user_name=? AND user_password=?");
 		stmt.setString(1, username);
 		stmt.setString(2, Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString());
-		ResultSet rs=stmt.executeQuery();
+		ResultSet rs = stmt.executeQuery();
 		rs.next();
 		return rs.getInt("count")>0;
 	}
 	
 	public synchronized User getUser(String username) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT u.user_id, u.user_name, u.user_password, u.email, "
+		PreparedStatement stmt=con.prepareStatement(/*"SELECT u.user_id, u.user_name, u.user_password, u.email, "
 				                                  + "u.first_name, " 
 				                                  + "u.last_name, "
 				                                  + "u.city_name, "
@@ -59,7 +59,8 @@ public class UserDao {
 				                                  + "u.profile_pic, "
 				                                  + "u.cover_photo "
 				                                  + "FROM users as u LEFT join countries as c on u.country_id=c.country_id "
-				                                  + "WHERE user_name=?");
+				                                  + "WHERE user_name=?"*/"SELECT u.user_id, u.user_name, u.user_password, u.email, u.first_name, u.last_name, u.city, c.country_id, u.bio, u.profile_pic, u.cover_photo \r\n" + 
+				                                  		"FROM users as u LEFT JOIN countries as c on u.country_id = c.country_id WHERE user_name = ?");
 		stmt.setString(1, username);
 		ResultSet rs=stmt.executeQuery();
 		rs.next();

@@ -1,0 +1,50 @@
+body{
+	background-color: #FA6F59;
+	margin: 0;
+	padding: 0;
+}
+
+#homeHeader{
+	background-color: #524A49;
+	height: 50px;
+	opacity: 0.9;
+}
+
+#homeFooter{
+	background-color: #524A49;
+	height: 50px;
+	opacity: 0.9;
+	margin-top: 70%;
+}
+
+#searchBar{
+	margin-left: 230px;
+	margin-top: 10px;
+	width: 600px;
+	height: 25px;
+	border-radius: 7px;
+}
+
+#loginButton{
+	height: 35px;
+	width: 100px;
+	background: none;
+	margin-left: 870px;
+	margin-top: -32px;
+	border-radius: 7px;
+}
+
+#signupButton{
+	height: 35px;
+	width: 100px;
+	background: none;
+	margin-left: 990px;
+	margin-top: -35px;
+}
+
+#djDiv{
+	height:500px;
+	opacity: 0.7;
+	position: absolute;
+	left: 17%;
+}

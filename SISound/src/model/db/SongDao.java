@@ -58,7 +58,7 @@ public class SongDao {
 		stmt.setTimestamp(3, Timestamp.valueOf(time));
 		stmt.execute();
 	}
-	
+	//ok
 	public synchronized boolean existSong(Song s) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT count(*) FROM songs WHERE song_id=?");
@@ -71,13 +71,14 @@ public class SongDao {
 	
 	public synchronized TreeSet<Song> getSongsForUser(User u) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, g.genre_title, s.song_url, s.genre_id"
+		PreparedStatement stmt = con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, g.genre_title, s.song_url"
 				                                  + "FROM songs as s JOIN music_genres as g "
-				                                  + "ON s.genre_id=g.genre_id"
-				                                  + "WHERE user_id=?");
+				                                  + "ON s.genre_id = g.genre_id"
+				                                  + "WHERE s.user_id = ?");
 		stmt.setLong(1, u.getUserID());
-		ResultSet rs=stmt.executeQuery();
-		TreeSet<Song> songs=new TreeSet<>();
+		System.out.println("opala");
+		ResultSet rs = stmt.executeQuery();//TODO fix throws exception
+		TreeSet<Song> songs = new TreeSet<>();
 
 		while(rs.next()){
 			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getLong(4), u, rs.getString(6), rs.getString(5), 

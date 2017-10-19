@@ -1,18 +1,11 @@
 package model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeSet;
-
-import com.sun.xml.internal.ws.api.ImpliesWebServiceFeature;
 
 import java.util.HashSet;
-import java.util.TreeSet;
+
 
 public class Song implements Comparable<Song>, Actionable {
 
