@@ -8,7 +8,7 @@
 		<title>SISound</title>
 	</head>
 	<body>
-		<header id="homeHeader">
+		<header id="indexHeader">
 		
 			<input id="searchBar" type="text" placeholder="search artists, songs, playlists" placeholder-style: font>
 			
