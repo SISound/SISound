@@ -24,19 +24,20 @@ public class LoginServlet extends HttpServlet {
 		String password=request.getParameter("password");
 		
 		try {
-			boolean exist=UserDao.getInstance().loginConfirmation(username, password);
+			boolean exist=UserDao.getInstance().existsUser(username, password);
 			if(exist){
 				User u=UserDao.getInstance().getUser(username);
 				request.getSession().setAttribute("user", u);
+				request.getSession().setAttribute("logged", true);
 				request.getRequestDispatcher("main.jsp").forward(request, response);
 			}
 			else{
 				request.setAttribute("error", "User does not exist!");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("error", "database problem : " + e.getMessage());
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 

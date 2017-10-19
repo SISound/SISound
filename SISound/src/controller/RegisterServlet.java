@@ -50,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 			}
 		} catch (SQLException e) {
 			request.setAttribute("error", "database problem : " + e.getMessage());
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 

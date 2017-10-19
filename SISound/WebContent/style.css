@@ -5,21 +5,17 @@ body,html{
 	padding: 0;
 }
 
-<<<<<<< HEAD
 header{
-	position:initial;
+	position: absolute;
 	width: 100%;
 	top: 0;
 	left: 0;
-=======
-body,html{
-	background-color: #FA6F59;
-	margin: 0;
-	padding: 0;
+	background-color: #524A49;
+	height: 50px;
+	opacity: 0.9;
 }
 
 #indexHeader{
->>>>>>> caa11bac3c901c8b258cbcb976385c06f0823b1c
 	background-color: #524A49;
 	height: 50px;
 	opacity: 0.9;
@@ -86,7 +82,6 @@ body,html{
 	margin-left: 500px;
 }
 
-<<<<<<< HEAD
 #loginHead{
 	padding: 0;
 	margin: 0;
@@ -94,12 +89,12 @@ body,html{
 	margin-top: 5%;
 	font: 40px Impact, Charcoal, sans-serif;
 	color: #ffffff;
-=======
+}
+
 #regDiv{
 	position: absolute;
 	margin-left: 45px;
 	margin-top: 75px;
->>>>>>> caa11bac3c901c8b258cbcb976385c06f0823b1c
 }
 
 #liDiv{
@@ -117,7 +112,6 @@ body,html{
 	margin-left: 45%;
 }
 
-<<<<<<< HEAD
 .forgotPass{
 	position: absolute;
 	font-size: 16px;
@@ -127,7 +121,8 @@ body,html{
 	font: 12px "Trebuchet MS", Helvetica, sans-serif;
 	color: #C2C2C2;
 	opacity: 0.4;
-=======
+}
+
 #rb{
 	height: 35px;
 	width: 150px;
@@ -141,7 +136,18 @@ body,html{
 	background-color: #524A49;
 	height: 50px;
 	opacity: 0.9;
->>>>>>> caa11bac3c901c8b258cbcb976385c06f0823b1c
+}
+
+#loginErr{
+	position: sticky;
+	background-color: yellow;
+	border-radius: 10px;
+	height: 70px;
+	width: 600px;
+	margin-top: 100px;
+	margin-left: 370px;
+	text-align: center;
+	text-shadow: activeborder;
 }
 
 .regLink{
@@ -178,9 +184,9 @@ body,html{
 	position: absolute;
 	font-size: 20px;
 	text-decoration: none;
-	margin-top: -40px;
-	margin-left: 22px;
-	font: 16px "Trebuchet MS", Helvetica, sans-serif;
-	color: #C2C2C2;
-	opacity: 0.4;
+	margin-top: -55px;
+	margin-left: 15px;
+	font: 30px Impact, Charcoal, sans-serif;
+	color: #ffffff;
+	text-align: center;
 }

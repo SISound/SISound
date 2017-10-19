@@ -45,7 +45,7 @@ public class UserDao {
 		stmt.setString(2, Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString());
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
-		return rs.getInt("count")>0;
+		return rs.getInt(1)>0;
 	}
 	
 	public synchronized User getUser(String username) throws SQLException{
@@ -59,7 +59,7 @@ public class UserDao {
 				                                  + "u.profile_pic, "
 				                                  + "u.cover_photo "
 				                                  + "FROM users as u LEFT join countries as c on u.country_id=c.country_id "
-				                                  + "WHERE user_name=?"*/"SELECT u.user_id, u.user_name, u.user_password, u.email, u.first_name, u.last_name, u.city, c.country_id, u.bio, u.profile_pic, u.cover_photo \r\n" + 
+				                                  + "WHERE user_name=?"*/"SELECT u.user_id, u.user_name, u.user_password, u.email, u.first_name, u.last_name, u.city_name, c.country_id, u.bio, u.profile_pic, u.cover_photo \r\n" + 
 				                                  		"FROM users as u LEFT JOIN countries as c on u.country_id = c.country_id WHERE user_name = ?");
 		stmt.setString(1, username);
 		ResultSet rs=stmt.executeQuery();
@@ -122,7 +122,7 @@ public class UserDao {
 		stmt.setString(1, username);
 		ResultSet rs=stmt.executeQuery();
 		rs.next();
-		return rs.getInt("count")>0;
+		return rs.getInt(1)>0;
 	}
 
 	public synchronized boolean emailExists(String email) throws SQLException{
