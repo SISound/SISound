@@ -36,7 +36,8 @@ public class RegisterServlet extends HttpServlet {
 				User u = new User(username, password, email);
 				UserDao.getInstance().insertUser(u);
 				request.getSession().setAttribute("user", u);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getSession().setAttribute("logged", true);
+				request.getRequestDispatcher("main.jsp").forward(request, response);
 			} 
 			else if(UserDao.getInstance().usernameExists(username)){
 				request.setAttribute("error", "username is taken");
@@ -50,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
 			}
 		} catch (SQLException e) {
 			request.setAttribute("error", "database problem : " + e.getMessage());
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 

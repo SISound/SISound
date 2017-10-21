@@ -1,24 +1,27 @@
-html{
-	padding: 0;
+
+#indexBody{
+	background-color: #FA6F59;
 	margin: 0;
+	padding: 0;
+	background-image: url("djImg.jpg");
+	background-repeat: no-repeat;
+	background-size: 64% auto;
+	background-position: 230px 60px;
 }
 
-body,html{
+body{
 	background-color: #FA6F59;
 	margin: 0;
 	padding: 0;
 }
 
-body,html{
-	background-color: #FA6F59;
-	margin: 0;
-	padding: 0;
-}
-
-#indexHeader{
+header{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
 	background-color: #524A49;
 	height: 50px;
-	opacity: 0.9;
 }
 
 #homeFooter{
@@ -34,6 +37,7 @@ body,html{
 	width: 600px;
 	height: 25px;
 	border-radius: 7px;
+	font-size: 16px;
 }
 
 #loginButton{
@@ -54,7 +58,8 @@ body,html{
 }
 
 #djDiv{
-	margin-top: 15px;
+	position: absolute;
+	top: 70px;
 	height:500px;
 	opacity: 0.5;
 	position: absolute;
@@ -81,6 +86,15 @@ body,html{
 	margin-left: 500px;
 }
 
+#loginHead{
+	padding: 0;
+	margin: 0;
+	margin-left: 30%;
+	margin-top: 5%;
+	font: 40px Impact, Charcoal, sans-serif;
+	color: #ffffff;
+}
+
 #regDiv{
 	position: absolute;
 	margin-left: 45px;
@@ -90,7 +104,7 @@ body,html{
 #liDiv{
 	position: absolute;
 	margin-left: 45px;
-	margin-top: 85px;
+	margin-top: 30px;
 }
 
 #lb{
@@ -98,8 +112,19 @@ body,html{
 	width: 150px;
 	background: none;
 	border-radius: 7px;
-	margin-top: 10%;
-	margin-left: 20%;
+	margin-top: 5%;
+	margin-left: 45%;
+}
+
+.forgotPass{
+	position: absolute;
+	font-size: 16px;
+	text-decoration: none;
+	margin-top: 230px;
+	margin-left: 50px;
+	font: 12px "Trebuchet MS", Helvetica, sans-serif;
+	color: #C2C2C2;
+	opacity: 0.4;
 }
 
 #rb{
@@ -115,6 +140,18 @@ body,html{
 	background-color: #524A49;
 	height: 50px;
 	opacity: 0.9;
+}
+
+#loginErr{
+	position: sticky;
+	background-color: yellow;
+	border-radius: 10px;
+	height: 70px;
+	width: 600px;
+	margin-top: 100px;
+	margin-left: 370px;
+	text-align: center;
+	text-shadow: activeborder;
 }
 
 .regLink{
@@ -151,9 +188,110 @@ body,html{
 	position: absolute;
 	font-size: 20px;
 	text-decoration: none;
-	margin-top: -40px;
-	margin-left: 22px;
-	font: 16px "Trebuchet MS", Helvetica, sans-serif;
-	color: #C2C2C2;
-	opacity: 0.4;
+	margin-top: -55px;
+	margin-left: 15px;
+	font: 30px Impact, Charcoal, sans-serif;
+	color: #ffffff;
+	text-align: center;
+}
+
+.homeButton_headerLink{
+	text-decoration: none;
+}
+
+.songs{
+	position: absolute;
+	margin-top: 200px;
+	background-color: transparent;
+	
+}
+.homeButton{
+	margin-left: 70px;
+	color: white;
+	font: 20px "Trebuchet MS", Helvetica, sans-serif; 
+	font-weight: bolder;
+}
+
+.homeButton:HOVER{
+	color: #cccccc;
+}
+
+.profileButton_headerLink{
+	text-decoration: none;
+	margin-top: -30px;
+}
+
+.profileButton{
+	color: white;
+	font: 15px "Trebuchet MS", Helvetica, sans-serif; 
+	background-color: transparent;
+	border: none;
+}
+
+.profileButton:HOVER{
+	color: #cccccc;
+}
+
+.profilePic{
+	height: 30px;
+	width: auto;
+	border-radius: 20px;
+}
+
+.profilTable{
+	margin-left: 990px;
+	margin-top: -35px;
+}
+
+
+.logoutButton{
+	position: absolute;
+	color: white;
+	font: 20px "Trebuchet MS", Helvetica, sans-serif; 
+	background-color: transparent;
+	border: none;
+	margin-left: 1250px;
+	margin-top: -35px;
+	font-weight: bolder;
+}
+
+.loginButton:HOVER {
+	color: #cccccc;
+}
+
+.player{
+	position: absolute;
+	margin-left: 200px;
+	margin-top: 600px;
+	width: 900px;
+	background-color: blue;
+}
+
+/* HERE STARTS THE MUSIC PLAYER FORMATTING */
+
+
+/* PROFILE */
+.profilePicProfile{
+	height: 200px;
+	width: auto;
+	border-radius: 100px;
+	margin-top: 7%;
+	margin-left: 20%;
+}
+
+#profileProperties{
+	padding: 0;
+	margin: 0;
+	margin-left: 20%;
+	margin-top: 0%;
+	font: 30px Impact, Charcoal, sans-serif;
+	color: #ffSfff;
+}
+
+.coverPhoto{
+	height: 200px;
+	width: auto;
+	border-radius: 100px;
+	margin-top: 7%;
+	margin-left: 20%;
 }

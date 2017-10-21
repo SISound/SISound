@@ -11,7 +11,7 @@
 	
 	<body>
 		<header id="loginHeader">
-			<h1>LOGO</h1>
+		
 		</header>
 		
 		<div id="registerDiv">

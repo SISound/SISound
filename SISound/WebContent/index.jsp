@@ -7,8 +7,8 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>SISound</title>
 	</head>
-	<body>
-		<header id="indexHeader">
+	<body id="indexBody">
+		<header>
 		
 			<input id="searchBar" type="text" placeholder="search artists, songs, playlists" placeholder-style: font>
 			
@@ -21,10 +21,6 @@
 			</form>
 			
 		</header>
-		
-		<div>
-			<img id="djDiv" src="djImg.jpg" alt="Mountain View">
-		</div>
 		
 		<footer id="homeFooter">
 			<p>Footerche</p>
