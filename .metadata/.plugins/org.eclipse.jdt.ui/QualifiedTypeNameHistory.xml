@@ -3,4 +3,8 @@
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="model.db.UserDao"/>
+<fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="model.Song"/>
+<fullyQualifiedTypeName name="model.db.SongDao"/>
 </qualifiedTypeNameHistroy>

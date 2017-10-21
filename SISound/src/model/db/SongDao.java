@@ -141,7 +141,7 @@ public class SongDao {
 		HashSet<Song> songs=new HashSet<>();
 		Connection con=DBManager.getInstance().getConnection();
 		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, u.user_name, "
-				                                  + "g.genre_title, s.song_url "
+				                                  + "m.genre_title, s.song_url "
 				                                  + "FROM songs as s "
 				                                  + "JOIN users as u ON s.user_id=u.user_id "
 				                                  + "JOIN music_genres as m ON s.genre_id=m.genre_id");

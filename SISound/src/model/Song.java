@@ -9,7 +9,7 @@ import java.util.HashSet;
 
 public class Song implements Comparable<Song>, Actionable {
 
-	private long songId;
+	private long id;
 	private String title;
 	private LocalDateTime uploadDate;
 	private long timesListened;
@@ -38,7 +38,7 @@ public class Song implements Comparable<Song>, Actionable {
 	public Song(long songId, String title, LocalDateTime uploadDate, long timesListened, User user, String url,
 			String genre, HashMap<Actions, HashSet<User>> actions, TreeSet<Comment> comments) {
 		this(title, user, genre, url, uploadDate);
-		this.songId = songId;
+		this.id = songId;
 		this.timesListened = timesListened;
 		this.actions = actions;
 		this.comments = comments;
@@ -50,7 +50,7 @@ public class Song implements Comparable<Song>, Actionable {
 	
 	@Override
 	public long getId() {
-		return songId;
+		return id;
 	}
 
 	public String getTitle() {
@@ -87,7 +87,7 @@ public class Song implements Comparable<Song>, Actionable {
 
 	@Override
 	public void setId(long songId) {
-		this.songId = songId;
+		this.id = songId;
 	}
 	
 	public void setTimesListened(int timesListened) {
