@@ -9,6 +9,10 @@
 	background-position: 230px 60px;
 }
 
+#mainBody{
+	background: #EDEDED;
+}
+
 body{
 	background-color: #FA6F59;
 	margin: 0;
@@ -22,6 +26,7 @@ header{
 	left: 0;
 	background-color: #524A49;
 	height: 50px;
+	z-index: 1;
 }
 
 #homeFooter{
@@ -199,11 +204,60 @@ header{
 	text-decoration: none;
 }
 
+#topH{
+	position: absolute;
+	margin-top: 80px;
+	margin-left: 35px;
+	color: #FA6F59;
+	font: 20px Bradley Hand, cursive;
+	font-weight: bolder;
+}
+
 .songs{
 	position: absolute;
-	margin-top: 200px;
+	width: 1300px;
+	height: 500px;
+	margin-top: 150px;
+	margin-left: 35px;
+	background-color: #FFFFFF;
+	border: 5px solid #FFFFFF;
+	border-radius: 8px;
+}
+
+.songTd{
+	display: inline-block;
+	padding: 0;
+	margin-left: 10px;
+	width: 300px;
+	height:100px;
+	font: 30px "Courier New", Courier, monospace;
+}
+
+#playButton{
+	position: absolute;
+	margin-top: -30px;
+	height: 100px;
+	width: 200px;
 	background-color: transparent;
-	
+}
+
+#playButton:HOVER{
+	opacity: 0.5;
+}
+
+#player{
+	margin-top: 300px;
+	margin-left: 300px;
+}
+
+footer{
+	z-index: 1;
+	color: black;
+}
+.songTr{
+	margin: 0;
+	padding: 0;
+	height: 10px;
 }
 .homeButton{
 	margin-left: 70px;
@@ -266,4 +320,10 @@ header{
 	background-color: blue;
 }
 
+.genresList{
+	margin-top: 300px;
+	height: 300px;
+	width: 200px;
+	color: white;
+}
 /* HERE STARTS THE MUSIC PLAYER FORMATTING */

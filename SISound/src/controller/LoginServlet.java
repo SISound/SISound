@@ -3,6 +3,9 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeSet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Song;
 import model.User;
+import model.db.GenresDao;
 import model.db.SongDao;
 import model.db.UserDao;
 
@@ -38,6 +42,10 @@ public class LoginServlet extends HttpServlet {
 					if(application.getAttribute("songs") == null){
 						HashSet<Song> songs = SongDao.getInstance().getAllSongs();
 						application.setAttribute("songs", songs);
+					}
+					if(application.getAttribute("genres") == null){
+						Map genres=GenresDao.getInstance().getAllGenres();
+						application.setAttribute("genres", genres);
 					}
 				}
 				request.getRequestDispatcher("main.jsp").forward(request, response);

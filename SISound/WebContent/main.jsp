@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>SISound</title>
 	</head>
-	<body>
+	<body id="mainBody">
 		<c:if test="${ sessionScope.user == null }">
 				<c:redirect url="login.jsp"></c:redirect>
 		</c:if>
@@ -42,22 +42,21 @@
 			</form>
 		</header>
 		
+		<h2 id="topH">TOP10 CHART</h2>
 		<table class="songs">
-			<tr>
-				<th>Id</th>
-				<th>Title</th>
-				<th>uploadDate</th>
-				<th>timesListened</th>
-			</tr>
 			<c:forEach items="${applicationScope.songs}" var="song">
-				<tr>
-					<td>${ song.id }</td>
-					<td><c:out value="${ song.title }"></c:out></td>
-					<td><c:out value="${ song.uploadDate }"></c:out></td>
-					<td><c:out value="${ song.timesListened }"></c:out></td>
+				<tr class="songTr">
+					<td class="songTd">
+							<audio controls>
+								 <source src="" type="audio/mpeg">
+							</audio>
+					</td>
+					<td class="songTd"><c:out value="${ song.title }"></c:out></td>
+					<td class="songTd"><c:out value="${ song.user.username }"></c:out></td>
+					<td class="songTd"><c:out value="${ song.timesListened }"></c:out></td>
 				</tr>
 			</c:forEach>
 		</table>
-         
+		
 	</body>
 </html>

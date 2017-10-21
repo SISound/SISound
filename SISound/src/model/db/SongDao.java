@@ -148,9 +148,8 @@ public class SongDao {
 		ResultSet rs=stmt.executeQuery();
 		while(rs.next()){
 			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getLong(4), 
-					  UserDao.getInstance().getUser(rs.getString(5)), rs.getString(6), rs.getString(7), 
-					  ActionsDao.getInstance().getActions(true, rs.getLong(1)), 
-					  CommentDao.getInstance().getComments(rs.getLong(1), true)));
+					           UserDao.getInstance().getUser(rs.getString(5)), rs.getString(7), rs.getString(6), 
+					           ActionsDao.getInstance().getActions(true, rs.getLong(1)), CommentDao.getInstance().getComments(rs.getLong(1), true)));
 		}
 		
 		return songs;
