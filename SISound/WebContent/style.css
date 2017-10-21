@@ -297,6 +297,7 @@ footer{
 	margin-top: -35px;
 }
 
+
 .logoutButton{
 	position: absolute;
 	color: white;
@@ -327,3 +328,30 @@ footer{
 	color: white;
 }
 /* HERE STARTS THE MUSIC PLAYER FORMATTING */
+
+
+/* PROFILE */
+.profilePicProfile{
+	height: 200px;
+	width: auto;
+	border-radius: 100px;
+	margin-top: 7%;
+	margin-left: 20%;
+}
+
+#profileProperties{
+	padding: 0;
+	margin: 0;
+	margin-left: 20%;
+	margin-top: 0%;
+	font: 30px Impact, Charcoal, sans-serif;
+	color: #ffSfff;
+}
+
+.coverPhoto{
+	height: 200px;
+	width: auto;
+	border-radius: 100px;
+	margin-top: 7%;
+	margin-left: 20%;
+}

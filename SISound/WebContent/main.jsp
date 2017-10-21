@@ -43,6 +43,9 @@
 		</header>
 		
 		<h2 id="topH">TOP10 CHART</h2>
+
+		<jsp:include page="header.jsp"></jsp:include>
+				
 		<table class="songs">
 			<c:forEach items="${applicationScope.songs}" var="song">
 				<tr class="songTr">

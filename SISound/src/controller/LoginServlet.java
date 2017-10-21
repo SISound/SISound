@@ -20,9 +20,6 @@ import model.db.GenresDao;
 import model.db.SongDao;
 import model.db.UserDao;
 
-/**
- * Servlet implementation class loginServlet
- */
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
