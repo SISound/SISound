@@ -11,7 +11,7 @@
 	<body>
 		<c:if test="${ requestScope.error != null }">
 			<div id="loginErr">
-				<h1>Sorry, username or password is incorrect. Reason: ${requestScope.error }</h1>
+				<h1>Sorry, username or password is incorrect. Reason: ${ requestScope.error }</h1>
 			</div>
 		</c:if>
 		
