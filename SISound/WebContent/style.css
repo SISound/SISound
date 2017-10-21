@@ -20,6 +20,10 @@ body{
 }
 
 header{
+	background-image: url("logo.png");
+	background-size: 150px auto;
+	background-repeat: no-repeat;
+	background-position: left;
 	position: fixed;
 	width: 100%;
 	top: 0;
@@ -76,7 +80,6 @@ header{
 	background-color: #524A49;
 	height: 420px;
 	width: 350px;
-	opacity: 0.9;
 	margin-top: 100px;
 	margin-left: 500px;
 }
@@ -86,7 +89,6 @@ header{
 	background-color: #524A49;
 	height: 380px;
 	width: 350px;
-	opacity: 0.9;
 	margin-top: 100px;
 	margin-left: 500px;
 }
@@ -144,7 +146,6 @@ header{
 #loginHeader{
 	background-color: #524A49;
 	height: 50px;
-	opacity: 0.9;
 }
 
 #loginErr{
@@ -206,11 +207,37 @@ header{
 
 #topH{
 	position: absolute;
-	margin-top: 80px;
+	margin-top: 120px;
 	margin-left: 35px;
 	color: #FA6F59;
 	font: 20px Bradley Hand, cursive;
 	font-weight: bolder;
+}
+
+#container{
+	position:relative;
+	top: 40px;
+	margin-left: 1240px;
+	font: 20px Bradley Hand, cursive;
+	font-weight: bold;
+	background-color: transparent;
+	border: none;
+	color: #FA6F59;
+}
+
+#container:HOVER{
+	background-color: blue;
+}
+
+#sortUl{
+	position: absolute;
+	margin-top: 2000px;
+}
+
+#sp{
+	color: #FA6F59;
+ 	border-left: solid;
+ 	border-right: solid;
 }
 
 .songs{
@@ -326,6 +353,12 @@ footer{
 	height: 300px;
 	width: 200px;
 	color: white;
+}
+
+#container{
+	position: absolute;
+	margin-top: 80px;
+	color: blue;
 }
 /* HERE STARTS THE MUSIC PLAYER FORMATTING */
 

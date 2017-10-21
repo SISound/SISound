@@ -27,7 +27,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
-		
 		try {
 			boolean exist=UserDao.getInstance().existsUser(username, password);
 			if(exist){
@@ -37,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 				ServletContext application = getServletConfig().getServletContext();
 				synchronized (application) {
 					if(application.getAttribute("songs") == null){
-						HashSet<Song> songs = SongDao.getInstance().getAllSongs();
+						TreeSet<Song> songs = SongDao.getInstance().getAllSongs();
 						application.setAttribute("songs", songs);
 					}
 					if(application.getAttribute("genres") == null){

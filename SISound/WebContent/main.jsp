@@ -14,15 +14,18 @@
 		</c:if>
 		
 		<c:set value="${ sessionScope.user}" var="user"></c:set>
-		
+		 
 		<header>
+		    
 			<input id="searchBar" type="text" placeholder="search artists, songs, playlists" placeholder-style: font>
 			
-			<a href="main.jsp" class="homeButton_headerLink">
-				<span class="homeButton">Home</span>
-			</a>
-			
 			<table class="profilTable">
+				<td>
+					<a href="main.jsp" class="homeButton_headerLink">
+						<span class="homeButton">Home</span>
+					</a>
+				</td>
+				
 				<td>
 					<c:if test="${user.profilPicture != null}">
 						<img class="profilePic" alt="profilePic" src="${user.profilPicture }">
@@ -43,6 +46,23 @@
 		</header>
 		
 		<h2 id="topH">TOP10 CHART</h2>
+		
+		<div id="container">
+			<span id="sp">Sort by</span>
+				<ul id="sortUl">
+				    <li>
+				    	<a href="sortingServlet?sorter=likes" >Likes</a>
+				    </li>
+				    
+					<li>
+						<a href="sortingServlet?sorter=shares" >Shares</a>
+					</li>
+					
+					<li>
+						<a href="sortingServlet?sorter=listenings" >Listenings</a>
+					</li>
+				</ul>
+		</div>
 
 		<jsp:include page="header.jsp"></jsp:include>
 				
