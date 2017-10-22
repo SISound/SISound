@@ -9,15 +9,12 @@
 	<title>SISound</title>
 </head>
 	<body>
+		<header></header>
 		<c:if test="${ requestScope.error != null }">
 			<div id="loginErr">
 				<h1>Sorry, username or password is incorrect. Reason: ${ requestScope.error }</h1>
 			</div>
 		</c:if>
-		
-		<header>
-			
-		</header>
 		
 		<div id="loginDiv">
 			<form action="login" method="POST">

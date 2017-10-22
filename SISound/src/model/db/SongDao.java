@@ -81,7 +81,7 @@ public class SongDao {
 		TreeSet<Song> songs = new TreeSet<>();
 
 		while(rs.next()){
-			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getLong(4), u, rs.getString(6), rs.getString(5), 
+			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getInt(4), u, rs.getString(6), rs.getString(5), 
 					ActionsDao.getInstance().getActions(true, rs.getLong(1)), CommentDao.getInstance().getComments(rs.getLong(1), true)));
 		}
 		
@@ -109,7 +109,7 @@ public class SongDao {
 	//searching song by name
 	public synchronized Song searchSongByName(String songName) throws SQLException{
 		Connection con=DBManager.getInstance().getConnection();
-		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, u.user_name, g.genre_title, s.song_url "
+		PreparedStatement stmt=con.prepareStatement("SELECT s.song_id, s.song_name, s.upload_date, s.listenings, u.user_name, mg.genre_title, s.song_url "
 				                                  + "FROM songs as s JOIN users as u "
 				                                  + "ON s.user_id=u.user_id "
 				                                  + "JOIN music_genres as mg ON s.genre_id=mg.genre_id "
@@ -147,7 +147,7 @@ public class SongDao {
 				                                  + "JOIN music_genres as m ON s.genre_id=m.genre_id");
 		ResultSet rs=stmt.executeQuery();
 		while(rs.next()){
-			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getLong(4), 
+			songs.add(new Song(rs.getLong(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getInt(4), 
 					           UserDao.getInstance().getUser(rs.getString(5)), rs.getString(7), rs.getString(6), 
 					           ActionsDao.getInstance().getActions(true, rs.getLong(1)), CommentDao.getInstance().getComments(rs.getLong(1), true)));
 		}

@@ -12,7 +12,7 @@ public class Song implements Comparable<Song>, Actionable {
 	private long id;
 	private String title;
 	private LocalDateTime uploadDate;
-	private long timesListened;
+	private int timesListened;
 	private User user;
 	private String url;
 	private String genre;
@@ -35,7 +35,7 @@ public class Song implements Comparable<Song>, Actionable {
 	}
 
 	//constructor for retrieving from db
-	public Song(long songId, String title, LocalDateTime uploadDate, long timesListened, User user, String url,
+	public Song(long songId, String title, LocalDateTime uploadDate, int timesListened, User user, String url,
 			String genre, HashMap<Actions, HashSet<User>> actions, TreeSet<Comment> comments) {
 		this(title, user, genre, url, uploadDate);
 		this.id = songId;
@@ -61,7 +61,7 @@ public class Song implements Comparable<Song>, Actionable {
 		return uploadDate;
 	}
 
-	public long getTimesListened() {
+	public int getTimesListened() {
 		return timesListened;
 	}
 

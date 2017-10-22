@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LogOutServlet")
 public class LogOutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		request.getSession().invalidate();
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

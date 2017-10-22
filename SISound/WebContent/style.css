@@ -58,12 +58,22 @@ header{
 	border-radius: 7px;
 }
 
+#loginButton:HOVER{
+	opacity: 0.7;
+	cursor: pointer;
+}
+
 #signupButton{
 	height: 35px;
 	width: 100px;
 	background: none;
 	margin-left: 990px;
 	margin-top: -35px;
+}
+
+#signupButton:HOVER{
+	opacity: 0.7;
+	cursor: pointer;
 }
 
 #djDiv{
@@ -123,6 +133,11 @@ header{
 	margin-left: 45%;
 }
 
+#lb:HOVER{
+	opacity: 0.7;
+	cursor: pointer;
+}
+
 .forgotPass{
 	position: absolute;
 	font-size: 16px;
@@ -141,6 +156,11 @@ header{
 	border-radius: 7px;
 	margin-top: 20%;
 	margin-left: 20%;
+}
+
+#rb:HOVER{
+	opacity: 0.7;
+	cursor: pointer;
 }
 
 #loginHeader{
@@ -206,34 +226,64 @@ header{
 }
 
 #topH{
-	position: absolute;
-	margin-top: 120px;
-	margin-left: 35px;
+	margin-top: 100px;
+	margin-left: 1180px;
 	color: #FA6F59;
 	font: 20px Bradley Hand, cursive;
 	font-weight: bolder;
 }
 
-#container{
-	position:relative;
-	top: 40px;
-	margin-left: 1240px;
-	font: 20px Bradley Hand, cursive;
-	font-weight: bold;
-	background-color: transparent;
-	border: none;
-	color: #FA6F59;
-}
-
-#container:HOVER{
-	background-color: blue;
-}
-
-#sortUl{
+#sortHeader{
 	position: absolute;
-	margin-top: 2000px;
+	margin-top: -55px;
+	margin-left: 40px;
+	font: 20px 'Courier New', Courier, monospace;
+	font-weight: bold;
+	border-left: medium;
+	color: #CECECE;
 }
 
+#sortByLikes{
+	position: absolute;
+	margin-top: -35px;
+	margin-left: 140px;
+	font: 20px 'Courier New', Courier, monospace;
+	font-weight: normal;
+	border-left: medium;
+	color: #CECECE;
+}
+
+#sortByLikes:HOVER{
+	font-weight: bold;
+}
+
+#sortByShares{
+	position: absolute;
+	margin-top: -35px;
+	margin-left: 220px;
+	font: 20px 'Courier New', Courier, monospace;
+	font-weight: normal;
+	border-left: medium;
+	color: #CECECE;
+}
+
+#sortByShares:HOVER{
+	font-weight: bold;
+}
+
+#sortByListenings{
+	position: absolute;
+	margin-top: -35px;
+	margin-left: 310px;
+	font: 20px 'Courier New', Courier, monospace;
+	font-weight: normal;
+	border-left: medium;
+	color: #CECECE;
+}
+
+#sortByListenings:HOVER{
+	font-weight: bold;
+}
 #sp{
 	color: #FA6F59;
  	border-left: solid;
@@ -241,11 +291,12 @@ header{
 }
 
 .songs{
-	position: absolute;
+	position: fixed;
+	padding: 0;
 	width: 1300px;
 	height: 500px;
-	margin-top: 150px;
 	margin-left: 35px;
+	margin-top: -15px;
 	background-color: #FFFFFF;
 	border: 5px solid #FFFFFF;
 	border-radius: 8px;
@@ -336,8 +387,9 @@ footer{
 	font-weight: bolder;
 }
 
-.loginButton:HOVER {
+.logoutButton:HOVER {
 	color: #cccccc;
+	cursor: pointer;
 }
 
 .player{
@@ -355,11 +407,6 @@ footer{
 	color: white;
 }
 
-#container{
-	position: absolute;
-	margin-top: 80px;
-	color: blue;
-}
 /* HERE STARTS THE MUSIC PLAYER FORMATTING */
 
 

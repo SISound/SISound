@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @MultipartConfig
 public class EditProfileServlet extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		doGet(request, response);
 	}
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 public class HomeServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		HttpSession s = request.getSession();
 		Object o = s.getAttribute("logged");
 		boolean logged =  (o != null && ((boolean) o ));

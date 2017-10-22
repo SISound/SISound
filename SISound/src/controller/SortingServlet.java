@@ -23,32 +23,21 @@ import model.db.SongDao;
 /**
  * Servlet implementation class SortingServlet
  */
-@WebServlet("/sortingServlet")
+@WebServlet("/SortingServlet")
 public class SortingServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
 			ServletContext application = getServletConfig().getServletContext();
 			synchronized(application){
 				if(request.getParameter("sorter").toString().equals("likes")){
-					TreeSet<Song> songs =  new TreeSet<>((o1, o2)->o1.getActions().get(Actions.LIKE).size()-o1.getActions().get(Actions.LIKE).size());
-					songs = SongDao.getInstance().getAllSongs();
-					application.setAttribute("songs", songs);
+					response.getWriter().append("likes");
 				}
 				if(request.getParameter("sorter").toString().equals("shares")){
-					TreeSet<Song> songs =  new TreeSet<>((o1, o2)->o1.getActions().get(Actions.SHARE).size()-o1.getActions().get(Actions.SHARE).size());
-					songs = SongDao.getInstance().getAllSongs();
-					application.setAttribute("songs", songs);
+					response.getWriter().append("shares");
 				}
-				if(application.getAttribute("genres") == null){
-					Map genres=GenresDao.getInstance().getAllGenres();
-					application.setAttribute("genres", genres);
+				if(request.getParameter("sorter").toString().equals("listenings")){
+					response.getWriter().append("listenings");
 				}
 			}
-			request.getRequestDispatcher("main.jsp").forward(request, response);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
