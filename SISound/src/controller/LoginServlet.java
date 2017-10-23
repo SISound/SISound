@@ -59,4 +59,28 @@ public class LoginServlet extends HttpServlet {
 		}
 	}
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession().getAttribute("user")!=null){
+			ServletContext application = getServletConfig().getServletContext();
+			try {
+				synchronized (application) {
+					TreeSet<Song> songs;
+					songs = SongDao.getInstance().getAllSongs();
+					application.setAttribute("songs", songs);
+					if(application.getAttribute("genres") == null){				
+						Map genres=GenresDao.getInstance().getAllGenres();
+						application.setAttribute("genres", genres);
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("main.jsp").forward(request, response);
+		}
+		else{
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+	}
 }

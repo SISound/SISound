@@ -29,9 +29,9 @@
 			<c:forEach items="${applicationScope.songs}" var="song">
 				<tr class="songTr">
 					<td class="songTd">
-							<audio controls>
-							    <source src="SongServlet?songName=${song.title}" type="audio/mpeg">
-							</audio>
+					    <audio controls>
+						    <source src="SongServlet?songName=${song.title}" type="audio/mpeg">
+						</audio>
 					</td>
 					<td class="songTd"><c:out value="${ song.title }"></c:out></td>
 					<td class="songTd"><c:out value="${ song.user.username }"></c:out></td>

@@ -12,7 +12,7 @@
 	<header>
 		<input id="searchBar" type="text" placeholder="search artists, songs, playlists" placeholder-style: font>
 			
-			<a href="main.jsp" class="homeButton_headerLink">
+			<a href="login" class="homeButton_headerLink">
 				<span class="homeButton">Home</span>
 			</a>
 			
@@ -31,8 +31,8 @@
 					</a>
 				</td>
 			</table>
-			<form action="LogOutServlet" method="GET">
-				<input class="logoutButton" type="submit" value="Log out">
+			<form action="LogOutServlet" method="post">
+				<input class="logoutButton" type="submit" value="Logout">
 			</form>
 	</header>		
 </body>

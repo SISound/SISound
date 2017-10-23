@@ -26,23 +26,14 @@ public class SongServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		System.out.println(request.getParameter("songName")!=null);
-		try {
-			TreeSet<Song> songs=SongDao.getInstance().getAllSongs();
-			for (Song song : songs) {
-				File myFile = new File(UploadSongServlet.SONG_URL+song.getUrl());
+		File myFile = new File(UploadSongServlet.SONG_URL+request.getParameter("songName"));
 				
-				try (OutputStream out = response.getOutputStream()) {
-				    Path path = myFile.toPath();
-				    Files.copy(path, out);
-				    out.flush();
-				} catch (IOException e) {
-				   e.printStackTrace();
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		try (OutputStream out = response.getOutputStream()) {
+			   Path path = myFile.toPath();
+			   Files.copy(path, out);
+			   out.flush();
+		} catch (IOException e) {
+			   e.printStackTrace();
 		}
-			
 	}
 }
