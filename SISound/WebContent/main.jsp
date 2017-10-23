@@ -8,7 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen">
 		<title>SISound</title>
 	</head>
+	
 	<body id="mainBody">
+	
 		<c:if test="${ sessionScope.user == null }">
 				<c:redirect url="login.jsp"></c:redirect>
 		</c:if>
@@ -28,18 +30,43 @@
 		<table class="songs">
 			<c:forEach items="${applicationScope.songs}" var="song">
 				<tr class="songTr">
+					<!-- SONG'S USER -->
 					<td class="songTd">
-					    <audio controls>
+						<c:if test="${song.user.profilPicture != null}">
+							<img class="songsPRPic" alt="profilePic" src="${user.profilPicture }">
+						</c:if>
+						<c:if test="${song.user.profilPicture == null}">
+							<img class="songsPRPic" alt="defaultProfilPic" src="defaultProfile.png">
+						</c:if>
+						<c:out value="${ song.user.username }"></c:out>
+					</td>
+					
+					<!-- SONG TITLE -->
+					<td class="songTd"><c:out value="${ song.title }"></c:out></td>
+					
+					<!--FOLLOW BUTTON -->
+					<td class="songTd"><c:out value="follow"></c:out></td>
+					
+					<!-- PLAYER -->
+					<td id="playerTd">
+					    <audio id="player" controls>
 						    <source src="SongServlet?songName=${song.title}" type="audio/mpeg">
 						</audio>
 					</td>
-					<td class="songTd"><c:out value="${ song.title }"></c:out></td>
-					<td class="songTd"><c:out value="${ song.user.username }"></c:out></td>
-					<td class="songTd"><c:out value="${ song.timesListened }"></c:out></td>
+					
+					<!-- ACTIONS -->
+				</tr>
+				<tr class="actions">
+					<td>LIKE</td>
+					<td>DISLIKE</td>
+					<td>SHARE</td>
+					<td>COMMENT</td>
 				</tr>
 			</c:forEach>
 		</table>	
 		
-		
+		<footer id="homeFooter">
+			<p>Footerche</p>
+		</footer>
 	</body>
 </html>

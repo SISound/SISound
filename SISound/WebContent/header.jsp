@@ -11,29 +11,30 @@
 <body>
 	<header>
 		<input id="searchBar" type="text" placeholder="search artists, songs, playlists" placeholder-style: font>
-			
-			<a href="login" class="homeButton_headerLink">
-				<span class="homeButton">Home</span>
+		
+			<a href="main.jsp" id="homeLink">
+				<div id="homeButton">Home</div>
 			</a>
 			
-			<table class="profilTable">
-				<td>
-					<c:if test="${user.profilPicture != null}">
-						<img class="profilePic" alt="profilePic" src="${user.profilPicture }">
-					</c:if>
-					<c:if test="${user.profilPicture == null}">
-						<img class="profilePic" alt="defaultProfilPic" src="defaultProfile.png">
-					</c:if>
-				</td>
-				<td>
-					<a href="profile.jsp" class="profileButton_headerLink">
-						<span class="profileButton"><c:out value="${ user.username }"></c:out></span>
-					</a>
-				</td>
-			</table>
-			<form action="LogOutServlet" method="post">
-				<input class="logoutButton" type="submit" value="Logout">
-			</form>
+			<div class="dropdown">
+			  <button class="dropbtn">
+			  	<c:if test="${user.profilPicture != null}">
+					<img class="profilePic" alt="profilePic" src="${user.profilPicture }">
+					<span class="profileButton"><c:out value="${ user.username }"></c:out></span>
+				</c:if>
+				<c:if test="${user.profilPicture == null}">
+					<img class="profilePic" alt="defaultProfilPic" src="defaultProfile.png">
+					<span class="profileButton"><c:out value="${ user.username }"></c:out></span>
+				</c:if>
+			  </button>
+			  <div class="dropdown-content">
+			    <a href="profile.jsp">Profile</a>
+			    <a href="upload.jsp">Upload</a>
+			    <form action="LogOutServlet" method="post">
+			    	<div id="signOutDiv"><input id="signOut" type="submit" value="Sign Out"></div>
+			    </form>
+			  </div>
+			</div>
 	</header>		
 </body>
 </html>

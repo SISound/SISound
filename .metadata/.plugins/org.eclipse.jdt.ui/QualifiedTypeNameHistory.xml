@@ -18,4 +18,7 @@
 <fullyQualifiedTypeName name="model.Actions"/>
 <fullyQualifiedTypeName name="javax.print.MultiDocPrintService"/>
 <fullyQualifiedTypeName name="model.db.SongDao"/>
+<fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
+<fullyQualifiedTypeName name="java.io.BufferedOutputStream"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
 </qualifiedTypeNameHistroy>

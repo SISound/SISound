@@ -10,7 +10,7 @@
 	<body id="indexBody">
 		<header>
 		
-			<input id="searchBar" type="text" placeholder="search artists, songs, playlists" placeholder-style: font>
+			<input id="indexSearchBar" type="text" placeholder="search artists, songs, playlists" placeholder-style: font>
 			
 			<form action="login.jsp" method="GET">
 				<input id="loginButton" type="submit" value="" style="background-image: url('login.png'); border:none; background-repeat:no-repeat;background-size:100% 100%;">
@@ -21,9 +21,5 @@
 			</form>
 			
 		</header>
-		
-		<footer id="homeFooter">
-			<p>Footerche</p>
-		</footer>
 	</body>
 </html>

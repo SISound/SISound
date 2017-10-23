@@ -34,7 +34,6 @@ public class LoginServlet extends HttpServlet {
 			if(exist){
 				User u=UserDao.getInstance().getUser(username);
 				request.getSession().setAttribute("user", u);
-				request.getSession().setAttribute("logged", true);
 				ServletContext application = getServletConfig().getServletContext();
 				synchronized (application) {
 					if(application.getAttribute("songs") == null){

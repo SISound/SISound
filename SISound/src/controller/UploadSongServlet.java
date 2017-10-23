@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,9 +42,9 @@ public class UploadSongServlet extends HttpServlet {
 			ServletContext application = getServletConfig().getServletContext();
 			User u=(User) request.getAttribute("user");
 			Part songPart = request.getPart("song");
-			InputStream fis = songPart.getInputStream();
-			String fileName = Paths.get(songPart.getSubmittedFileName()).getFileName().toString();
-			File myFile = new File(SONG_URL + "_" + u.getUsername() +"_" + fileName + ".mp3");
+			InputStream fis =songPart.getInputStream();
+			String songName=Paths.get(songPart.getSubmittedFileName()).getFileName().toString();
+			File myFile = new File(SONG_URL + "_" + songPart + ".mp3");
 			if(!myFile.exists()){
 				myFile.createNewFile();
 			}
@@ -55,8 +56,8 @@ public class UploadSongServlet extends HttpServlet {
 			}
 			fis.close();
 			fos.close();
-			String songUrl = u.getUsername()+".mp3";
-			Song song=new Song("new song", u, "ge", songUrl, LocalDateTime.now());
+			String songUrl = songPart.getName()+".mp3";
+			Song song=new Song("new song", u, "rock", songUrl, LocalDateTime.now());
 			try {
 				SongDao.getInstance().uploadSong(song);
 			} catch (SQLException e) {
