@@ -35,12 +35,12 @@ public class UploadSongServlet extends HttpServlet {
 	public static final String SONG_URL = "C:\\Users\\Workstation\\Desktop\\temp\\";
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("user")==null){
+		if(request.getSession().isNew()){
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else{
 			ServletContext application = getServletConfig().getServletContext();
-			User u=(User) request.getAttribute("user");
+			User u=(User) request.getSession().getAttribute("user");
 			Part songPart = request.getPart("song");
 			InputStream fis =songPart.getInputStream();
 			String songName=Paths.get(songPart.getSubmittedFileName()).getFileName().toString();
@@ -57,7 +57,7 @@ public class UploadSongServlet extends HttpServlet {
 			fis.close();
 			fos.close();
 			String songUrl = songPart.getName()+".mp3";
-			Song song=new Song("new song", u, "rock", songUrl, LocalDateTime.now());
+			Song song=new Song(u.getUserID()+"_"+u.getUsername(), u, "Rock", songUrl, LocalDateTime.now());
 			try {
 				SongDao.getInstance().uploadSong(song);
 			} catch (SQLException e) {

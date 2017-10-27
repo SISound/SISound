@@ -1,3 +1,4 @@
-GitRepositoriesView.GitDirectories=D\:\\Programming\\GIT\\SISound\\SISound\\.git;
-GitRepositoriesView.GitDirectories.relative=.git;
+GitRepositoriesView.GitDirectories=D\:\\Programming\\GIT\\SISound\\SISoundSpring\\.git;D\:\\Programming\\GIT\\SISound\\SISound\\.git;
+GitRepositoriesView.GitDirectories.relative=D\:\\Programming\\GIT\\SISound\\SISoundSpring\\.git;.git;
+core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

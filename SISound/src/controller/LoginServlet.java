@@ -24,9 +24,7 @@ import model.db.UserDao;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 		try {

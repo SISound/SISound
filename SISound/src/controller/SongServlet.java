@@ -24,7 +24,6 @@ import model.db.SongDao;
 public class SongServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		System.out.println(request.getParameter("songName")!=null);
 		File myFile = new File(UploadSongServlet.SONG_URL+request.getParameter("songName"));
 				
